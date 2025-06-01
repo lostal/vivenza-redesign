@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import Logo from '@/components/logo';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = useState<number | string>('...');
@@ -17,10 +18,22 @@ export default function Footer() {
       <div className="container py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Logo />
-            <p className="mt-4 text-sm text-muted-foreground">
+            <div className="mb-4">
+              <Logo />
+            </div>
+            <p className="text-sm text-muted-foreground">
               Soluciones de alta calidad para baño y hogar con diseño minimalista.
             </p>
+            <div className="mt-6">
+              <Image
+                src="https://vivenzaexpo.es/wp-content/uploads/2025/03/UNA-MARCA-DE-GRUPOSIETE-VIVENZA.png"
+                alt="Una marca de GrupoSiete"
+                width={241} 
+                height={20}
+                className="h-auto max-w-full"
+                data-ai-hint="brand affiliation group"
+              />
+            </div>
           </div>
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Explora</h3>

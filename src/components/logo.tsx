@@ -1,10 +1,15 @@
-import { Bath } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Logo() {
   return (
-    <div className="flex items-center space-x-2">
-      <Bath className="h-7 w-7 text-primary" />
-      <span className="font-headline text-2xl font-semibold text-foreground">Vivenza</span>
-    </div>
+    <Image
+      src="https://vivenzaexpo.es/wp-content/uploads/2025/02/Logo-Vivenza-RGB-274x42.png"
+      alt="Vivenza Logo"
+      width={163} 
+      height={25} 
+      className="h-auto max-w-full"
+      priority
+      data-ai-hint="company logo"
+    />
   );
 }
