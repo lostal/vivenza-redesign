@@ -3,7 +3,7 @@ import HeroShowcase from '@/components/hero-showcase';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Lightbulb, Users } from 'lucide-react';
+import { ArrowRight, MapPin, Users } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
 
 export default function HomePage() {
@@ -43,27 +43,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AI Style Finder Teaser */}
-      <section id="ai-style-finder-teaser" className="py-16 lg:py-24 bg-card">
-        <div className="container text-center">
-           <SectionTitle
-            icon={<Lightbulb className="h-8 w-8 text-primary" />}
-            title="Descubre Tu Estilo Ideal"
-            description="Sube una foto de tu espacio y deja que nuestra IA te ofrezca un análisis de diseño e inspiración."
-          />
-          <div className="mt-10">
-            <Button asChild size="lg" variant="default">
-              <Link href="/style-finder">Probar Buscador de Estilos IA <ArrowRight className="ml-2 h-5 w-5" /></Link>
-            </Button>
-          </div>
-          <div className="mt-12 max-w-3xl mx-auto">
-             <Image src="https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-1.jpg" alt="Ejemplo Buscador de Estilos IA" width={800} height={450} className="rounded-lg shadow-lg" data-ai-hint="stylish interior" />
-          </div>
-        </div>
-      </section>
-
       {/* Location Teaser Section */}
-      <section id="locations-teaser" className="py-16 lg:py-24 bg-background">
+      <section id="locations-teaser" className="py-16 lg:py-24 bg-card">
         <div className="container text-center">
           <SectionTitle
             icon={<MapPin className="h-8 w-8 text-primary" />}
@@ -72,7 +53,7 @@ export default function HomePage() {
           />
           <div className="mt-10">
             <Button asChild size="lg" variant="default">
-              <Link href="/locations">Encuentra una Ubicación <ArrowRight className="ml-2 h-5 w-5" /></Link>
+              <Link href="/locations">Encuentra tu tienda <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
           </div>
            <div className="mt-12 max-w-4xl mx-auto aspect-video rounded-lg shadow-lg overflow-hidden">

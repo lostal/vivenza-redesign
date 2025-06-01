@@ -12,16 +12,15 @@ import LanguageSwitcher from '@/components/language-switcher';
 import { useState, useEffect, useCallback } from 'react';
 
 interface NavLinkItem {
-  href: string; // Usado para el comportamiento del <Link> y el scroll en la home
+  href: string; 
   label: string;
-  sectionId?: string; // ID del elemento en la página de inicio para activar este enlace por scroll
-  pagePath?: string; // La ruta real de la página (ej. /style-finder) para el resaltado
+  sectionId?: string; 
+  pagePath?: string; 
 }
 
 const navLinks: NavLinkItem[] = [
   { href: '/', label: 'Inicio', pagePath: '/' },
   { href: '/#sobre-nosotros', label: 'Sobre Nosotros', sectionId: 'sobre-nosotros', pagePath: '/' },
-  { href: '/#ai-style-finder-teaser', label: 'Buscador IA', sectionId: 'ai-style-finder-teaser', pagePath: '/style-finder' },
   { href: '/#locations-teaser', label: 'Ubicaciones', sectionId: 'locations-teaser', pagePath: '/locations' },
   { href: '/contact', label: 'Contacto', pagePath: '/contact' },
 ];
@@ -40,14 +39,13 @@ export default function Navbar() {
 
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    const activationOffset = windowHeight * 0.4; // Activate when top of section reaches 40% of viewport height
+    const activationOffset = windowHeight * 0.4; 
 
     if (currentPath === '/') {
       let highestVisibleSectionTop = Infinity;
       let foundSectionByScroll = false;
 
-      // Special case for "Inicio" when at the very top or near it
-      if (scrollY < activationOffset * 0.5) { // Consider top 20% of viewport for "Inicio"
+      if (scrollY < activationOffset * 0.5) { 
         newActiveHref = '/';
         foundSectionByScroll = true;
       } else {
@@ -56,12 +54,10 @@ export default function Navbar() {
             const sectionElement = document.getElementById(link.sectionId);
             if (sectionElement) {
               const rect = sectionElement.getBoundingClientRect();
-              // Check if the section is within the activation zone (between 10% and 40% from top)
-              // and its top is less than the current highest visible section
               if (rect.top < activationOffset && rect.bottom > activationOffset * 0.1 && rect.top < windowHeight) {
                 if (rect.top < highestVisibleSectionTop) {
                     highestVisibleSectionTop = rect.top;
-                    newActiveHref = link.href; // This href points to the anchor
+                    newActiveHref = link.href; 
                     foundSectionByScroll = true;
                 }
               }
@@ -70,19 +66,15 @@ export default function Navbar() {
         }
       }
       
-      // Fallback for homepage if no section is actively scrolled to but past the initial "Inicio" threshold
       if (currentPath === '/' && !foundSectionByScroll && scrollY >= activationOffset * 0.5) {
-        // If no specific section is "active" but we've scrolled down, keep the last known or default to "Inicio"
-        if (!newActiveHref) newActiveHref = '/'; // Default to "Inicio" if nothing else matches
+        if (!newActiveHref) newActiveHref = '/'; 
       }
 
-    } else { // For pages that are not the homepage
-      // Find the link whose pagePath matches the current non-homepage path
+    } else { 
       const directMatch = navLinks.find(link => link.pagePath === currentPath);
       if (directMatch) {
-        newActiveHref = directMatch.href; // Activate the href (which could be an anchor or the pagePath itself)
+        newActiveHref = directMatch.href; 
       } else {
-        // Fallback for sub-pages or unlinked pages: try to find a parent or default to "Inicio"
         const bestFallback = navLinks.find(link => currentPath.startsWith(link.pagePath || '') && link.pagePath !== '/') || navLinks.find(link => link.href === '/');
         newActiveHref = bestFallback ? bestFallback.href : currentPath;
       }
@@ -90,53 +82,46 @@ export default function Navbar() {
 
     if (newActiveHref && activeLink !== newActiveHref) {
       setActiveLink(newActiveHref);
-    } else if (!newActiveHref && currentPath === '/' && activeLink !== '/') { // Ensure "Inicio" is active if no other conditions met on homepage
+    } else if (!newActiveHref && currentPath === '/' && activeLink !== '/') { 
       setActiveLink('/');
     }
-  }, [activeLink, pathname]); // Removed navLinks from dependencies as it's constant
+  }, [activeLink]); 
 
   useEffect(() => {
-    updateActiveLink(); // Initial call to set active link based on URL
+    updateActiveLink(); 
 
     window.addEventListener('scroll', updateActiveLink, { passive: true });
-    window.addEventListener('hashchange', updateActiveLink, { passive: true }); // For direct anchor navigation
+    window.addEventListener('hashchange', updateActiveLink, { passive: true }); 
 
-    // Cleanup listeners
     return () => {
       window.removeEventListener('scroll', updateActiveLink);
       window.removeEventListener('hashchange', updateActiveLink);
     };
-  }, [updateActiveLink]); // updateActiveLink is memoized and should only change if its dependencies change
+  }, [updateActiveLink]);
 
-  // Effect for initial load and pathname changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
         const currentPath = window.location.pathname;
         const currentHash = window.location.hash;
         let initialLink = '';
 
-        // Check if we are on the homepage and there is an anchor
         if (currentPath === '/' && currentHash) {
             const anchorMatch = navLinks.find(link => link.href === `/${currentHash}`);
             if (anchorMatch) initialLink = anchorMatch.href;
-            else initialLink = '/'; // Default to "Inicio" if anchor doesn't match a navLink
+            else initialLink = '/'; 
         } else {
-            // Check if the current path (without anchor) matches pagePath of any link
             const navLinkMatch = navLinks.find(link => link.pagePath === currentPath);
             if (navLinkMatch) {
-                initialLink = navLinkMatch.href; // Use the href of the navLink (could be an anchor for teaser sections)
+                initialLink = navLinkMatch.href; 
             } else if (currentPath === '/') {
-                initialLink = '/'; // Root of the homepage
+                initialLink = '/'; 
             } else {
-                // Fallback for other pages (e.g., sub-pages not in nav, like a blog post if it existed)
-                // Try to find a link whose pagePath is a prefix of the currentPath, or default to "Inicio"
                 const bestFallback = navLinks.find(link => link.pagePath && currentPath.startsWith(link.pagePath) && link.pagePath !== '/') || navLinks.find(link => link.pagePath === '/');
                 initialLink = bestFallback ? bestFallback.href : currentPath;
             }
         }
         setActiveLink(initialLink);
         
-        // Scroll to top smoothly if navigating to home page without a hash and not already at top
         if (currentPath === '/' && !currentHash && window.scrollY !== 0) {
             setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 0);
         }
@@ -147,7 +132,6 @@ export default function Navbar() {
   const handleLinkClick = (href: string) => {
     setActiveLink(href);
     setIsSheetOpen(false); 
-    // The Next.js <Link> component and html's scroll-smooth handle the scrolling.
   };
 
   return (
@@ -162,7 +146,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link
               key={link.label}
-              href={link.href} // This will now correctly point to /#section-id for teasers
+              href={link.href} 
               onClick={() => handleLinkClick(link.href)}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
