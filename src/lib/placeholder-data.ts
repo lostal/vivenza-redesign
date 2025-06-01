@@ -1,3 +1,4 @@
+
 import type { BlogPost, Location } from '@/lib/types';
 
 export const placeholderBlogPosts: BlogPost[] = [
@@ -7,11 +8,11 @@ export const placeholderBlogPosts: BlogPost[] = [
     title: 'Principales Tendencias de Baño para 2024',
     date: '2024-07-15',
     excerpt: 'Descubre los últimos estilos e innovaciones en diseño de baños para el próximo año.',
-    imageUrl: 'https://placehold.co/800x500.png',
+    imageUrl: 'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-4-1.jpg',
     content: '<p>El mundo del diseño de baños está en constante evolución. En 2024, estamos viendo un cambio hacia...</p><p>Se exploran materiales naturales, diseños minimalistas y tecnología integrada para crear espacios que son tanto funcionales como relajantes.</p>',
     author: 'Juana Pérez',
     tags: ['tendencias', 'diseño', 'baño'],
-    dataAiHint: 'bathroom design',
+    dataAiHint: 'modern bathroom',
   },
   {
     id: '2',
@@ -63,3 +64,7 @@ export const placeholderLocations: Location[] = [
     dataAiHint: 'store interior',
   },
 ];
+
+// No longer needed as products are removed
+// export const placeholderProducts: Product[] = [...];
+// export const productCategories: string[] = [...];

@@ -1,3 +1,4 @@
+
 import HeroShowcase from '@/components/hero-showcase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,7 +27,7 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="mt-12 max-w-3xl mx-auto">
-             <Image src="https://placehold.co/800x450.png" alt="Ejemplo Buscador de Estilos IA" width={800} height={450} className="rounded-lg shadow-lg" data-ai-hint="interior design moodboard" />
+             <Image src="https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-1.jpg" alt="Ejemplo Buscador de Estilos IA" width={800} height={450} className="rounded-lg shadow-lg" data-ai-hint="stylish interior" />
           </div>
         </div>
       </section>
@@ -85,7 +86,7 @@ export default function HomePage() {
             </Button>
           </div>
            <div className="mt-12 max-w-4xl mx-auto relative aspect-video">
-             <Image src="https://placehold.co/1000x500.png" alt="Mapa con ubicaciones de showrooms" layout="fill" objectFit="cover" className="rounded-lg shadow-lg" data-ai-hint="city map location" />
+             <Image src="https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-2.jpg" alt="Mapa con ubicaciones de showrooms" layout="fill" objectFit="cover" className="rounded-lg shadow-lg" data-ai-hint="showroom design" />
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+
 import SectionTitle from '@/components/section-title';
 import LocationCard from '@/components/location/location-card';
 import { placeholderLocations } from '@/lib/placeholder-data';
@@ -15,11 +16,11 @@ export default function LocationsPage() {
         {/* Placeholder for interactive map. For now, a static image. */}
         <div className="relative aspect-[2/1] w-full bg-muted">
            <Image 
-            src="https://placehold.co/1200x600.png" 
+            src="https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-3.jpg" 
             alt="Mapa de ubicaciones Vivenza" 
             layout="fill"
             objectFit="cover"
-            data-ai-hint="world map locations"
+            data-ai-hint="modern space"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
             <p className="text-2xl text-white font-semibold p-4 bg-black/50 rounded-md">Mapa Interactivo Próximamente</p>
