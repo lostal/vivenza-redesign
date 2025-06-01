@@ -26,7 +26,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
       </CardHeader>
       <CardContent className="p-6 flex-grow">
         <div className="mb-2 flex items-center space-x-3 text-xs text-muted-foreground">
-          <span className="flex items-center"><CalendarDays className="h-3.5 w-3.5 mr-1.5" /> {new Date(post.date).toLocaleDateString()}</span>
+          <span className="flex items-center"><CalendarDays className="h-3.5 w-3.5 mr-1.5" /> {new Date(post.date).toLocaleDateString('es-ES')}</span>
           <span className="flex items-center"><UserCircle className="h-3.5 w-3.5 mr-1.5" /> {post.author}</span>
         </div>
         <CardTitle className="text-xl mb-2 font-headline line-clamp-2">
@@ -39,7 +39,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
       <CardFooter className="p-6 pt-0">
         <Button asChild variant="link" className="p-0 h-auto text-primary font-semibold">
           <Link href={`/blog/${post.slug}`}>
-            Read More <ArrowRight className="ml-1 h-4 w-4" />
+            Leer Más <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </Button>
       </CardFooter>

@@ -16,8 +16,8 @@ export default function HomePage() {
       <section className="py-16 lg:py-24 bg-background">
         <div className="container">
           <SectionTitle
-            title="Featured Products"
-            description="Handpicked selections from our latest collections."
+            title="Productos Destacados"
+            description="Selecciones escogidas de nuestras últimas colecciones."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {placeholderProducts.slice(0, 3).map((product) => (
@@ -36,7 +36,7 @@ export default function HomePage() {
                   <CardTitle className="text-xl mb-2">{product.name}</CardTitle>
                   <CardDescription className="text-muted-foreground mb-4">{product.category}</CardDescription>
                   <Button asChild variant="outline">
-                    <Link href={`/products#${product.id}`}>View Details <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                    <Link href={`/products#${product.id}`}>Ver Detalles <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -44,7 +44,7 @@ export default function HomePage() {
           </div>
           <div className="text-center mt-12">
             <Button asChild size="lg">
-              <Link href="/products">Explore All Products</Link>
+              <Link href="/products">Explorar Todos los Productos</Link>
             </Button>
           </div>
         </div>
@@ -55,16 +55,16 @@ export default function HomePage() {
         <div className="container text-center">
            <SectionTitle
             icon={<Lightbulb className="h-8 w-8 text-primary" />}
-            title="Find Your Perfect Style"
-            description="Upload a photo of your space and let our AI suggest the perfect Vivenza products."
+            title="Encuentra Tu Estilo Perfecto"
+            description="Sube una foto de tu espacio y deja que nuestra IA sugiera los productos Vivenza perfectos."
           />
           <div className="mt-10">
             <Button asChild size="lg" variant="default">
-              <Link href="/style-finder">Try AI Style Finder <ArrowRight className="ml-2 h-5 w-5" /></Link>
+              <Link href="/style-finder">Probar Buscador de Estilos IA <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
           </div>
           <div className="mt-12 max-w-3xl mx-auto">
-             <Image src="https://placehold.co/800x450.png" alt="AI Style Finder example" width={800} height={450} className="rounded-lg shadow-lg" data-ai-hint="interior design moodboard" />
+             <Image src="https://placehold.co/800x450.png" alt="Ejemplo Buscador de Estilos IA" width={800} height={450} className="rounded-lg shadow-lg" data-ai-hint="interior design moodboard" />
           </div>
         </div>
       </section>
@@ -74,8 +74,8 @@ export default function HomePage() {
         <div className="container">
           <SectionTitle
             icon={<Rss className="h-8 w-8 text-primary" />}
-            title="From Our Blog"
-            description="Latest news, design trends, and inspiration."
+            title="De Nuestro Blog"
+            description="Últimas noticias, tendencias de diseño e inspiración."
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             {placeholderBlogPosts.slice(0, 3).map((post) => (
@@ -92,10 +92,10 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent className="p-6">
                   <CardTitle className="text-lg mb-2">{post.title}</CardTitle>
-                  <p className="text-xs text-muted-foreground mb-2">{new Date(post.date).toLocaleDateString()}</p>
+                  <p className="text-xs text-muted-foreground mb-2">{new Date(post.date).toLocaleDateString('es-ES')}</p>
                   <CardDescription className="text-sm text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</CardDescription>
                    <Button asChild variant="link" className="p-0 h-auto text-primary">
-                     <Link href={`/blog/${post.slug}`}>Read More <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                     <Link href={`/blog/${post.slug}`}>Leer Más <ArrowRight className="ml-1 h-4 w-4" /></Link>
                    </Button>
                 </CardContent>
               </Card>
@@ -103,7 +103,7 @@ export default function HomePage() {
           </div>
            <div className="text-center mt-12">
             <Button asChild size="lg">
-              <Link href="/blog">Visit Our Blog</Link>
+              <Link href="/blog">Visita Nuestro Blog</Link>
             </Button>
           </div>
         </div>
@@ -114,16 +114,16 @@ export default function HomePage() {
         <div className="container text-center">
           <SectionTitle
             icon={<MapPin className="h-8 w-8 text-primary" />}
-            title="Visit Our Showrooms"
-            description="Experience Vivenza quality firsthand at our exhibition locations."
+            title="Visita Nuestros Showrooms"
+            description="Experimenta la calidad Vivenza de primera mano en nuestras ubicaciones de exposición."
           />
           <div className="mt-10">
             <Button asChild size="lg" variant="default">
-              <Link href="/locations">Find a Location <ArrowRight className="ml-2 h-5 w-5" /></Link>
+              <Link href="/locations">Encuentra una Ubicación <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
           </div>
            <div className="mt-12 max-w-4xl mx-auto relative aspect-video">
-             <Image src="https://placehold.co/1000x500.png" alt="Map with showroom locations" layout="fill" objectFit="cover" className="rounded-lg shadow-lg" data-ai-hint="city map location" />
+             <Image src="https://placehold.co/1000x500.png" alt="Mapa con ubicaciones de showrooms" layout="fill" objectFit="cover" className="rounded-lg shadow-lg" data-ai-hint="city map location" />
           </div>
         </div>
       </section>

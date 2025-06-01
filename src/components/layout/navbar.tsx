@@ -4,18 +4,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Menu, ShoppingBag, Globe } from 'lucide-react';
+import { Menu, ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products' },
-  { href: '/style-finder', label: 'AI Style Finder' },
-  { href: '/locations', label: 'Locations' },
-  { href: '/blog', label: 'News Blog' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'Inicio' },
+  { href: '/products', label: 'Productos' },
+  { href: '/style-finder', label: 'Buscador IA' },
+  { href: '/locations', label: 'Ubicaciones' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contacto' },
 ];
 
 export default function Navbar() {
@@ -51,12 +51,12 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <Button variant="ghost" size="icon" aria-label="Shopping Bag">
+          <Button variant="ghost" size="icon" aria-label="Bolsa de compra">
             <ShoppingBag className="h-5 w-5" />
           </Button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>

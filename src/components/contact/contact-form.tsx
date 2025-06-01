@@ -16,30 +16,29 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(500, { message: "Message must be at most 500 characters." }),
-  consent: z.boolean().refine(value => value === true, { message: "You must agree to the data protection policy." }),
+  name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
+  email: z.string().email({ message: "Por favor, introduce una dirección de correo electrónico válida." }),
+  subject: z.string().min(5, { message: "El asunto debe tener al menos 5 caracteres." }),
+  message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }).max(500, { message: "El mensaje debe tener como máximo 500 caracteres." }),
+  consent: z.boolean().refine(value => value === true, { message: "Debes aceptar la política de protección de datos." }),
 });
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-// This is a placeholder for a server action.
+// Placeholder para una acción de servidor.
 async function submitContactForm(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
-  console.log("Form data submitted:", data);
-  // Simulate API call
+  console.log("Datos del formulario enviados:", data);
+  // Simular llamada API
   await new Promise(resolve => setTimeout(resolve, 1500));
-  // Simulate success/failure
+  // Simular éxito/fracaso
   if (data.email.includes("error")) {
-      return { success: false, message: "There was an error submitting your message. Please try again." };
+      return { success: false, message: "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo." };
   }
-  return { success: true, message: "Your message has been sent successfully! We'll get back to you soon." };
+  return { success: true, message: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto." };
 }
 
 
@@ -64,21 +63,21 @@ export default function ContactForm() {
       const result = await submitContactForm(values);
       if (result.success) {
         toast({
-          title: "Message Sent!",
+          title: "¡Mensaje Enviado!",
           description: result.message,
         });
         form.reset();
       } else {
         toast({
-          title: "Submission Failed",
+          title: "Envío Fallido",
           description: result.message,
           variant: "destructive",
         });
       }
     } catch (error) {
       toast({
-        title: "An Unexpected Error Occurred",
-        description: "Please try again later.",
+        title: "Ocurrió un Error Inesperado",
+        description: "Por favor, inténtalo de nuevo más tarde.",
         variant: "destructive",
       });
     } finally {
@@ -94,9 +93,9 @@ export default function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel>Nombre Completo</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} className="h-12"/>
+                <Input placeholder="Juan Pérez" {...field} className="h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,9 +106,9 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel>Correo Electrónico</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@example.com" {...field} className="h-12"/>
+                <Input type="email" placeholder="tu@ejemplo.com" {...field} className="h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -120,9 +119,9 @@ export default function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel>Asunto</FormLabel>
               <FormControl>
-                <Input placeholder="Inquiry about product..." {...field} className="h-12"/>
+                <Input placeholder="Consulta sobre producto..." {...field} className="h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -133,10 +132,10 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>Mensaje</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us more about your inquiry..."
+                  placeholder="Cuéntanos más sobre tu consulta..."
                   className="min-h-[150px] resize-none"
                   {...field}
                 />
@@ -158,10 +157,10 @@ export default function ContactForm() {
               </FormControl>
               <div className="space-y-1 leading-none">
                 <FormLabel>
-                  I agree to the data protection policy.
+                  Acepto la política de protección de datos.
                 </FormLabel>
                 <p className="text-xs text-muted-foreground">
-                  We are committed to protecting your privacy. Your information will be handled in accordance with our privacy policy.
+                  Nos comprometemos a proteger tu privacidad. Tu información será manejada de acuerdo con nuestra política de privacidad.
                 </p>
                 <FormMessage />
               </div>
@@ -172,10 +171,10 @@ export default function ContactForm() {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Submitting...
+              Enviando...
             </>
           ) : (
-            "Send Message"
+            "Enviar Mensaje"
           )}
         </Button>
       </form>

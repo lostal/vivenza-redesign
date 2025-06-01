@@ -8,7 +8,7 @@ export default function HeroShowcase() {
     <section className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-center text-center bg-background overflow-hidden">
       <Image
         src="https://placehold.co/1920x1080.png"
-        alt="Modern bathroom design"
+        alt="Diseño de baño moderno"
         layout="fill"
         objectFit="cover"
         quality={90}
@@ -18,19 +18,19 @@ export default function HeroShowcase() {
       />
       <div className="relative z-10 p-8 max-w-3xl animate-fade-in">
         <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground mb-6">
-          Elegance. Innovation. Vivenza.
+          Elegancia. Innovación. Vivenza.
         </h1>
         <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-xl mx-auto">
-          Discover exquisitely crafted bathroom and home solutions that blend timeless design with modern functionality.
+          Descubre soluciones para baño y hogar exquisitamente elaboradas que combinan diseño atemporal con funcionalidad moderna.
         </p>
         <div className="space-x-4">
           <Button asChild size="lg" className="font-body">
             <Link href="/products">
-              Explore Products <ArrowRight className="ml-2 h-5 w-5" />
+              Explorar Productos <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="font-body">
-            <Link href="/style-finder">AI Style Finder</Link>
+            <Link href="/style-finder">Buscador de Estilos IA</Link>
           </Button>
         </div>
       </div>

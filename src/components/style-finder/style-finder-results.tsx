@@ -42,11 +42,11 @@ export default function StyleFinderResults({ results, isLoading }: StyleFinderRe
         <CardHeader>
           <CardTitle className="flex items-center text-2xl font-headline">
             <Lightbulb className="h-7 w-7 mr-3 text-primary" />
-            AI Design Analysis
+            Análisis de Diseño IA
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-foreground/80 whitespace-pre-wrap">{results.reasoning || "No reasoning provided."}</p>
+          <p className="text-foreground/80 whitespace-pre-wrap">{results.reasoning || "No se proporcionó razonamiento."}</p>
         </CardContent>
       </Card>
 
@@ -55,10 +55,10 @@ export default function StyleFinderResults({ results, isLoading }: StyleFinderRe
           <CardHeader>
             <CardTitle className="flex items-center text-2xl font-headline">
               <Package className="h-7 w-7 mr-3 text-primary" />
-              Suggested Products
+              Productos Sugeridos
             </CardTitle>
             <CardDescription>
-              Based on your space, we think these Vivenza products would be a great fit.
+              Basándonos en tu espacio, creemos que estos productos Vivenza encajarían genial.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -79,7 +79,7 @@ export default function StyleFinderResults({ results, isLoading }: StyleFinderRe
                       <p className="text-sm text-muted-foreground">{product.category}</p>
                       <p className="text-sm text-primary font-medium">${product.price.toFixed(2)}</p>
                     </div>
-                    <Button variant="outline" size="sm" className="ml-auto">View Product</Button>
+                    <Button variant="outline" size="sm" className="ml-auto">Ver Producto</Button>
                   </div>
                 </Link>
               ))
@@ -87,12 +87,12 @@ export default function StyleFinderResults({ results, isLoading }: StyleFinderRe
               results.productSuggestions.map((name, index) => (
                  <div key={index} className="p-4 border border-dashed rounded-md">
                     <h4 className="font-semibold text-lg text-foreground">{name}</h4>
-                    <p className="text-sm text-muted-foreground">Product details not found in current catalog. This might be a new or custom item.</p>
+                    <p className="text-sm text-muted-foreground">Detalles del producto no encontrados en el catálogo actual. Podría ser un artículo nuevo o personalizado.</p>
                   </div>
               ))
             )}
             {results.productSuggestions.length === 0 && !isLoading && (
-                 <p className="text-muted-foreground text-center py-4">No specific products could be matched from our current catalog based on the analysis.</p>
+                 <p className="text-muted-foreground text-center py-4">No se pudieron encontrar productos específicos de nuestro catálogo actual basados en el análisis.</p>
             )}
           </CardContent>
         </Card>

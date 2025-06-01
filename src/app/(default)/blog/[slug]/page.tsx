@@ -14,7 +14,7 @@ interface BlogPostPageProps {
   };
 }
 
-// Simulate fetching a single blog post
+// Simula la obtención de una sola entrada de blog
 async function getPost(slug: string): Promise<BlogPost | undefined> {
   return placeholderBlogPosts.find((post) => post.slug === slug);
 }
@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <Button variant="outline" asChild>
           <Link href="/blog">
             <ChevronLeft className="mr-2 h-4 w-4" />
-            Back to Blog
+            Volver al Blog
           </Link>
         </Button>
       </div>
@@ -46,8 +46,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <header className="mb-10">
         <h1 className="font-headline text-4xl md:text-5xl font-bold text-foreground mb-4">{post.title}</h1>
         <div className="flex flex-wrap items-center space-x-4 text-sm text-muted-foreground mb-6">
-          <span className="flex items-center"><CalendarDays className="h-4 w-4 mr-1.5" /> Published on {new Date(post.date).toLocaleDateString()}</span>
-          <span className="flex items-center"><UserCircle className="h-4 w-4 mr-1.5" /> By {post.author}</span>
+          <span className="flex items-center"><CalendarDays className="h-4 w-4 mr-1.5" /> Publicado el {new Date(post.date).toLocaleDateString('es-ES')}</span>
+          <span className="flex items-center"><UserCircle className="h-4 w-4 mr-1.5" /> Por {post.author}</span>
         </div>
         {post.imageUrl && (
           <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden shadow-lg mb-8">
@@ -72,7 +72,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-12 pt-8 border-t border-border/40">
           <h3 className="text-lg font-semibold mb-3 flex items-center text-foreground">
             <Tag className="h-5 w-5 mr-2 text-primary" />
-            Tags
+            Etiquetas
           </h3>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (

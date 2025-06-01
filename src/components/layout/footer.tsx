@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -7,7 +6,7 @@ import Logo from '@/components/logo';
 import { useState, useEffect } from 'react';
 
 export default function Footer() {
-  const [currentYear, setCurrentYear] = useState<number | string>('...'); // Initial placeholder
+  const [currentYear, setCurrentYear] = useState<number | string>('...');
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -20,27 +19,27 @@ export default function Footer() {
           <div>
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground">
-              High-quality bathroom and home products with minimalist design.
+              Productos de alta calidad para baño y hogar con diseño minimalista.
             </p>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Explore</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Explora</h3>
             <ul role="list" className="mt-4 space-y-2">
-              <li><Link href="/products" className="text-sm text-muted-foreground hover:text-primary">Products</Link></li>
-              <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary">Locations</Link></li>
-              <li><Link href="/blog" className="text-sm text-muted-foreground hover:text-primary">News Blog</Link></li>
+              <li><Link href="/products" className="text-sm text-muted-foreground hover:text-primary">Productos</Link></li>
+              <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary">Ubicaciones</Link></li>
+              <li><Link href="/blog" className="text-sm text-muted-foreground hover:text-primary">Blog de Noticias</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Support</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Soporte</h3>
             <ul role="list" className="mt-4 space-y-2">
-              <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact Us</Link></li>
-              <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-primary">FAQ</Link></li>
-              <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
+              <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contáctanos</Link></li>
+              <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-primary">Preguntas Frecuentes</Link></li>
+              <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">Política de Privacidad</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Connect</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Conecta</h3>
             <div className="mt-4 flex space-x-4">
               <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">Facebook</span><Facebook size={20} /></Link>
               <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">Instagram</span><Instagram size={20} /></Link>
@@ -50,7 +49,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-border/40 pt-8 text-center">
-          <p className="text-sm text-muted-foreground">&copy; {currentYear} Vivenza. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {currentYear} Vivenza. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

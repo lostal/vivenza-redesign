@@ -10,20 +10,18 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export default function LanguageSwitcher() {
-  // Placeholder languages
   const languages = [
-    { code: 'en', name: 'English' },
     { code: 'es', name: 'Español' },
+    { code: 'en', name: 'English' },
     { code: 'fr', name: 'Français' },
   ];
 
-  // Placeholder for current language state
-  const currentLanguage = 'en'; 
+  const currentLanguage = 'es'; // Defaulting to Spanish as per request
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Change language">
+        <Button variant="ghost" size="icon" aria-label="Cambiar idioma">
           <Globe className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>

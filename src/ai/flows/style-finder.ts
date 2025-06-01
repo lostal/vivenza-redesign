@@ -1,11 +1,11 @@
 'use server';
 
 /**
- * @fileOverview AI flow to suggest Vivenza products based on a user-provided photo of their space.
+ * @fileOverview Flujo de IA para sugerir productos Vivenza basado en una foto del espacio del usuario.
  *
- * - `styleFinder`: Asynchronous function to initiate the style finding process.
- * - `StyleFinderInput`: Interface defining the structure for input data (photo).
- * - `StyleFinderOutput`: Interface defining the structure for output data (product suggestions).
+ * - `styleFinder`: Función asíncrona para iniciar el proceso de búsqueda de estilo.
+ * - `StyleFinderInput`: Interfaz que define la estructura para los datos de entrada (foto).
+ * - `StyleFinderOutput`: Interfaz que define la estructura para los datos de salida (sugerencias de productos).
  */
 
 import {ai} from '@/ai/genkit';
@@ -15,7 +15,7 @@ const StyleFinderInputSchema = z.object({
   photoDataUri: z
     .string()
     .describe(
-      "A photo of the user's bathroom or space, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "Una foto del baño o espacio del usuario, como un URI de datos que debe incluir un tipo MIME y usar codificación Base64. Formato esperado: 'data:<mimetype>;base64,<encoded_data>'."
     ),
 });
 
@@ -23,9 +23,9 @@ export type StyleFinderInput = z.infer<typeof StyleFinderInputSchema>;
 
 const StyleFinderOutputSchema = z.object({
   productSuggestions: z.array(
-    z.string().describe('A suggested product name from Vivenza.')
-  ).describe('An array of product suggestions based on the style of the provided photo.'),
-  reasoning: z.string().describe('The reasoning behind the product suggestions.'),
+    z.string().describe('Un nombre de producto sugerido de Vivenza.')
+  ).describe('Un array de sugerencias de productos basadas en el estilo de la foto proporcionada.'),
+  reasoning: z.string().describe('El razonamiento detrás de las sugerencias de productos.'),
 });
 
 export type StyleFinderOutput = z.infer<typeof StyleFinderOutputSchema>;
@@ -38,13 +38,13 @@ const prompt = ai.definePrompt({
   name: 'styleFinderPrompt',
   input: {schema: StyleFinderInputSchema},
   output: {schema: StyleFinderOutputSchema},
-  prompt: `You are an AI assistant specializing in interior design and product suggestions for Vivenza, a provider of bathroom and home products. Vivenza's website is vivenzaexpo.es.
+  prompt: `Eres un asistente de IA especializado en diseño de interiores y sugerencias de productos para Vivenza, un proveedor de productos para baño y hogar. El sitio web de Vivenza es vivenzaexpo.es.
 
-  A user has uploaded a photo of their space. Analyze the photo to determine the style, color palette, and overall aesthetic of the space. Based on this analysis, suggest specific Vivenza products that would complement the existing decor.
+  Un usuario ha subido una foto de su espacio. Analiza la foto para determinar el estilo, la paleta de colores y la estética general del espacio. Basándote en este análisis, sugiere productos específicos de Vivenza que complementarían la decoración existente.
 
-  Respond with an array of product suggestions and a detailed explanation of your reasoning.  Reference the Vivenza website to ensure product availability.
+  Responde con un array de sugerencias de productos y una explicación detallada de tu razonamiento. Consulta el sitio web de Vivenza para asegurar la disponibilidad de los productos.
 
-  Photo: {{media url=photoDataUri}}
+  Foto: {{media url=photoDataUri}}
   `,
 });
 

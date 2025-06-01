@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Product } from '@/lib/types';
-import { ArrowRight, ShoppingCart } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -30,9 +30,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardFooter className="p-6 pt-0 flex justify-between items-center">
         <p className="text-xl font-semibold text-primary">${product.price.toFixed(2)}</p>
         <Button asChild variant="outline" size="sm">
-           {/* Link would typically go to product detail page: /products/${product.id} */}
+           {/* El enlace normalmente iría a la página de detalles del producto: /products/${product.id} */}
           <Link href={`/products#${product.id}`}> 
-            Details <ArrowRight className="ml-2 h-4 w-4" />
+            Detalles <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
       </CardFooter>

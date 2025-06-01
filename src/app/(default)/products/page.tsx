@@ -10,12 +10,12 @@ import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>('Todo');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const filteredProducts = useMemo(() => {
     return placeholderProducts.filter((product) => {
-      const categoryMatch = selectedCategory === 'All' || product.category === selectedCategory;
+      const categoryMatch = selectedCategory === 'Todo' || product.category === selectedCategory;
       const searchTermMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                               product.description.toLowerCase().includes(searchTerm.toLowerCase());
       return categoryMatch && searchTermMatch;
@@ -25,14 +25,14 @@ export default function ProductsPage() {
   return (
     <div className="container py-12 md:py-16">
       <SectionTitle
-        title="Our Products"
-        description="Explore our wide range of high-quality bathroom and home solutions."
+        title="Nuestros Productos"
+        description="Explora nuestra amplia gama de soluciones de alta calidad para baño y hogar."
       />
       
       <div className="my-8 max-w-md mx-auto relative">
         <Input 
           type="text"
-          placeholder="Search products..."
+          placeholder="Buscar productos..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-10 h-12 text-lg"
@@ -53,7 +53,7 @@ export default function ProductsPage() {
         </div>
       ) : (
         <div className="text-center py-10">
-          <p className="text-xl text-muted-foreground">No products found matching your criteria.</p>
+          <p className="text-xl text-muted-foreground">No se encontraron productos que coincidan con tus criterios.</p>
         </div>
       )}
     </div>

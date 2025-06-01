@@ -6,15 +6,15 @@ export default function BlogPage() {
   return (
     <div className="container py-12 md:py-16">
       <SectionTitle
-        title="Vivenza News & Insights"
-        description="Stay updated with the latest trends, design inspiration, and company news."
+        title="Noticias e Inspiración Vivenza"
+        description="Mantente al día con las últimas tendencias, inspiración de diseño y noticias de la empresa."
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {placeholderBlogPosts.map((post) => (
           <BlogPostCard key={post.id} post={post} />
         ))}
       </div>
-      {/* Add pagination if many posts */}
+      {/* Añadir paginación si hay muchas entradas */}
     </div>
   );
 }

@@ -23,8 +23,8 @@ export default function StyleFinderPage() {
     <div className="container py-12 md:py-16">
       <SectionTitle
         icon={<Wand2 className="h-10 w-10 text-primary" />}
-        title="AI Style Finder"
-        description="Let our AI analyze your space and suggest the perfect Vivenza products to match your style. Simply upload a photo to get started."
+        title="Buscador de Estilos IA"
+        description="Deja que nuestra IA analice tu espacio y sugiera los productos Vivenza perfectos para tu estilo. Simplemente sube una foto para comenzar."
       />
       <div className="max-w-2xl mx-auto mt-10 p-6 md:p-8 bg-card rounded-xl shadow-2xl">
         <StyleFinderForm onResults={handleNewResults} onLoadingChange={handleLoadingChange} />
