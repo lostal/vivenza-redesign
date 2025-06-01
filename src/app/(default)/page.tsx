@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Users } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
+import AboutUsCarousel from '@/components/about-us-carousel';
 
 export default function HomePage() {
   return (
@@ -22,7 +23,7 @@ export default function HomePage() {
             <p className="mb-8">
               VIVENZA es la nueva marca comercial de GRUPOSIETE de Exposición de Baño y Cerámica.
             </p>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div className="space-y-4">
                 <p>
                   GRUPOSIETE es una empresa que comercializa y distribuye materiales de Calefacción, Fontanería, Climatización, Sanitario, Obra Civil, Materiales de la Construcción y Energías Renovables a través de puntos de venta para el profesional y Exposiciones de Baño y Cerámica.
@@ -38,6 +39,9 @@ export default function HomePage() {
                   Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo.
                 </p>
               </div>
+            </div>
+            <div className="mt-12">
+              <AboutUsCarousel />
             </div>
           </div>
         </div>
