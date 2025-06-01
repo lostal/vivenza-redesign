@@ -18,7 +18,7 @@ export default function HomePage() {
             icon={<Users className="h-8 w-8 text-primary" />}
             title="SOBRE NOSOTROS"
           />
-          <div className="max-w-3xl mx-auto space-y-6 text-lg text-foreground/80 text-left md:text-justify">
+          <div className="max-w-3xl mx-auto space-y-6 text-lg text-foreground/80 text-left">
             <p>
               VIVENZA es la nueva marca comercial de GRUPOSIETE de Exposición de Baño y Cerámica.
             </p>
