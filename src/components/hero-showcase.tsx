@@ -16,7 +16,7 @@ export default function HeroShowcase() {
         data-ai-hint="modern bathroom hero"
         priority
       />
-      <div className="relative z-10 p-8 max-w-3xl animate-fade-in mx-auto text-left">
+      <div className="relative z-10 p-8 max-w-3xl mx-auto text-left transform translate-x-8">
         <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground mb-6">
           VIVE<br />
           VIVENZA
