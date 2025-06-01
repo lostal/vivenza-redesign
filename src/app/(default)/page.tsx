@@ -18,19 +18,27 @@ export default function HomePage() {
             icon={<Users className="h-8 w-8 text-primary" />}
             title="SOBRE NOSOTROS"
           />
-          <div className="max-w-3xl mx-auto space-y-6 text-lg text-foreground/80 text-left">
-            <p>
+          <div className="max-w-4xl mx-auto text-lg text-foreground/80 text-left">
+            <p className="mb-8">
               VIVENZA es la nueva marca comercial de GRUPOSIETE de Exposición de Baño y Cerámica.
             </p>
-            <p>
-              GRUPOSIETE es una empresa que comercializa y distribuye materiales de Calefacción, Fontanería, Climatización, Sanitario, Obra Civil, Materiales de la Construcción y Energías Renovables a través de puntos de venta para el profesional y Exposiciones de Baño y Cerámica.
-            </p>
-            <p>
-              GRUPOSIETE a través de VIVENZA ofrece soluciones integrales e innovadoras para crear espacios de diseño. En nuestras 12 exposiciones podrás explorar diferentes ambientes completos que te inspirarán.
-            </p>
-            <p>
-              Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo.
-            </p>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="space-y-4">
+                <p>
+                  GRUPOSIETE es una empresa que comercializa y distribuye materiales de Calefacción, Fontanería, Climatización, Sanitario, Obra Civil, Materiales de la Construcción y Energías Renovables a través de puntos de venta para el profesional y Exposiciones de Baño y Cerámica.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p>
+                  GRUPOSIETE a través de VIVENZA ofrece soluciones integrales e innovadoras para crear espacios de diseño. En nuestras 12 exposiciones podrás explorar diferentes ambientes completos que te inspirarán.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p>
+                  Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
