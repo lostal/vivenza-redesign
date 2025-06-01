@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -55,7 +56,12 @@ const styleFinderFlow = ai.defineFlow(
     outputSchema: StyleFinderOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    const result = await prompt(input);
+    if (!result.output) {
+      // Puedes registrar más detalles del 'result' aquí en el servidor si es necesario para depuración.
+      console.error("StyleFinderFlow: El modelo de IA no generó una salida válida. Result:", JSON.stringify(result, null, 2));
+      throw new Error("El modelo de IA no pudo generar un análisis para la imagen proporcionada. Por favor, inténtalo de nuevo.");
+    }
+    return result.output;
   }
 );

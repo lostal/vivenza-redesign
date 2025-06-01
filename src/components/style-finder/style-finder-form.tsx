@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -10,7 +11,7 @@ import type { StyleFinderInput, StyleFinderOutput } from '@/ai/flows/style-finde
 import { styleFinder } from '@/ai/flows/style-finder';
 
 interface StyleFinderFormProps {
-  onResults: (results: StyleFinderOutput) => void;
+  onResults: (results: StyleFinderOutput | null) => void;
   onLoadingChange: (loading: boolean) => void;
 }
 
@@ -45,20 +46,21 @@ export default function StyleFinderForm({ onResults, onLoadingChange }: StyleFin
 
     setIsLoading(true);
     onLoadingChange(true);
+    onResults(null); // Clear previous results
 
     try {
       const input: StyleFinderInput = { photoDataUri: previewUrl };
       const result = await styleFinder(input);
       onResults(result);
       toast({ title: "¡Análisis de Estilo Completado!", description: "Consulta tus sugerencias personalizadas." });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error del Buscador de Estilos IA:", error);
       toast({
         title: "Falló el Análisis",
-        description: "No se pudo analizar la imagen. Por favor, inténtalo de nuevo o usa una imagen diferente.",
+        description: error?.message || "No se pudo analizar la imagen. Por favor, inténtalo de nuevo o usa una imagen diferente.",
         variant: "destructive",
       });
-      onResults({ productSuggestions: [], reasoning: "Error durante el análisis." });
+      onResults(null);
     } finally {
       setIsLoading(false);
       onLoadingChange(false);
