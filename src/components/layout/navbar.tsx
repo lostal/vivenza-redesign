@@ -11,12 +11,19 @@ import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
 import { useState, useEffect, useCallback } from 'react';
 
-const navLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/#sobre-nosotros', label: 'Sobre Nosotros' },
-  { href: '/style-finder', label: 'Buscador IA' },
-  { href: '/locations', label: 'Ubicaciones' },
-  { href: '/contact', label: 'Contacto' },
+// Definición de NavLink con sectionId opcional para mapeo en la homepage
+interface NavLinkItem {
+  href: string;
+  label: string;
+  sectionId?: string; // ID del elemento en la página de inicio para activar este enlace por scroll
+}
+
+const navLinks: NavLinkItem[] = [
+  { href: '/', label: 'Inicio' }, // sectionId podría ser el hero si se quisiera
+  { href: '/#sobre-nosotros', label: 'Sobre Nosotros', sectionId: 'sobre-nosotros' },
+  { href: '/style-finder', label: 'Buscador IA', sectionId: 'ai-style-finder-teaser' },
+  { href: '/locations', label: 'Ubicaciones', sectionId: 'locations-teaser' },
+  { href: '/contact', label: 'Contacto' }, // No tiene sección teaser en la home, es página directa
 ];
 
 export default function Navbar() {
@@ -33,119 +40,140 @@ export default function Navbar() {
 
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
-    // A section is "active" if its top is above this point in the viewport
-    const activationOffset = windowHeight * 0.4; 
+    // Un umbral más pequeño (ej. 25-30%) puede ser mejor para que la sección se active antes.
+    // O un offset desde la parte superior de la ventana (ej. 100px).
+    // Por ahora, mantenemos 40% como estaba, pero se puede ajustar.
+    const activationOffset = windowHeight * 0.4;
 
-    let bestMatchFound = false;
+    if (currentPath === '/') { // Lógica de scroll para la página de inicio
+      let highestVisibleSectionTop = Infinity;
+      let foundSectionByScroll = false;
 
-    // Check anchor links. Iterate from defined order, last one to meet criteria wins.
-    // This helps if sections are close or if definition order matters.
-    for (const link of navLinks) {
-      if (link.href.startsWith('/#') && currentPath === '/') { // Only for homepage anchors
-        const sectionId = link.href.substring(2); // From '/#id' to 'id'
-        const sectionElement = document.getElementById(sectionId);
-        if (sectionElement) {
-          const sectionTop = sectionElement.getBoundingClientRect().top;
-          // If section top is above activation offset, it's a candidate
-          if (sectionTop < activationOffset) {
-            newActiveHref = link.href;
-            bestMatchFound = true; 
-            // Continue checking as a lower section might also meet criteria and be the "current" one
-          } else if (bestMatchFound) {
-            // If we already found a section and this one is below the offset,
-            // the previous one (higher on page) was the correct one.
-            break;
+      // Comprobar primero si estamos muy arriba para "Inicio"
+      if (scrollY < activationOffset * 0.5) { // Ajustar este umbral si es necesario
+        newActiveHref = '/';
+        foundSectionByScroll = true;
+      } else {
+        // Iterar sobre los navLinks para encontrar la sección visible más alta
+        // Se asume que los navLinks están en el orden en que aparecen en la página (o su secciónId correspondiente)
+        for (const link of navLinks) {
+          if (link.sectionId) {
+            const sectionElement = document.getElementById(link.sectionId);
+            if (sectionElement) {
+              const rect = sectionElement.getBoundingClientRect();
+              // La sección es candidata si su parte superior está por encima del offset de activación
+              // y su parte inferior aún no ha pasado completamente el offset (o alguna parte es visible)
+              // y la parte superior de la sección está dentro de la ventana.
+              if (rect.top < activationOffset && rect.bottom > activationOffset * 0.1 && rect.top < windowHeight) {
+                 // Si esta sección está más arriba que la anterior encontrada, o es la primera.
+                if (rect.top < highestVisibleSectionTop) {
+                    highestVisibleSectionTop = rect.top;
+                    newActiveHref = link.href; // Usar el href del navLink (puede ser ancla o página)
+                    foundSectionByScroll = true;
+                }
+              }
+            }
           }
         }
       }
-    }
-    
-    if (bestMatchFound) {
-      // If an anchor section on the homepage is active, use it.
-    } else if (currentPath === '/' && scrollY < 50) {
-      // Homepage, scrolled to the very top
-      newActiveHref = '/';
-    } else {
-      // For non-homepage paths or homepage without active section by scroll
-      // Try to match the full path (including hash if present) or just the base path
+      
+      // Si después de scrollear no se encontró ninguna sección específica y no estamos en el "Inicio" por scrollY bajo
+      if (currentPath === '/' && !foundSectionByScroll && scrollY >= activationOffset * 0.5) {
+        // Si no se encontró una sección activa por scroll y hemos bajado,
+        // podríamos hacer default a Inicio o dejar que el último activeLink persista si es relevante.
+        // Por ahora, si no hay match específico por scroll en la home, y no es el top, se queda en el último activo o default a Inicio.
+        // La lógica de abajo (setActiveLink) se encarga de esto.
+        // Si newActiveHref no se seteó aquí, se usará el que venga del pathname o el anterior.
+        // Para evitar que se quede "colgado" en una sección pasada, si no hay nada claro, Inicio es un buen fallback.
+        if (!newActiveHref) newActiveHref = '/';
+      }
+
+
+    } else { // Para páginas que no son la de inicio
       const fullPathWithHash = currentPath + currentHash;
       const directMatch = navLinks.find(link => link.href === fullPathWithHash || link.href === currentPath);
       if (directMatch) {
         newActiveHref = directMatch.href;
-      } else if (currentPath === '/') {
-        newActiveHref = '/'; // Fallback for home if no section active
       } else {
-        // Fallback for other pages if no exact match (e.g. sub-pages not in nav)
-        newActiveHref = currentPath; 
+        // Fallback para sub-páginas o rutas no listadas (ej. /blog/un-post)
+        // Intenta encontrar el enlace "padre" más cercano.
+        const bestFallback = navLinks.find(link => currentPath.startsWith(link.href) && link.href !== '/') || navLinks.find(link => link.href === '/');
+        newActiveHref = bestFallback ? bestFallback.href : currentPath;
       }
     }
 
     if (newActiveHref && activeLink !== newActiveHref) {
       setActiveLink(newActiveHref);
     } else if (!newActiveHref && currentPath === '/' && activeLink !== '/') {
-      // If somehow newActiveHref is empty on home, ensure 'Inicio' is active
+      // Fallback final si estamos en home y newActiveHref es vacío por alguna razón.
       setActiveLink('/');
     }
-
-  }, [activeLink, pathname]); // pathname ensures re-check if base path changes
+  }, [activeLink, pathname]); // pathname es importante para re-evaluar en cambio de ruta.
 
   useEffect(() => {
-    // Initial determination of active link
-    updateActiveLink();
+    updateActiveLink(); // Determinación inicial
 
     window.addEventListener('scroll', updateActiveLink, { passive: true });
-    window.addEventListener('hashchange', updateActiveLink, { passive: true });
+    window.addEventListener('hashchange', updateActiveLink, { passive: true }); // Para anclas directas
 
     return () => {
       window.removeEventListener('scroll', updateActiveLink);
       window.removeEventListener('hashchange', updateActiveLink);
     };
-  }, [updateActiveLink]); // Run when updateActiveLink (and its dependencies) change
+  }, [updateActiveLink]);
 
-   // Ensure active link is correctly set on direct page loads or navigations
+  // Efecto para manejar el estado activo cuando cambia el pathname (navegación directa)
   useEffect(() => {
     if (typeof window !== 'undefined') {
         const currentPath = window.location.pathname;
         const currentHash = window.location.hash;
-        let initialLink = currentPath; // Default to current path
+        let initialLink = currentPath;
 
-        if (currentHash) {
-            const pathWithHash = currentPath + currentHash;
-            if (navLinks.some(link => link.href === pathWithHash)) {
-                initialLink = pathWithHash;
-            }
+        // Prioridad para match completo con hash
+        const pathWithHash = currentPath + currentHash;
+        const navLinkWithHashMatch = navLinks.find(link => link.href === pathWithHash);
+
+        if (navLinkWithHashMatch) {
+            initialLink = navLinkWithHashMatch.href;
         } else {
-             if (navLinks.some(link => link.href === currentPath)) {
-                initialLink = currentPath;
+            // Match con path (sin hash)
+            const navLinkMatch = navLinks.find(link => link.href === currentPath);
+            if (navLinkMatch) {
+                initialLink = navLinkMatch.href;
+            } else if (currentPath === '/' && currentHash) { // Ancla en homepage
+                 const anchorMatch = navLinks.find(link => link.href === `/${currentHash}`);
+                 if (anchorMatch) initialLink = anchorMatch.href;
+                 else initialLink = '/'; // Fallback a Inicio si el ancla no está en navLinks
+            } else if (currentPath === '/') {
+                initialLink = '/'; // Raíz de la homepage
+            } else {
+                // Fallback para otras páginas (ej. sub-páginas no en nav)
+                const bestFallback = navLinks.find(link => currentPath.startsWith(link.href) && link.href !== '/') || navLinks.find(link => link.href === '/');
+                initialLink = bestFallback ? bestFallback.href : currentPath;
             }
         }
-        // Special case for homepage root
-        if (initialLink === '/' && currentHash === '') {
-          setActiveLink('/');
-        } else if (navLinks.some(link => link.href === initialLink)) {
-          setActiveLink(initialLink);
-        } else {
-           // Fallback to just the path if no specific navLink matches (e.g. for sub-pages not in nav)
-           // or if it's a hash link to a non-nav section on another page.
-           const bestFallback = navLinks.find(link => currentPath.startsWith(link.href) && link.href !== '/') || navLinks.find(link => link.href === '/');
-           setActiveLink(bestFallback ? bestFallback.href : currentPath);
-        }
+        setActiveLink(initialLink);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]); // Rerun only when pathname changes, not on every activeLink change from scroll
+  }, [pathname]);
 
 
   const handleLinkClick = (href: string) => {
     setActiveLink(href);
-    setIsSheetOpen(false); // Close mobile menu on link click
+    setIsSheetOpen(false); // Close mobile menu
 
-    if (href.startsWith('/#')) {
-      const targetId = href.substring(2);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+    // Para anclas en la misma página, Next.js <Link> y 'scroll-smooth' en <html> deben manejarlo.
+    // Si el href es un ancla (ej. '/#sobre-nosotros') y estamos en la página de inicio:
+    if (href.startsWith('/#') && pathname === '/') {
+        const targetId = href.substring(2); // Remueve '/#'
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // En lugar de history.pushState o scrollIntoView manual aquí,
+            // simplemente dejamos que el <Link> de Next.js navegue al ancla.
+            // El `scroll-smooth` en <html> se encargará de la animación.
+            // Esto evita conflictos.
+        }
     }
+    // Para enlaces a otras páginas, Next.js <Link> se encarga.
   };
 
   return (
@@ -160,7 +188,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link
               key={link.label}
-              href={link.href}
+              href={link.href} // El href del Link debe ser el destino final
               onClick={() => handleLinkClick(link.href)}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',

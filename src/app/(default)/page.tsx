@@ -44,7 +44,7 @@ export default function HomePage() {
       </section>
 
       {/* AI Style Finder Teaser */}
-      <section className="py-16 lg:py-24 bg-card">
+      <section id="ai-style-finder-teaser" className="py-16 lg:py-24 bg-card">
         <div className="container text-center">
            <SectionTitle
             icon={<Lightbulb className="h-8 w-8 text-primary" />}
@@ -63,7 +63,7 @@ export default function HomePage() {
       </section>
 
       {/* Location Teaser Section */}
-      <section className="py-16 lg:py-24 bg-background">
+      <section id="locations-teaser" className="py-16 lg:py-24 bg-background">
         <div className="container text-center">
           <SectionTitle
             icon={<MapPin className="h-8 w-8 text-primary" />}
