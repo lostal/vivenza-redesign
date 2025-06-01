@@ -13,7 +13,6 @@ const navLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/style-finder', label: 'Buscador IA' },
   { href: '/locations', label: 'Ubicaciones' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contacto' },
 ];
 

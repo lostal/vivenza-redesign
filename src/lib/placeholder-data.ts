@@ -1,44 +1,5 @@
 
-import type { BlogPost, Location } from '@/lib/types';
-
-export const placeholderBlogPosts: BlogPost[] = [
-  {
-    id: '1',
-    slug: 'tendencias-bano-2024',
-    title: 'Principales Tendencias de Baño para 2024',
-    date: '2024-07-15',
-    excerpt: 'Descubre los últimos estilos e innovaciones en diseño de baños para el próximo año.',
-    imageUrl: 'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-4-1.jpg',
-    content: '<p>El mundo del diseño de baños está en constante evolución. En 2024, estamos viendo un cambio hacia...</p><p>Se exploran materiales naturales, diseños minimalistas y tecnología integrada para crear espacios que son tanto funcionales como relajantes.</p>',
-    author: 'Juana Pérez',
-    tags: ['tendencias', 'diseño', 'baño'],
-    dataAiHint: 'modern bathroom',
-  },
-  {
-    id: '2',
-    slug: 'creando-un-refugio-spa-en-casa',
-    title: 'Creando un Refugio Tipo Spa en Casa',
-    date: '2024-06-28',
-    excerpt: 'Transforma tu baño en un santuario personal con estos consejos y trucos.',
-    imageUrl: 'https://placehold.co/800x500.png',
-    content: '<p>Tu baño puede ser más que un espacio funcional. Con algunos cambios clave, puedes crear un ambiente de spa que promueva la relajación y el bienestar. Considera la iluminación, los textiles y los aromas.</p>',
-    author: 'Juan García',
-    tags: ['spa', 'lujo', 'mejoras hogar'],
-    dataAiHint: 'spa bathroom',
-  },
-  {
-    id: '3',
-    slug: 'opciones-sostenibles-bano',
-    title: 'Opciones Sostenibles para un Baño Ecológico',
-    date: '2024-05-10',
-    excerpt: 'Aprende cómo hacer tu baño más verde con prácticas y materiales sostenibles.',
-    imageUrl: 'https://placehold.co/800x500.png',
-    content: '<p>La sostenibilidad es más importante que nunca. Así es como puedes tomar decisiones ecológicas para tu baño, desde la elección de materiales hasta el ahorro de agua y energía.</p>',
-    author: 'Alicia Verde',
-    tags: ['sostenibilidad', 'ecológico', 'diseño verde'],
-    dataAiHint: 'eco bathroom',
-  },
-];
+import type { Location } from '@/lib/types';
 
 export const placeholderLocations: Location[] = [
   {
@@ -64,7 +25,3 @@ export const placeholderLocations: Location[] = [
     dataAiHint: 'store interior',
   },
 ];
-
-// No longer needed as products are removed
-// export const placeholderProducts: Product[] = [...];
-// export const productCategories: string[] = [...];

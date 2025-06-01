@@ -1,11 +1,9 @@
 
 import HeroShowcase from '@/components/hero-showcase';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Rss, Lightbulb } from 'lucide-react';
-import { placeholderBlogPosts } from '@/lib/placeholder-data';
+import { ArrowRight, MapPin, Lightbulb } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
 
 export default function HomePage() {
@@ -32,48 +30,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Blog Highlights Section */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container">
-          <SectionTitle
-            icon={<Rss className="h-8 w-8 text-primary" />}
-            title="De Nuestro Blog"
-            description="Últimas noticias, tendencias de diseño e inspiración."
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {placeholderBlogPosts.slice(0, 3).map((post) => (
-              <Card key={post.id} className="overflow-hidden transition-all hover:shadow-xl animate-slide-in-up">
-                 <CardHeader className="p-0">
-                  <Image
-                    src={post.imageUrl}
-                    alt={post.title}
-                    width={600}
-                    height={400}
-                    className="object-cover aspect-[3/2]"
-                    data-ai-hint={post.dataAiHint}
-                  />
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="text-lg mb-2">{post.title}</CardTitle>
-                  <p className="text-xs text-muted-foreground mb-2">{new Date(post.date).toLocaleDateString('es-ES')}</p>
-                  <CardDescription className="text-sm text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</CardDescription>
-                   <Button asChild variant="link" className="p-0 h-auto text-primary">
-                     <Link href={`/blog/${post.slug}`}>Leer Más <ArrowRight className="ml-1 h-4 w-4" /></Link>
-                   </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-           <div className="text-center mt-12">
-            <Button asChild size="lg">
-              <Link href="/blog">Visita Nuestro Blog</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Location Teaser Section */}
-      <section className="py-16 lg:py-24 bg-card">
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container text-center">
           <SectionTitle
             icon={<MapPin className="h-8 w-8 text-primary" />}

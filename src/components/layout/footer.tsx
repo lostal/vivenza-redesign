@@ -40,7 +40,6 @@ export default function Footer() {
             <ul role="list" className="mt-4 space-y-2">
               <li><Link href="/style-finder" className="text-sm text-muted-foreground hover:text-primary">Buscador IA</Link></li>
               <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary">Ubicaciones</Link></li>
-              <li><Link href="/blog" className="text-sm text-muted-foreground hover:text-primary">Blog de Noticias</Link></li>
             </ul>
           </div>
           <div>

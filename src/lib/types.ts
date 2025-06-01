@@ -1,17 +1,4 @@
 
-export interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  imageUrl: string;
-  content: string; // HTML content
-  author: string;
-  tags: string[];
-  dataAiHint?: string;
-}
-
 export interface Location {
   id: string;
   name: string;
