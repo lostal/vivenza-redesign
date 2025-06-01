@@ -25,12 +25,12 @@ export default function HeroShowcase() {
         </p>
         <div className="space-x-4">
           <Button asChild size="lg" className="font-body">
-            <Link href="/products">
-              Explorar Productos <ArrowRight className="ml-2 h-5 w-5" />
+            <Link href="/style-finder">
+              Buscador de Estilos IA <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="font-body">
-            <Link href="/style-finder">Buscador de Estilos IA</Link>
+            <Link href="/contact">Contáctanos</Link>
           </Button>
         </div>
       </div>

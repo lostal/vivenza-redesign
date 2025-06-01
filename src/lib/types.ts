@@ -1,12 +1,3 @@
-export interface Product {
-  id: string;
-  name: string;
-  category: string;
-  imageUrl: string;
-  description: string;
-  price: number;
-  dataAiHint?: string;
-}
 
 export interface BlogPost {
   id: string;

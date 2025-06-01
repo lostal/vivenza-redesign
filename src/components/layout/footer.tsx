@@ -19,13 +19,13 @@ export default function Footer() {
           <div>
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground">
-              Productos de alta calidad para baño y hogar con diseño minimalista.
+              Soluciones de alta calidad para baño y hogar con diseño minimalista.
             </p>
           </div>
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Explora</h3>
             <ul role="list" className="mt-4 space-y-2">
-              <li><Link href="/products" className="text-sm text-muted-foreground hover:text-primary">Productos</Link></li>
+              <li><Link href="/style-finder" className="text-sm text-muted-foreground hover:text-primary">Buscador IA</Link></li>
               <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary">Ubicaciones</Link></li>
               <li><Link href="/blog" className="text-sm text-muted-foreground hover:text-primary">Blog de Noticias</Link></li>
             </ul>

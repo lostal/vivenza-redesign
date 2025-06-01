@@ -1,61 +1,4 @@
-import type { Product, BlogPost, Location } from '@/lib/types';
-
-export const placeholderProducts: Product[] = [
-  {
-    id: '1',
-    name: 'Grifo AquaSleek',
-    category: 'Grifería',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Un grifo moderno y elegante con tecnología de ahorro de agua.',
-    price: 199.99,
-    dataAiHint: 'modern faucet',
-  },
-  {
-    id: '2',
-    name: 'Sistema de Ducha Zenith',
-    category: 'Duchas',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Experimenta el lujo con este sistema de ducha de lluvia todo en uno.',
-    price: 499.50,
-    dataAiHint: 'luxury shower',
-  },
-  {
-    id: '3',
-    name: 'Mueble de Baño Terra',
-    category: 'Muebles de Baño',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Mueble de baño espacioso y elegante con amplio almacenamiento.',
-    price: 349.00,
-    dataAiHint: 'bathroom vanity',
-  },
-  {
-    id: '4',
-    name: 'Armario Espejo Lumina',
-    category: 'Espejos',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Armario con espejo iluminado por LED y función antivaho.',
-    price: 279.99,
-    dataAiHint: 'led mirror',
-  },
-  {
-    id: '5',
-    name: 'Bañera Exenta Serene',
-    category: 'Bañeras',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Una hermosa pieza central para cualquier baño moderno.',
-    price: 899.00,
-    dataAiHint: 'freestanding bathtub',
-  },
-  {
-    id: '6',
-    name: 'Inodoro Compacto',
-    category: 'Inodoros',
-    imageUrl: 'https://placehold.co/600x400.png',
-    description: 'Inodoro de doble descarga eficiente y que ahorra espacio.',
-    price: 299.00,
-    dataAiHint: 'modern toilet',
-  },
-];
+import type { BlogPost, Location } from '@/lib/types';
 
 export const placeholderBlogPosts: BlogPost[] = [
   {
@@ -65,7 +8,7 @@ export const placeholderBlogPosts: BlogPost[] = [
     date: '2024-07-15',
     excerpt: 'Descubre los últimos estilos e innovaciones en diseño de baños para el próximo año.',
     imageUrl: 'https://placehold.co/800x500.png',
-    content: '<p>El mundo del diseño de baños está en constante evolución. En 2024, estamos viendo un cambio hacia...</p>',
+    content: '<p>El mundo del diseño de baños está en constante evolución. En 2024, estamos viendo un cambio hacia...</p><p>Se exploran materiales naturales, diseños minimalistas y tecnología integrada para crear espacios que son tanto funcionales como relajantes.</p>',
     author: 'Juana Pérez',
     tags: ['tendencias', 'diseño', 'baño'],
     dataAiHint: 'bathroom design',
@@ -77,7 +20,7 @@ export const placeholderBlogPosts: BlogPost[] = [
     date: '2024-06-28',
     excerpt: 'Transforma tu baño en un santuario personal con estos consejos y trucos.',
     imageUrl: 'https://placehold.co/800x500.png',
-    content: '<p>Tu baño puede ser más que un espacio funcional. Con algunos cambios clave, puedes crear...</p>',
+    content: '<p>Tu baño puede ser más que un espacio funcional. Con algunos cambios clave, puedes crear un ambiente de spa que promueva la relajación y el bienestar. Considera la iluminación, los textiles y los aromas.</p>',
     author: 'Juan García',
     tags: ['spa', 'lujo', 'mejoras hogar'],
     dataAiHint: 'spa bathroom',
@@ -87,9 +30,9 @@ export const placeholderBlogPosts: BlogPost[] = [
     slug: 'opciones-sostenibles-bano',
     title: 'Opciones Sostenibles para un Baño Ecológico',
     date: '2024-05-10',
-    excerpt: 'Aprende cómo hacer tu baño más verde con productos y prácticas sostenibles.',
+    excerpt: 'Aprende cómo hacer tu baño más verde con prácticas y materiales sostenibles.',
     imageUrl: 'https://placehold.co/800x500.png',
-    content: '<p>La sostenibilidad es más importante que nunca. Así es como puedes tomar decisiones ecológicas para tu baño...</p>',
+    content: '<p>La sostenibilidad es más importante que nunca. Así es como puedes tomar decisiones ecológicas para tu baño, desde la elección de materiales hasta el ahorro de agua y energía.</p>',
     author: 'Alicia Verde',
     tags: ['sostenibilidad', 'ecológico', 'diseño verde'],
     dataAiHint: 'eco bathroom',
@@ -119,8 +62,4 @@ export const placeholderLocations: Location[] = [
     openingHours: 'Lun-Vie: 9 AM - 6 PM, Sáb: 10 AM - 4 PM',
     dataAiHint: 'store interior',
   },
-];
-
-export const productCategories = [
-  'Todo', 'Grifería', 'Duchas', 'Muebles de Baño', 'Espejos', 'Bañeras', 'Inodoros'
 ];

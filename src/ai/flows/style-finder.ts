@@ -1,11 +1,11 @@
 'use server';
 
 /**
- * @fileOverview Flujo de IA para sugerir productos Vivenza basado en una foto del espacio del usuario.
+ * @fileOverview Flujo de IA para analizar el estilo de un espacio basándose en una foto del usuario.
  *
- * - `styleFinder`: Función asíncrona para iniciar el proceso de búsqueda de estilo.
+ * - `styleFinder`: Función asíncrona para iniciar el proceso de análisis de estilo.
  * - `StyleFinderInput`: Interfaz que define la estructura para los datos de entrada (foto).
- * - `StyleFinderOutput`: Interfaz que define la estructura para los datos de salida (sugerencias de productos).
+ * - `StyleFinderOutput`: Interfaz que define la estructura para los datos de salida (análisis de estilo y recomendaciones generales).
  */
 
 import {ai} from '@/ai/genkit';
@@ -22,10 +22,8 @@ const StyleFinderInputSchema = z.object({
 export type StyleFinderInput = z.infer<typeof StyleFinderInputSchema>;
 
 const StyleFinderOutputSchema = z.object({
-  productSuggestions: z.array(
-    z.string().describe('Un nombre de producto sugerido de Vivenza.')
-  ).describe('Un array de sugerencias de productos basadas en el estilo de la foto proporcionada.'),
-  reasoning: z.string().describe('El razonamiento detrás de las sugerencias de productos.'),
+  styleAnalysis: z.string().describe('Análisis detallado del estilo, la paleta de colores y la estética del espacio.'),
+  designRecommendations: z.string().describe('Recomendaciones generales de diseño o tipos de elementos que complementarían el espacio, sin mencionar productos o marcas específicas.'),
 });
 
 export type StyleFinderOutput = z.infer<typeof StyleFinderOutputSchema>;
@@ -38,11 +36,13 @@ const prompt = ai.definePrompt({
   name: 'styleFinderPrompt',
   input: {schema: StyleFinderInputSchema},
   output: {schema: StyleFinderOutputSchema},
-  prompt: `Eres un asistente de IA especializado en diseño de interiores y sugerencias de productos para Vivenza, un proveedor de productos para baño y hogar. El sitio web de Vivenza es vivenzaexpo.es.
+  prompt: `Eres un asistente de IA especializado en diseño de interiores y análisis de estilos para espacios de hogar, particularmente baños. Tu objetivo es ayudar a los usuarios a comprender el estilo de su espacio y ofrecer inspiración general. NO menciones productos específicos de ninguna marca, ni precios, ni la marca "Vivenza".
 
-  Un usuario ha subido una foto de su espacio. Analiza la foto para determinar el estilo, la paleta de colores y la estética general del espacio. Basándote en este análisis, sugiere productos específicos de Vivenza que complementarían la decoración existente.
+  Un usuario ha subido una foto de su espacio. Analiza la foto para determinar el estilo (ej. minimalista, industrial, rústico, moderno, clásico, etc.), la paleta de colores predominante, y la estética general del espacio.
 
-  Responde con un array de sugerencias de productos y una explicación detallada de tu razonamiento. Consulta el sitio web de Vivenza para asegurar la disponibilidad de los productos.
+  Responde con:
+  1.  \`styleAnalysis\`: Un análisis detallado del estilo, la paleta de colores y la estética del espacio.
+  2.  \`designRecommendations\`: Recomendaciones generales de diseño o tipos de elementos (ej. "muebles de líneas simples", "textiles naturales", "iluminación cálida indirecta", "elementos metálicos en tonos oscuros") que complementarían la decoración existente, manteniendo un enfoque general y sin sugerir productos o marcas específicas.
 
   Foto: {{media url=photoDataUri}}
   `,

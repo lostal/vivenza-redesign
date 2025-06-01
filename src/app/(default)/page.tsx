@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Rss, Lightbulb } from 'lucide-react';
-import { placeholderProducts, placeholderBlogPosts, placeholderLocations } from '@/lib/placeholder-data';
+import { placeholderBlogPosts } from '@/lib/placeholder-data';
 import SectionTitle from '@/components/section-title';
 
 export default function HomePage() {
@@ -12,51 +12,13 @@ export default function HomePage() {
     <div>
       <HeroShowcase />
 
-      {/* Featured Products Section */}
-      <section className="py-16 lg:py-24 bg-background">
-        <div className="container">
-          <SectionTitle
-            title="Productos Destacados"
-            description="Selecciones escogidas de nuestras últimas colecciones."
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {placeholderProducts.slice(0, 3).map((product) => (
-              <Card key={product.id} className="overflow-hidden transition-all hover:shadow-xl animate-slide-in-up">
-                <CardHeader className="p-0">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={600}
-                    height={400}
-                    className="object-cover aspect-[3/2]"
-                    data-ai-hint={product.dataAiHint}
-                  />
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="text-xl mb-2">{product.name}</CardTitle>
-                  <CardDescription className="text-muted-foreground mb-4">{product.category}</CardDescription>
-                  <Button asChild variant="outline">
-                    <Link href={`/products#${product.id}`}>Ver Detalles <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button asChild size="lg">
-              <Link href="/products">Explorar Todos los Productos</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* AI Style Finder Teaser */}
       <section className="py-16 lg:py-24 bg-card">
         <div className="container text-center">
            <SectionTitle
             icon={<Lightbulb className="h-8 w-8 text-primary" />}
-            title="Encuentra Tu Estilo Perfecto"
-            description="Sube una foto de tu espacio y deja que nuestra IA sugiera los productos Vivenza perfectos."
+            title="Descubre Tu Estilo Ideal"
+            description="Sube una foto de tu espacio y deja que nuestra IA te ofrezca un análisis de diseño e inspiración."
           />
           <div className="mt-10">
             <Button asChild size="lg" variant="default">
