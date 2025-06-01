@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function HeroShowcase() {
   return (
-    <section className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-start text-left bg-background overflow-hidden">
+    <section className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-center bg-background overflow-hidden">
       <Image
         src="https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg"
         alt="Diseño de baño moderno Vivenza"
@@ -16,7 +16,7 @@ export default function HeroShowcase() {
         data-ai-hint="modern bathroom hero"
         priority
       />
-      <div className="relative z-10 p-8 md:pl-16 lg:pl-24 max-w-3xl animate-fade-in">
+      <div className="relative z-10 p-8 max-w-3xl animate-fade-in mx-auto text-left">
         <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground mb-6">
           VIVE<br />
           VIVENZA
