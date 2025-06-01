@@ -1,13 +1,13 @@
 
-import HeroShowcase from '@/components/hero-showcase';
+import HeroShowcaseClientContent from '@/components/hero-showcase-client-content';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import { Link } from 'next-intl/navigation';
 import { ArrowRight, MapPin, Users } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
 import AboutUsCarousel from '@/components/about-us-carousel';
-import { getTranslator } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import type { Locale } from '@/i18n';
+import LocationsTeaserButton from '@/components/locations-teaser-button';
+
 
 interface HomePageProps {
   params: {
@@ -16,11 +16,20 @@ interface HomePageProps {
 }
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
-  const t = await getTranslator(locale, 'HomePage');
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+  const tHero = await getTranslations({ locale, namespace: 'HeroShowcaseClientContent'});
+  const tLocationsButton = await getTranslations({ locale, namespace: 'LocationsTeaserButton'});
+
 
   return (
     <div>
-      <HeroShowcase />
+      <HeroShowcaseClientContent
+        titleLine1={tHero('titleLine1')}
+        titleLine2={tHero('titleLine2')}
+        description={tHero('description')}
+        aboutUsButtonText={tHero('aboutUsButtonText')}
+        contactUsButtonText={tHero('contactUsButtonText')}
+      />
 
       {/* Sobre Nosotros Section */}
       <section id="sobre-nosotros" className="py-16 lg:py-24 bg-background">
@@ -29,22 +38,22 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
             icon={<Users className="h-8 w-8 text-primary" />}
             title={t('aboutUs.title')}
           />
-          <div className="max-w-4xl mx-auto text-lg text-foreground/80 text-center"> {/* Cambiado de text-left a text-center */}
+          <div className="max-w-4xl mx-auto text-lg text-foreground/80 text-center">
             <p className="mb-8">
               {t('aboutUs.intro')}
             </p>
             <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="space-y-4">
+              <div className="space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph1')}
                 </p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph2')}
                 </p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph3')}
                 </p>
@@ -66,9 +75,9 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
             description={t('locationsTeaser.description')}
           />
           <div className="mt-10">
-            <Button asChild size="lg" variant="default">
-              <Link href="/locations">{t('locationsTeaser.button')} <ArrowRight className="ml-2 h-5 w-5" /></Link>
-            </Button>
+            <LocationsTeaserButton
+              buttonText={tLocationsButton('findStore')}
+            />
           </div>
            <div className="mt-12 max-w-4xl mx-auto aspect-video rounded-lg shadow-lg overflow-hidden">
             <iframe
