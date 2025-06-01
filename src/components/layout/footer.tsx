@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import Logo from '@/components/logo';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -30,7 +30,7 @@ export default function Footer() {
                 <Image
                   src="https://vivenzaexpo.es/wp-content/uploads/2025/03/UNA-MARCA-DE-GRUPOSIETE-VIVENZA.png"
                   alt="Una marca de GrupoSiete"
-                  width={241} 
+                  width={241}
                   height={20}
                   className="h-auto max-w-full"
                   data-ai-hint="brand affiliation group"
@@ -57,10 +57,10 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Conecta</h3>
             <div className="mt-4 flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">Facebook</span><Facebook size={20} /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">Instagram</span><Instagram size={20} /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">Twitter</span><Twitter size={20} /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary"><span className="sr-only">LinkedIn</span><Linkedin size={20} /></Link>
+              <Link href="https://www.instagram.com/gruposiete_vivenza/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                <span className="sr-only">Instagram</span>
+                <Instagram size={20} />
+              </Link>
             </div>
           </div>
         </div>
