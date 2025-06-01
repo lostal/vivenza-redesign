@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -25,14 +26,16 @@ export default function Footer() {
               Soluciones de alta calidad para baño y hogar con diseño minimalista.
             </p>
             <div className="mt-6">
-              <Image
-                src="https://vivenzaexpo.es/wp-content/uploads/2025/03/UNA-MARCA-DE-GRUPOSIETE-VIVENZA.png"
-                alt="Una marca de GrupoSiete"
-                width={241} 
-                height={20}
-                className="h-auto max-w-full"
-                data-ai-hint="brand affiliation group"
-              />
+              <Link href="https://gruposiete.es/" target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="https://vivenzaexpo.es/wp-content/uploads/2025/03/UNA-MARCA-DE-GRUPOSIETE-VIVENZA.png"
+                  alt="Una marca de GrupoSiete"
+                  width={241} 
+                  height={20}
+                  className="h-auto max-w-full"
+                  data-ai-hint="brand affiliation group"
+                />
+              </Link>
             </div>
           </div>
           <div>
