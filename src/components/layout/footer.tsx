@@ -38,6 +38,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Explora</h3>
             <ul role="list" className="mt-4 space-y-2">
+              <li><Link href="/#sobre-nosotros" className="text-sm text-muted-foreground hover:text-primary">Sobre Nosotros</Link></li>
               <li><Link href="/style-finder" className="text-sm text-muted-foreground hover:text-primary">Buscador IA</Link></li>
               <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary">Ubicaciones</Link></li>
             </ul>

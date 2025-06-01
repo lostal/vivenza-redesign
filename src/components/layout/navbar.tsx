@@ -11,6 +11,7 @@ import LanguageSwitcher from '@/components/language-switcher';
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
+  { href: '/#sobre-nosotros', label: 'Sobre Nosotros' },
   { href: '/style-finder', label: 'Buscador IA' },
   { href: '/locations', label: 'Ubicaciones' },
   { href: '/contact', label: 'Contacto' },
@@ -27,7 +28,7 @@ export default function Navbar() {
           href={link.href}
           className={cn(
             "text-sm font-medium transition-colors hover:text-primary",
-            pathname === link.href ? "text-primary" : "text-foreground/80"
+            (pathname === link.href || (link.href.includes('#') && pathname === link.href.split('#')[0])) ? "text-primary" : "text-foreground/80"
           )}
         >
           {link.label}

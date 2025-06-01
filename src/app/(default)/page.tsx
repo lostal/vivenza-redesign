@@ -3,13 +3,37 @@ import HeroShowcase from '@/components/hero-showcase';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Lightbulb } from 'lucide-react';
+import { ArrowRight, MapPin, Lightbulb, Users } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
 
 export default function HomePage() {
   return (
     <div>
       <HeroShowcase />
+
+      {/* Sobre Nosotros Section */}
+      <section id="sobre-nosotros" className="py-16 lg:py-24 bg-background">
+        <div className="container">
+          <SectionTitle
+            icon={<Users className="h-8 w-8 text-primary" />}
+            title="SOBRE NOSOTROS"
+          />
+          <div className="max-w-3xl mx-auto space-y-6 text-lg text-foreground/80 text-left md:text-justify">
+            <p>
+              VIVENZA es la nueva marca comercial de GRUPOSIETE de Exposición de Baño y Cerámica.
+            </p>
+            <p>
+              GRUPOSIETE es una empresa que comercializa y distribuye materiales de Calefacción, Fontanería, Climatización, Sanitario, Obra Civil, Materiales de la Construcción y Energías Renovables a través de puntos de venta para el profesional y Exposiciones de Baño y Cerámica.
+            </p>
+            <p>
+              GRUPOSIETE a través de VIVENZA ofrece soluciones integrales e innovadoras para crear espacios de diseño. En nuestras 12 exposiciones podrás explorar diferentes ambientes completos que te inspirarán.
+            </p>
+            <p>
+              Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* AI Style Finder Teaser */}
       <section className="py-16 lg:py-24 bg-card">
