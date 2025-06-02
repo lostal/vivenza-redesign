@@ -1,6 +1,6 @@
 
 import createMiddleware from 'next-intl/middleware';
-import { i18nConfig } from './i18n';
+import { i18nConfig, pathnames } from './navigation'; // Use pathnames from navigation
 
 export default createMiddleware({
   // A list of all locales that are supported
@@ -12,35 +12,15 @@ export default createMiddleware({
   // Configure an explicit locale prefix for all locales including the default
   localePrefix: i18nConfig.localePrefix,
 
-  // আন্তর্জাতিক রুটের জন্য পাথনামের আন্তর্জাতিকীকরণ নিষ্ক্রিয় করুন
-  pathnames: {
-    // If all locales use the same pathnames, use the
-    // default:
-    '/': '/',
-    '/blog': '/blog',
-    '/contact': '/contact',
-    '/locations': '/locations',
-    '/products': '/products',
-
-    // If locales use different pathnames, customize them:
-    // '/about': {
-    //   en: '/about',
-    //   es: '/sobre-nosotros'
-    // }
-  }
+  // Use the pathnames from navigation.ts
+  // This ensures consistency between link generation and request routing.
+  pathnames,
 });
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next` or `/_vercel`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-    // Match all pathnames within locales list (e.g. `/es`, `/en/about`)
-    '/([\\w-]+)?/blog/:path*',
-    '/([\\w-]+)?/contact/:path*',
-    '/([\\w-]+)?/locations/:path*',
-    '/([\\w-]+)?/products/:path*',
-  ]
+  // This simplified matcher is generally recommended for next-intl with App Router
+  // when all user-facing pages are intended to be localized.
+  // It excludes common non-page assets and API routes.
+  matcher: ['/((?!api|_next/static|_next/image|_next/data|_vercel|.*\\..*).*)']
 };

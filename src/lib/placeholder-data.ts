@@ -24,19 +24,18 @@ export const productCategories: string[] = [
 ];
 
 export const placeholderBlogPosts: BlogPost[] = [
-  // Example blog post (optional, can be an empty array if preferred)
-  // {
-  //   id: 'post1',
-  //   slug: 'ideas-bano-moderno',
-  //   title: 'Ideas Increíbles para un Baño Moderno',
-  //   date: '2024-05-15',
-  //   author: 'Equipo Vivenza',
-  //   imageUrl: 'https://placehold.co/600x338.png',
-  //   excerpt: 'Descubre las últimas tendencias en diseño de baños modernos...',
-  //   content: '<p>Contenido completo del artículo aquí...</p>',
-  //   tags: ['Baño Moderno', 'Diseño'],
-  //   dataAiHint: 'modern bathroom design'
-  // }
+  {
+    id: 'sample-post-1',
+    slug: 'sample-post-slug',
+    title: 'Sample Post Title for Static Export',
+    date: '2024-01-01',
+    author: 'Vivenza Team',
+    imageUrl: 'https://placehold.co/600x338.png',
+    dataAiHint: 'sample blog image',
+    excerpt: 'This is a sample blog post excerpt to test static generation for /blog/[slug] routes.',
+    content: '<p>This is the full content of the sample blog post. It helps ensure generateStaticParams has data.</p>',
+    tags: ['Sample', 'Test', 'Static Export'],
+  }
 ];
 
 export const placeholderLocations: Location[] = [
