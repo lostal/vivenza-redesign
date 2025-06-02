@@ -1,5 +1,43 @@
 
-import type { Location } from '@/lib/types';
+import type { Location, Product, BlogPost } from '@/lib/types';
+
+export const placeholderProducts: Product[] = [
+  // Example product (optional, can be an empty array if preferred)
+  // {
+  //   id: 'prod1',
+  //   name: 'Grifo Moderno XL',
+  //   category: 'Baño',
+  //   description: 'Un grifo elegante y moderno para tu lavabo.',
+  //   imageUrl: 'https://placehold.co/600x450.png',
+  //   price: 120.99,
+  //   dataAiHint: 'modern faucet'
+  // }
+];
+
+export const productCategories: string[] = [
+  'Todo',
+  'Baño',
+  'Cocina',
+  'Hogar',
+  'Cerámica',
+  'Grifería'
+];
+
+export const placeholderBlogPosts: BlogPost[] = [
+  // Example blog post (optional, can be an empty array if preferred)
+  // {
+  //   id: 'post1',
+  //   slug: 'ideas-bano-moderno',
+  //   title: 'Ideas Increíbles para un Baño Moderno',
+  //   date: '2024-05-15',
+  //   author: 'Equipo Vivenza',
+  //   imageUrl: 'https://placehold.co/600x338.png',
+  //   excerpt: 'Descubre las últimas tendencias en diseño de baños modernos...',
+  //   content: '<p>Contenido completo del artículo aquí...</p>',
+  //   tags: ['Baño Moderno', 'Diseño'],
+  //   dataAiHint: 'modern bathroom design'
+  // }
+];
 
 export const placeholderLocations: Location[] = [
   {
