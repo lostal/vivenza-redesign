@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 
 export const metadata: Metadata = {
-  title: 'Vivenza - Soluciones Modernas para el Hogar y Baño',
+  title: 'Vivenza',
   description: 'Descubre Vivenza: Productos de alta calidad para baño y hogar con un diseño minimalista inspirado en Apple. Explora nuestras galerías de productos, encuentra ubicaciones de exposición e inspírate con nuestro Buscador de Estilos IA.',
   keywords: ['Vivenza', 'grifería de baño', 'diseño de hogar', 'diseño de interiores', 'estilo moderno', 'diseño minimalista'],
   icons: {
