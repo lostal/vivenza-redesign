@@ -1,0 +1,31 @@
+
+{
+  "RootLayout": {
+    "title": "Vivenza",
+    "description": "Modern Solutions for Home and Bath",
+    "keywords": "Vivenza,bath fixtures,home design,interior design,modern style,minimalist design"
+  },
+  "HeroShowcaseClientContent": {
+    "titleLine1": "LIVE",
+    "titleLine2": "VIVENZA",
+    "description": "Discover exquisitely crafted bath and home solutions that blend timeless design with modern functionality.",
+    "aboutUsButtonText": "About Us",
+    "contactUsButtonText": "Contact Us"
+  },
+  "HomePage": {
+    "aboutUs": {
+      "title": "ABOUT US",
+      "intro": "VIVENZA is the new commercial brand of GRUPOSIETE for Bath and Ceramic Showrooms.",
+      "paragraph1": "GRUPOSIETE is a company that markets and distributes materials for Heating, Plumbing, Air Conditioning, Sanitary Ware, Civil Works, Construction Materials, and Renewable Energies through points of sale for professionals and Bath and Ceramic Showrooms.",
+      "paragraph2": "GRUPOSIETE, through VIVENZA, offers comprehensive and innovative solutions to create designer spaces. In our 12 showrooms, you can explore different complete environments that will inspire you.",
+      "paragraph3": "Our team of experts will provide you with a unique experience with personalized attention and tailor-made solutions adapted to your style."
+    },
+    "locationsTeaser": {
+      "title": "Visit Our Showrooms",
+      "description": "Experience Vivenza quality firsthand at our showroom locations."
+    }
+  },
+  "LocationsTeaserButton": {
+    "findStore": "Find your store"
+  }
+}

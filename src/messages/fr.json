@@ -1,0 +1,31 @@
+
+{
+  "RootLayout": {
+    "title": "Vivenza",
+    "description": "Solutions Modernes pour la Maison et la Salle de Bain",
+    "keywords": "Vivenza,équipements de salle de bain,design de maison,design d'intérieur,style moderne,design minimaliste"
+  },
+  "HeroShowcaseClientContent": {
+    "titleLine1": "VIVEZ",
+    "titleLine2": "VIVENZA",
+    "description": "Découvrez des solutions de bain et de maison exquises qui allient un design intemporel à une fonctionnalité moderne.",
+    "aboutUsButtonText": "À Propos de Nous",
+    "contactUsButtonText": "Contactez-Nous"
+  },
+  "HomePage": {
+    "aboutUs": {
+      "title": "À PROPOS DE NOUS",
+      "intro": "VIVENZA est la nouvelle marque commerciale de GRUPOSIETE pour les Expositions de Salle de Bain et de Céramique.",
+      "paragraph1": "GRUPOSIETE est une entreprise qui commercialise et distribue des matériaux de Chauffage, Plomberie, Climatisation, Sanitaire, Génie Civil, Matériaux de Construction et Énergies Renouvelables à travers des points de vente pour professionnels et des Expositions de Salle de Bain et de Céramique.",
+      "paragraph2": "GRUPOSIETE, via VIVENZA, offre des solutions intégrales et innovantes pour créer des espaces design. Dans nos 12 showrooms, vous pourrez explorer différents environnements complets qui vous inspireront.",
+      "paragraph3": "Notre équipe d'experts vous offrira une expérience unique avec une attention personnalisée et des solutions sur mesure adaptées à votre style."
+    },
+    "locationsTeaser": {
+      "title": "Visitez Nos Showrooms",
+      "description": "Découvrez la qualité Vivenza en personne dans nos showrooms."
+    }
+  },
+  "LocationsTeaserButton": {
+    "findStore": "Trouvez votre magasin"
+  }
+}

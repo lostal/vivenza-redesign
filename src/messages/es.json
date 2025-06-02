@@ -1,0 +1,31 @@
+
+{
+  "RootLayout": {
+    "title": "Vivenza",
+    "description": "Soluciones Modernas para el Hogar y Baño",
+    "keywords": "Vivenza,grifería de baño,diseño de hogar,diseño de interiores,estilo moderno,diseño minimalista"
+  },
+  "HeroShowcaseClientContent": {
+    "titleLine1": "VIVE",
+    "titleLine2": "VIVENZA",
+    "description": "Descubre soluciones para baño y hogar exquisitamente elaboradas que combinan diseño atemporal con funcionalidad moderna.",
+    "aboutUsButtonText": "Sobre Nosotros",
+    "contactUsButtonText": "Contáctanos"
+  },
+  "HomePage": {
+    "aboutUs": {
+      "title": "SOBRE NOSOTROS",
+      "intro": "VIVENZA es la nueva marca comercial de GRUPOSIETE de Exposición de Baño y Cerámica.",
+      "paragraph1": "GRUPOSIETE es una empresa que comercializa y distribuye materiales de Calefacción, Fontanería, Climatización, Sanitario, Obra Civil, Materiales de la Construcción y Energías Renovables a través de puntos de venta para el profesional y Exposiciones de Baño y Cerámica.",
+      "paragraph2": "GRUPOSIETE a través de VIVENZA ofrece soluciones integrales e innovadoras para crear espacios de diseño. En nuestras 12 exposiciones podrás explorar diferentes ambientes completos que te inspirarán.",
+      "paragraph3": "Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo."
+    },
+    "locationsTeaser": {
+      "title": "Visita Nuestros Showrooms",
+      "description": "Experimenta la calidad Vivenza de primera mano en nuestras ubicaciones de exposición."
+    }
+  },
+  "LocationsTeaserButton": {
+    "findStore": "Encuentra tu tienda"
+  }
+}
