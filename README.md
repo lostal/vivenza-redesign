@@ -104,11 +104,24 @@ Las rutas se prefijan automáticamente con el locale (`/es`, `/en`, `/fr`).
 
 ## 🚀 Deployment
 
-### Recomendado: Vercel
+### Opción 1: Netlify (Configurado)
+
+El proyecto incluye `netlify.toml` con la configuración correcta:
+
+1. Conecta tu repositorio en [Netlify](https://app.netlify.com/)
+2. Netlify detectará automáticamente la configuración
+3. Build settings (auto-detectados):
+   - **Build command**: `npm run build`
+   - **Publish directory**: `.next`
+   - **Node version**: 20
+
+**Importante**: Netlify requiere el plugin `@netlify/plugin-nextjs` (ya incluido en devDependencies).
+
+### Opción 2: Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alvarolostal/vivenza-redesign)
 
-El proyecto usa middleware de i18n que requiere un entorno de Node.js (no compatible con static export).
+Vercel detecta automáticamente Next.js, sin configuración adicional.
 
 ### Scripts
 
