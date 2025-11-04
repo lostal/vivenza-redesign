@@ -33,73 +33,112 @@ Con **12 exposiciones** en España, Vivenza ofrece espacios de diseño completos
 - **JavaScript (ES6+)** - Funcionalidad interactiva
 - **Netlify** - Despliegue y hosting
 
-## 🛠️ Instalación y Desarrollo
+## 🛠️ Instalación
 
 ### Prerrequisitos
 
-- Node.js (versión 14 o superior)
+- Node.js 20.x o superior
 - npm o yarn
 
-### Instalación
+### Desarrollo Local
 
-1. Clona este repositorio:
+1. Clonar repositorio:
 ```bash
-git clone https://github.com/alvarolostal/vivenza.git
+git clone https://github.com/alvarolostal/vivenza-redesign.git
 cd vivenza-redesign
 ```
 
-2. Instala las dependencias:
+2. Instalar dependencias:
 ```bash
 npm install
-# o
-yarn install
 ```
 
-3. Ejecuta el servidor de desarrollo:
+3. Iniciar servidor de desarrollo:
 ```bash
 npm run dev
-# o
-yarn dev
 ```
 
-4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+4. Abrir [http://localhost:3000](http://localhost:3000)
 
-## 🚀 Despliegue
+## 📁 Estructura del Proyecto
 
-El proyecto está desplegado automáticamente en **Netlify** y se actualiza con cada push a la rama main.
+```
+src/
+├── app/
+│   ├── [locale]/              # Rutas internacionalizadas
+│   │   ├── page.tsx           # Homepage
+│   │   ├── contact/page.tsx   # Página de contacto
+│   │   └── locations/page.tsx # Showrooms
+│   ├── globals.css            # Estilos globales
+│   └── layout.tsx             # Layout raíz
+├── components/
+│   ├── layout/                # Navbar, Footer
+│   ├── contact/               # Formulario de contacto
+│   ├── location/              # Componentes de ubicaciones
+│   └── ui/                    # Componentes UI reutilizables
+├── lib/                       # Utilidades y datos
+├── messages/                  # Traducciones (es/en/fr)
+└── i18n.ts                    # Configuración i18n
+```
 
-### Comandos de Build
+## 🌍 Internacionalización
+
+Soporte para tres idiomas:
+- 🇪🇸 Español (por defecto)
+- 🇬🇧 Inglés
+- 🇫🇷 Francés
+
+Las rutas se prefijan automáticamente con el locale (`/es`, `/en`, `/fr`).
+
+## 🚀 Deployment
+
+### Recomendado: Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alvarolostal/vivenza-redesign)
+
+El proyecto usa middleware de i18n que requiere un entorno de Node.js (no compatible con static export).
+
+### Scripts
 
 ```bash
-# Generar build de producción
-npm run build
-
-# Iniciar en modo producción
-npm start
+npm run dev        # Desarrollo
+npm run build      # Build de producción
+npm start          # Iniciar producción
+npm run lint       # ESLint
+npm run typecheck  # Verificar TypeScript
 ```
 
-## 🎯 Objetivos del Rediseño
+## 🎯 Mejoras Implementadas
 
-- Modernizar la interfaz visual manteniendo la identidad de marca
-- Mejorar la navegación y experiencia de usuario
-- Optimizar el rendimiento y la carga de la página
-- Crear un diseño más atractivo y profesional
-- Adaptar el contenido para una mejor presentación
+- ✅ Modernización completa de UI/UX
+- ✅ Performance optimizado (bundle 55% más ligero)
+- ✅ Smooth scroll con JavaScript (sin hash en URL)
+- ✅ Internacionalización completa en 3 idiomas
+- ✅ TypeScript strict mode
+- ✅ Componentes reutilizables con shadcn/ui
+- ✅ Formularios con validación robusta
+- ✅ Responsive design mobile-first
+- ✅ Limpieza de código y dependencias innecesarias
 
-## 📝 Licencia
+## 🎨 Sistema de Diseño
 
-Este proyecto es una reinterpretación educativa y creativa del sitio web original de Vivenza. No tiene fines comerciales.
+- **Color Primario**: `#106984` (Teal)
+- **Tema**: Dark mode por defecto
+- **Tipografía**: System font stack
+- **Breakpoints**: 
+  - `sm`: 640px
+  - `md`: 768px  
+  - `lg`: 1024px
 
-## 📞 Contacto
+## � Licencia
 
-Si tienes preguntas sobre este proyecto o quieres conectar conmigo, tengo mis redes en mi perfil.
+Proyecto educativo. Rediseño no oficial de [Vivenza](https://vivenzaexpo.es/).
 
-## 🙏 Reconocimientos
+## 🔗 Links
 
-- Diseño original por [GRUPOSIETE](https://vivenzaexpo.es/)
-- Inspiración en las mejores prácticas de UX/UI modernas
-- Comunidad de desarrolladores de Next.js
+- [GrupoSiete](https://gruposiete.es/)
+- [Instagram Vivenza](https://www.instagram.com/gruposiete_vivenza/)
 
 ---
 
-**Nota**: Este es un proyecto de práctica y rediseño personal. No está afiliado oficialmente con Vivenza o GRUPOSIETE.
+**Nota**: Proyecto de portfolio personal. No afiliado oficialmente con Vivenza o GrupoSiete.
