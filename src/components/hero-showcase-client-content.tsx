@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { usePathname } from 'next/navigation'; // To get current locale if needed
+import { usePathname } from 'next/navigation';
 
 interface HeroShowcaseClientContentProps {
   titleLine1: string;
@@ -23,38 +23,49 @@ export default function HeroShowcaseClientContent({
   contactUsButtonText,
 }: HeroShowcaseClientContentProps) {
   const pathname = usePathname();
-  const currentLocale = pathname.split('/')[1] || 'es'; // Fallback to 'es' if locale is not in path
-
-  const aboutUsLink = `/${currentLocale}/#sobre-nosotros`;
+  const currentLocale = pathname.split('/')[1] || 'es';
   const contactLink = `/${currentLocale}/contact`;
   
+  const scrollToAboutUs = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('sobre-nosotros');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
-    <section className="relative h-[calc(100vh-4rem)] min-h-[600px] flex items-center justify-center bg-background overflow-hidden">
+    <section className="relative h-[calc(100vh-4rem)] min-h-[500px] sm:min-h-[600px] flex items-center justify-center bg-background overflow-hidden">
       <Image
         src="https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg"
         alt="Diseño de baño moderno Vivenza"
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: 'cover' }}
         quality={90}
         className="opacity-30"
-        data-ai-hint="modern bathroom hero"
         priority
+        sizes="100vw"
       />
-      <div className="relative z-10 p-8 max-w-3xl mx-auto text-left transform translate-x-8">
-        <h1 className="font-headline text-5xl md:text-7xl font-bold text-foreground mb-6">
+      <div className="relative z-10 px-4 sm:px-8 py-8 max-w-3xl mx-auto text-left sm:translate-x-8">
+        <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6">
           {titleLine1}<br />
           <span className="text-primary">{titleLine2}</span>
         </h1>
-        <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-xl">
+        <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-8 sm:mb-10 max-w-xl">
           {description}
         </p>
-        <div className="space-x-4">
-          <Button asChild size="lg" className="font-body">
-            <Link href={aboutUsLink}>
-              {aboutUsButtonText} <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 sm:space-x-0">
+          <Button 
+            size="lg" 
+            className="font-body w-full sm:w-auto"
+            onClick={scrollToAboutUs}
+          >
+            {aboutUsButtonText} <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
-          <Button asChild variant="outline" size="lg" className="font-body">
+          <Button asChild variant="outline" size="lg" className="font-body w-full sm:w-auto">
             <Link href={contactLink}>{contactUsButtonText}</Link>
           </Button>
         </div>

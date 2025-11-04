@@ -8,15 +8,33 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { usePathname, useRouter } from 'next/navigation';
+import { locales } from '@/i18n';
+
+const languageNames: Record<string, string> = {
+  es: 'Español',
+  en: 'English',
+  fr: 'Français',
+};
 
 export default function LanguageSwitcher() {
-  const languages = [
-    { code: 'es', name: 'Español' },
-    { code: 'en', name: 'English' },
-    { code: 'fr', name: 'Français' },
-  ];
+  const pathname = usePathname();
+  const router = useRouter();
+  
+  // Extract current locale from pathname
+  const currentLocale = pathname.split('/')[1] || 'es';
 
-  const currentLanguage = 'es'; // Defaulting to Spanish as per request
+  const handleLanguageChange = (newLocale: string) => {
+    // Replace the locale in the current path
+    const segments = pathname.split('/');
+    if (locales.includes(segments[1] as any)) {
+      segments[1] = newLocale;
+    } else {
+      segments.unshift('', newLocale);
+    }
+    const newPath = segments.join('/');
+    router.push(newPath);
+  };
 
   return (
     <DropdownMenu>
@@ -26,13 +44,13 @@ export default function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {languages.map((lang) => (
+        {locales.map((locale) => (
           <DropdownMenuItem 
-            key={lang.code} 
-            // onClick={() => {/* Implement language change logic here */}}
-            className={currentLanguage === lang.code ? 'font-semibold' : ''}
+            key={locale} 
+            onClick={() => handleLanguageChange(locale)}
+            className={currentLocale === locale ? 'font-semibold bg-muted' : ''}
           >
-            {lang.name}
+            {languageNames[locale] || locale}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

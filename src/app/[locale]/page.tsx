@@ -1,4 +1,3 @@
-
 import HeroShowcaseClientContent from '@/components/hero-showcase-client-content';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MapPin, Users } from 'lucide-react';
@@ -8,18 +7,17 @@ import { getTranslations } from 'next-intl/server';
 import type { Locale } from '@/i18n';
 import LocationsTeaserButton from '@/components/locations-teaser-button';
 
-
 interface HomePageProps {
-  params: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 }
 
-export default async function HomePage({ params: { locale } }: HomePageProps) {
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'HomePage' });
   const tHero = await getTranslations({ locale, namespace: 'HeroShowcaseClientContent'});
   const tLocationsButton = await getTranslations({ locale, namespace: 'LocationsTeaserButton'});
-
 
   return (
     <div>
@@ -31,35 +29,35 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
         contactUsButtonText={tHero('contactUsButtonText')}
       />
 
-      {/* Sobre Nosotros Section */}
-      <section id="sobre-nosotros" className="py-16 lg:py-24 bg-background">
-        <div className="container">
+      {/* About Us Section */}
+      <section id="sobre-nosotros" className="py-12 sm:py-16 lg:py-24 bg-background">
+        <div className="container px-4">
           <SectionTitle
-            icon={<Users className="h-8 w-8 text-primary" />}
+            icon={<Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />}
             title={t('aboutUs.title')}
           />
-          <div className="max-w-4xl mx-auto text-lg text-foreground/80 text-center">
-            <p className="mb-8">
+          <div className="max-w-4xl mx-auto text-base sm:text-lg text-foreground/80 text-center">
+            <p className="mb-6 sm:mb-8">
               {t('aboutUs.intro')}
             </p>
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="space-y-4 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-12">
+              <div className="space-y-3 sm:space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph1')}
                 </p>
               </div>
-              <div className="space-y-4 text-center">
+              <div className="space-y-3 sm:space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph2')}
                 </p>
               </div>
-              <div className="space-y-4 text-center">
+              <div className="space-y-3 sm:space-y-4 text-center">
                 <p>
                   {t('aboutUs.paragraph3')}
                 </p>
               </div>
             </div>
-            <div className="mt-12">
+            <div className="mt-10 sm:mt-12">
               <AboutUsCarousel />
             </div>
           </div>
@@ -67,19 +65,19 @@ export default async function HomePage({ params: { locale } }: HomePageProps) {
       </section>
 
       {/* Location Teaser Section */}
-      <section id="locations-teaser" className="py-16 lg:py-24 bg-card">
-        <div className="container text-center">
+      <section id="locations-teaser" className="py-12 sm:py-16 lg:py-24 bg-card">
+        <div className="container px-4 text-center">
           <SectionTitle
-            icon={<MapPin className="h-8 w-8 text-primary" />}
+            icon={<MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />}
             title={t('locationsTeaser.title')}
             description={t('locationsTeaser.description')}
           />
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <LocationsTeaserButton
               buttonText={tLocationsButton('findStore')}
             />
           </div>
-           <div className="mt-12 max-w-4xl mx-auto aspect-video rounded-lg shadow-lg overflow-hidden">
+          <div className="mt-10 sm:mt-12 max-w-4xl mx-auto aspect-video rounded-lg shadow-lg overflow-hidden">
             <iframe
               className="w-full h-full"
               src="https://www.youtube.com/embed/k95tU4XvWDs"

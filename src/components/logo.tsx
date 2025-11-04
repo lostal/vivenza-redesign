@@ -7,9 +7,8 @@ export default function Logo() {
       alt="Vivenza Logo"
       width={163} 
       height={25} 
-      className="h-auto max-w-full"
+      className="h-auto w-auto max-w-[120px] sm:max-w-[140px] md:max-w-[163px]"
       priority
-      data-ai-hint="company logo"
     />
   );
 }

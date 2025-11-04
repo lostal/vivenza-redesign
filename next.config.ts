@@ -4,15 +4,14 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // output: 'export' removed - incompatible with i18n middleware
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false, // Enable type checking
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false, // Enable linting
   },
   images: {
-    unoptimized: true, // Correct for static export
     remotePatterns: [
       {
         protocol: 'https',

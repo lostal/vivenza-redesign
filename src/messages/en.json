@@ -27,5 +27,71 @@
   },
   "LocationsTeaserButton": {
     "findStore": "Find your store"
+  },
+  "ContactPage": {
+    "title": "Get in Touch",
+    "description": "We'd love to hear from you. Whether you have a question about our products, need assistance, or just want to share your feedback, please contact us.",
+    "contactInfo": "Contact Information",
+    "ourHeadquarters": "Our Headquarters",
+    "headquarters": "Vivenza Avenue 123, Design City, DC 54321",
+    "phone": "Phone",
+    "phoneNumber": "+34 900 VIV-ENZA (848-3692)",
+    "email": "Email",
+    "supportEmail": "support@vivenzaexpo.es",
+    "salesEmail": "sales@vivenzaexpo.es",
+    "businessHours": "Business Hours",
+    "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "saturday": "Saturday: 10:00 AM - 4:00 PM",
+    "sunday": "Sunday: Closed",
+    "sendMessage": "Send Us a Message"
+  },
+  "LocationsPage": {
+    "title": "Our Showrooms",
+    "description": "Visit us to experience Vivenza quality and get expert advice. Find your nearest showroom:"
+  },
+  "Navbar": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "locations": "Locations",
+    "contact": "Contact",
+    "openMenu": "Open menu"
+  },
+  "ContactForm": {
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Doe",
+    "nameError": "Name must be at least 2 characters.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailError": "Please enter a valid email address.",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Product inquiry...",
+    "subjectError": "Subject must be at least 5 characters.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us more about your inquiry...",
+    "messageErrorMin": "Message must be at least 10 characters.",
+    "messageErrorMax": "Message must be no more than 500 characters.",
+    "consentLabel": "I accept the data protection policy.",
+    "consentDescription": "We are committed to protecting your privacy. Your information will be handled in accordance with our privacy policy.",
+    "consentError": "You must accept the data protection policy.",
+    "submitButton": "Send Message",
+    "submitting": "Sending...",
+    "successTitle": "Message Sent!",
+    "successMessage": "Your message has been sent successfully! We'll get back to you soon.",
+    "errorTitle": "Submission Failed",
+    "errorMessage": "There was an error sending your message. Please try again.",
+    "unexpectedErrorTitle": "An Unexpected Error Occurred",
+    "unexpectedErrorMessage": "Please try again later."
+  },
+  "Footer": {
+    "description": "High-quality bathroom and home solutions with minimalist design.",
+    "explore": "Explore",
+    "aboutUs": "About Us",
+    "locations": "Locations",
+    "support": "Support",
+    "contactUs": "Contact Us",
+    "faq": "FAQ",
+    "privacy": "Privacy Policy",
+    "connect": "Connect",
+    "copyright": "All rights reserved."
   }
 }

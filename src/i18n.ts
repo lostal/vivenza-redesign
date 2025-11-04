@@ -38,6 +38,7 @@ export default getRequestConfig(async ({locale}) => {
   }
 
   return {
+    locale,
     messages
     // You can add other properties like timeZone if needed
     // timeZone: 'Europe/Vienna',

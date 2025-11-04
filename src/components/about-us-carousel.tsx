@@ -28,7 +28,7 @@ export default function AboutUsCarousel() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-4xl mx-auto" // Increased max-width for better display
+      className="w-full max-w-4xl mx-auto"
       opts={{
         loop: true,
       }}
@@ -37,7 +37,7 @@ export default function AboutUsCarousel() {
         {imageUrls.map((url, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
-              <div className="relative aspect-[16/9] overflow-hidden rounded-lg shadow-xl"> {/* Adjusted aspect ratio & shadow */}
+              <div className="relative aspect-[16/9] overflow-hidden rounded-lg shadow-xl">
                 <Image
                   src={url}
                   alt={`Exposición Vivenza ${index + 1}`}
@@ -46,15 +46,14 @@ export default function AboutUsCarousel() {
                   quality={85}
                   priority={index === 0}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1000px"
-                  data-ai-hint="showroom interior"
                 />
               </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/75 text-foreground p-2 rounded-full md:left-[-15px]" />
-      <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/75 text-foreground p-2 rounded-full md:right-[-15px]" />
+      <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/75 text-foreground p-2 rounded-full md:left-4 lg:left-[-15px]" />
+      <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/50 hover:bg-background/75 text-foreground p-2 rounded-full md:right-4 lg:right-[-15px]" />
     </Carousel>
   );
 }

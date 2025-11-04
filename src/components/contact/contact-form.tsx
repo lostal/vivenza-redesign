@@ -18,33 +18,24 @@ import { useToast } from "@/hooks/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
-
-const formSchema = z.object({
-  name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
-  email: z.string().email({ message: "Por favor, introduce una dirección de correo electrónico válida." }),
-  subject: z.string().min(5, { message: "El asunto debe tener al menos 5 caracteres." }),
-  message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }).max(500, { message: "El mensaje debe tener como máximo 500 caracteres." }),
-  consent: z.boolean().refine(value => value === true, { message: "Debes aceptar la política de protección de datos." }),
-});
-
-type ContactFormValues = z.infer<typeof formSchema>;
-
-// Placeholder para una acción de servidor.
-async function submitContactForm(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
-  console.log("Datos del formulario enviados:", data);
-  // Simular llamada API
-  await new Promise(resolve => setTimeout(resolve, 1500));
-  // Simular éxito/fracaso
-  if (data.email.includes("error")) {
-      return { success: false, message: "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo." };
-  }
-  return { success: true, message: "¡Tu mensaje ha sido enviado con éxito! Nos pondremos en contacto contigo pronto." };
-}
-
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations('ContactForm');
+  
+  const formSchema = z.object({
+    name: z.string().min(2, { message: t('nameError') }),
+    email: z.string().email({ message: t('emailError') }),
+    subject: z.string().min(5, { message: t('subjectError') }),
+    message: z.string()
+      .min(10, { message: t('messageErrorMin') })
+      .max(500, { message: t('messageErrorMax') }),
+    consent: z.boolean().refine(value => value === true, { message: t('consentError') }),
+  });
+  
+  type ContactFormValues = z.infer<typeof formSchema>;
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
@@ -60,24 +51,28 @@ export default function ContactForm() {
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
     try {
-      const result = await submitContactForm(values);
-      if (result.success) {
+      console.log("Form data submitted:", values);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Simulate success/failure
+      if (values.email.includes("error")) {
         toast({
-          title: "¡Mensaje Enviado!",
-          description: result.message,
-        });
-        form.reset();
-      } else {
-        toast({
-          title: "Envío Fallido",
-          description: result.message,
+          title: t('errorTitle'),
+          description: t('errorMessage'),
           variant: "destructive",
         });
+      } else {
+        toast({
+          title: t('successTitle'),
+          description: t('successMessage'),
+        });
+        form.reset();
       }
     } catch (error) {
       toast({
-        title: "Ocurrió un Error Inesperado",
-        description: "Por favor, inténtalo de nuevo más tarde.",
+        title: t('unexpectedErrorTitle'),
+        description: t('unexpectedErrorMessage'),
         variant: "destructive",
       });
     } finally {
@@ -87,15 +82,15 @@ export default function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-2xl mx-auto">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8 max-w-2xl mx-auto">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre Completo</FormLabel>
+              <FormLabel>{t('nameLabel')}</FormLabel>
               <FormControl>
-                <Input placeholder="Juan Pérez" {...field} className="h-12"/>
+                <Input placeholder={t('namePlaceholder')} {...field} className="h-11 sm:h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,9 +101,9 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Correo Electrónico</FormLabel>
+              <FormLabel>{t('emailLabel')}</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="tu@ejemplo.com" {...field} className="h-12"/>
+                <Input type="email" placeholder={t('emailPlaceholder')} {...field} className="h-11 sm:h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,9 +114,9 @@ export default function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Asunto</FormLabel>
+              <FormLabel>{t('subjectLabel')}</FormLabel>
               <FormControl>
-                <Input placeholder="Consulta sobre producto..." {...field} className="h-12"/>
+                <Input placeholder={t('subjectPlaceholder')} {...field} className="h-11 sm:h-12"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -132,11 +127,11 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mensaje</FormLabel>
+              <FormLabel>{t('messageLabel')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Cuéntanos más sobre tu consulta..."
-                  className="min-h-[150px] resize-none"
+                  placeholder={t('messagePlaceholder')}
+                  className="min-h-[120px] sm:min-h-[150px] resize-none"
                   {...field}
                 />
               </FormControl>
@@ -148,7 +143,7 @@ export default function ContactForm() {
           control={form.control}
           name="consent"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm bg-card">
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-3 sm:p-4 shadow-sm bg-card">
               <FormControl>
                 <Checkbox
                   checked={field.value}
@@ -156,25 +151,25 @@ export default function ContactForm() {
                 />
               </FormControl>
               <div className="space-y-1 leading-none">
-                <FormLabel>
-                  Acepto la política de protección de datos.
+                <FormLabel className="text-sm sm:text-base">
+                  {t('consentLabel')}
                 </FormLabel>
                 <p className="text-xs text-muted-foreground">
-                  Nos comprometemos a proteger tu privacidad. Tu información será manejada de acuerdo con nuestra política de privacidad.
+                  {t('consentDescription')}
                 </p>
                 <FormMessage />
               </div>
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full h-12 text-lg" disabled={isSubmitting}>
+        <Button type="submit" className="w-full h-11 sm:h-12 text-base sm:text-lg" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Enviando...
+              {t('submitting')}
             </>
           ) : (
-            "Enviar Mensaje"
+            t('submitButton')
           )}
         </Button>
       </form>

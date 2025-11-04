@@ -27,5 +27,71 @@
   },
   "LocationsTeaserButton": {
     "findStore": "Trouvez votre magasin"
+  },
+  "ContactPage": {
+    "title": "Contactez-Nous",
+    "description": "Nous serions ravis d'avoir de vos nouvelles. Que vous ayez une question sur nos produits, besoin d'aide ou que vous souhaitiez simplement partager vos commentaires, n'hésitez pas à nous contacter.",
+    "contactInfo": "Informations de Contact",
+    "ourHeadquarters": "Notre Siège",
+    "headquarters": "Avenue Vivenza 123, Design City, DC 54321",
+    "phone": "Téléphone",
+    "phoneNumber": "+34 900 VIV-ENZA (848-3692)",
+    "email": "Email",
+    "supportEmail": "support@vivenzaexpo.es",
+    "salesEmail": "ventes@vivenzaexpo.es",
+    "businessHours": "Horaires d'Ouverture",
+    "mondayFriday": "Lundi - Vendredi: 9h00 - 18h00",
+    "saturday": "Samedi: 10h00 - 16h00",
+    "sunday": "Dimanche: Fermé",
+    "sendMessage": "Envoyez-Nous un Message"
+  },
+  "LocationsPage": {
+    "title": "Nos Showrooms",
+    "description": "Visitez-nous pour découvrir la qualité Vivenza et obtenir des conseils d'experts. Trouvez votre showroom le plus proche:"
+  },
+  "Navbar": {
+    "home": "Accueil",
+    "aboutUs": "À Propos",
+    "locations": "Emplacements",
+    "contact": "Contact",
+    "openMenu": "Ouvrir le menu"
+  },
+  "ContactForm": {
+    "nameLabel": "Nom Complet",
+    "namePlaceholder": "Jean Dupont",
+    "nameError": "Le nom doit contenir au moins 2 caractères.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "vous@exemple.com",
+    "emailError": "Veuillez entrer une adresse email valide.",
+    "subjectLabel": "Sujet",
+    "subjectPlaceholder": "Question sur le produit...",
+    "subjectError": "Le sujet doit contenir au moins 5 caractères.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Parlez-nous de votre demande...",
+    "messageErrorMin": "Le message doit contenir au moins 10 caractères.",
+    "messageErrorMax": "Le message ne doit pas dépasser 500 caractères.",
+    "consentLabel": "J'accepte la politique de protection des données.",
+    "consentDescription": "Nous nous engageons à protéger votre vie privée. Vos informations seront traitées conformément à notre politique de confidentialité.",
+    "consentError": "Vous devez accepter la politique de protection des données.",
+    "submitButton": "Envoyer le Message",
+    "submitting": "Envoi en cours...",
+    "successTitle": "Message Envoyé!",
+    "successMessage": "Votre message a été envoyé avec succès! Nous vous répondrons bientôt.",
+    "errorTitle": "Échec de l'Envoi",
+    "errorMessage": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer.",
+    "unexpectedErrorTitle": "Une Erreur Inattendue s'est Produite",
+    "unexpectedErrorMessage": "Veuillez réessayer plus tard."
+  },
+  "Footer": {
+    "description": "Solutions de haute qualité pour salle de bain et maison avec un design minimaliste.",
+    "explore": "Explorer",
+    "aboutUs": "À Propos",
+    "locations": "Emplacements",
+    "support": "Support",
+    "contactUs": "Contactez-Nous",
+    "faq": "FAQ",
+    "privacy": "Politique de Confidentialité",
+    "connect": "Connecter",
+    "copyright": "Tous droits réservés."
   }
 }

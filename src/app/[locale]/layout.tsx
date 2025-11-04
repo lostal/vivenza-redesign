@@ -11,10 +11,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }) {
+  const { locale } = await params;
   unstable_setRequestLocale(locale); // Set locale for metadata
   let t;
   try {
@@ -44,13 +45,14 @@ export async function generateMetadata({
 
 interface LocaleLayoutProps {
   children: ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: LocaleLayoutProps) {
+  const { locale } = await params;
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
