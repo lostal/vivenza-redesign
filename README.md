@@ -2,36 +2,48 @@
 
 ![Vivenza Preview](https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg)
 
-Una reinterpretación moderna y creativa de la página web de **Vivenza**, la marca comercial de GRUPOSIETE especializada en exposición de baño y cerámica.
+Una reinterpretación moderna de la página web de **Vivenza**, la marca comercial de GRUPOSIETE especializada en exposición de baño y cerámica.
 
 ## 🌐 Demo en Vivo
 
-🔗 **[Ver Proyecto en Vivo](https://vivenza.netlify.app/)**
+🔗 **[Ver Proyecto](https://vivenza-redesign.vercel.app/)** *(Vercel recomendado)*
 
 📍 **[Sitio Web Original](https://vivenzaexpo.es/)**
 
-## 📋 Descripción del Proyecto
+## 📋 Descripción
 
-Este proyecto es una reinterpretación libre y moderna del sitio web de Vivenza, una empresa española especializada en soluciones integrales para baño y hogar. El rediseño se centra en mejorar la experiencia de usuario manteniendo la esencia y el mensaje de la marca original.
+Rediseño completo con enfoque en experiencia de usuario, rendimiento y mejores prácticas. El proyecto incluye internacionalización completa (español, inglés, francés) y diseño responsive optimizado.
 
 ### Sobre Vivenza
 
-Vivenza es la marca comercial de GRUPOSIETE, empresa que comercializa y distribuye materiales de:
-- Calefacción y Fontanería
-- Climatización
+Vivenza es la marca comercial de GRUPOSIETE, empresa que comercializa materiales de:
+- Calefacción, Fontanería y Climatización
 - Sanitario y Obra Civil
 - Materiales de Construcción
 - Energías Renovables
 
-Con **12 exposiciones** en España, Vivenza ofrece espacios de diseño completos que combinan funcionalidad moderna con diseño atemporal.
+Con **12 exposiciones** en España, Vivenza ofrece soluciones integrales de diseño para baño y hogar.
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Tech Stack
 
-- **[Next.js](https://nextjs.org/)** - Framework de React para aplicaciones web
-- **React** - Biblioteca de JavaScript para interfaces de usuario
-- **CSS3** - Estilos y animaciones
-- **JavaScript (ES6+)** - Funcionalidad interactiva
-- **Netlify** - Despliegue y hosting
+- **Framework**: Next.js 15.2.3 con App Router
+- **Styling**: Tailwind CSS 3.4.1 + shadcn/ui
+- **Internacionalización**: next-intl 3.11.1
+- **Forms**: React Hook Form + Zod
+- **UI Components**: Radix UI primitives
+- **Icons**: Lucide React
+- **TypeScript**: Strict mode enabled
+
+## ✨ Features
+
+- ✅ Diseño responsive completo (mobile, tablet, desktop)
+- ✅ Internacionalización (es/en/fr) con routing automático
+- ✅ Navegación smooth scroll sin hash en URL
+- ✅ Formulario de contacto con validación
+- ✅ Acordeón interactivo de showrooms
+- ✅ Carrusel de imágenes con autoplay
+- ✅ Bundle optimizado (101 kB First Load JS)
+- ✅ 215 paquetes (reducción del 58% vs versión inicial)
 
 ## 🛠️ Instalación
 
@@ -111,7 +123,7 @@ npm run typecheck  # Verificar TypeScript
 ## 🎯 Mejoras Implementadas
 
 - ✅ Modernización completa de UI/UX
-- ✅ Performance optimizado (bundle 55% más ligero)
+- ✅ Performance optimizado (bundle 58% más ligero)
 - ✅ Smooth scroll con JavaScript (sin hash en URL)
 - ✅ Internacionalización completa en 3 idiomas
 - ✅ TypeScript strict mode
