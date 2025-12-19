@@ -1,169 +1,98 @@
-# VIVENZA - Redesign
+# 🚿 Vivenza - Redesign
+
+<div align="center">
+
+![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_v3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Shadcn/UI](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
+![i18n](https://img.shields.io/badge/i18n-Multipropósito-26A69A?style=for-the-badge&logo=googletranslate&logoColor=white)
+
+**Reinterpretación moderna y optimizada** de la presencia digital de Vivenza, especializada en exposición de baño y cerámica.
+
+[🌐 Ver Demo en Vivo](https://vivenza-redesign.vercel.app/)
 
 ![Vivenza Preview](https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg)
 
-Una reinterpretación moderna de la página web de **Vivenza**, la marca comercial de GRUPOSIETE especializada en exposición de baño y cerámica.
+</div>
 
-## 🌐 Demo en Vivo
-
-🔗 **[Ver Proyecto](https://vivenza-redesign.vercel.app/)** *(Vercel recomendado)*
-
-📍 **[Sitio Web Original](https://vivenzaexpo.es/)**
+---
 
 ## 📋 Descripción
 
-Rediseño completo con enfoque en experiencia de usuario, rendimiento y mejores prácticas. El proyecto incluye internacionalización completa (español, inglés, francés) y diseño responsive optimizado.
+Este proyecto es un **rediseño no oficial** y educativo del sitio web de [Vivenza](https://vivenzaexpo.es/). El objetivo principal ha sido mejorar drásticamente la **experiencia de usuario (UX)** y el **rendimiento web**, implementando una arquitectura moderna basada en Next.js App Router.
 
-### Sobre Vivenza
+Se ha logrado una navegación fluida, tiempos de carga instantáneos y una internacionalización completa, reduciendo el peso del bundle en un **58%** respecto a la versión original.
 
-Vivenza es la marca comercial de GRUPOSIETE, empresa que comercializa materiales de:
-- Calefacción, Fontanería y Climatización
-- Sanitario y Obra Civil
-- Materiales de Construcción
-- Energías Renovables
+## ✨ Características
 
-Con **12 exposiciones** en España, Vivenza ofrece soluciones integrales de diseño para baño y hogar.
+- 🎨 **UI/UX Moderna**: Diseño limpio y sofisticado utilizando componentes de **shadcn/ui**.
+- 🌍 **Internacionalización**: Soporte nativo para Español (🇪🇸), Inglés (🇬🇧) y Francés (🇫🇷) con routing automático.
+- 📱 **100% Responsive**: Adaptación perfecta desde móviles hasta pantallas de gran formato.
+- ⚡ **Alto Rendimiento**: Optimización de imágenes y code-splitting (Bundle JS inicial de ~100kB).
+- 📍 **Mapa Interactivo**: Localización dinámica de showrooms en España.
+- 📧 **Contacto**: Formularios validados con Zod y React Hook Form.
 
-## 🚀 Tech Stack
+## 🛠️ Stack Tecnológico
 
-- **Framework**: Next.js 15.2.3 con App Router
-- **Styling**: Tailwind CSS 3.4.1 + shadcn/ui
-- **Internacionalización**: next-intl 3.11.1
-- **Forms**: React Hook Form + Zod
-- **UI Components**: Radix UI primitives
-- **Icons**: Lucide React
-- **TypeScript**: Strict mode enabled
+- **Framework**: Next.js 15 (App Router)
+- **Estilos**: Tailwind CSS + Framer Motion
+- **Componentes**: Radix UI (vía shadcn)
+- **Lenguaje**: TypeScript (Strict Mode)
+- **i18n**: `next-intl`
+- **Gestor de Paquetes**: pnpm
 
-## ✨ Features
+## 🚀 Instalación y Ejecución
 
-- ✅ Diseño responsive completo (mobile, tablet, desktop)
-- ✅ Internacionalización (es/en/fr) con routing automático
-- ✅ Navegación smooth scroll sin hash en URL
-- ✅ Formulario de contacto con validación
-- ✅ Acordeón interactivo de showrooms
-- ✅ Carrusel de imágenes con autoplay
-- ✅ Bundle optimizado (101 kB First Load JS)
-- ✅ 215 paquetes (reducción del 58% vs versión inicial)
-
-## 🛠️ Instalación
-
-### Prerrequisitos
-
-- Node.js 20.x o superior
-- npm o yarn
-
-### Desarrollo Local
-
-1. Clonar repositorio:
 ```bash
-git clone https://github.com/alvarolostal/vivenza-redesign.git
+# 1. Clonar el repositorio
+git clone [https://github.com/alvarolostal/vivenza-redesign.git](https://github.com/alvarolostal/vivenza-redesign.git)
 cd vivenza-redesign
+
+# 2. Instalar dependencias (Recomendado usar pnpm por el lockfile)
+pnpm install
+
+# 3. Iniciar servidor de desarrollo
+pnpm run dev
 ```
 
-2. Instalar dependencias:
-```bash
-npm install
-```
-
-3. Iniciar servidor de desarrollo:
-```bash
-npm run dev
-```
-
-4. Abrir [http://localhost:3000](http://localhost:3000)
+El sitio estará disponible en [http://localhost:3000](http://localhost:3000).
 
 ## 📁 Estructura del Proyecto
 
 ```
 src/
 ├── app/
-│   ├── [locale]/              # Rutas internacionalizadas
-│   │   ├── page.tsx           # Homepage
-│   │   ├── contact/page.tsx   # Página de contacto
-│   │   └── locations/page.tsx # Showrooms
-│   ├── globals.css            # Estilos globales
-│   └── layout.tsx             # Layout raíz
+│   ├── [locale]/           # Rutas internacionalizadas (es/en/fr)
+│   │   ├── page.tsx        # Landing Page
+│   │   ├── contact/        # Página de contacto
+│   │   └── locations/      # Buscador de showrooms
+│   └── globals.css         # Estilos y variables CSS
 ├── components/
-│   ├── layout/                # Navbar, Footer
-│   ├── contact/               # Formulario de contacto
-│   ├── location/              # Componentes de ubicaciones
-│   └── ui/                    # Componentes UI reutilizables
-├── lib/                       # Utilidades y datos
-├── messages/                  # Traducciones (es/en/fr)
-└── i18n.ts                    # Configuración i18n
+│   ├── layout/             # Navbar, Footer
+│   ├── ui/                 # Componentes reutilizables (shadcn)
+│   └── location/           # Mapas y acordeones
+├── lib/                    # Utilidades, tipos y datos estáticos
+└── messages/               # Archivos de traducción (JSON)
 ```
-
-## 🌍 Internacionalización
-
-Soporte para tres idiomas:
-- 🇪🇸 Español (por defecto)
-- 🇬🇧 Inglés
-- 🇫🇷 Francés
-
-Las rutas se prefijan automáticamente con el locale (`/es`, `/en`, `/fr`).
-
-## 🚀 Deployment
-
-### Opción 1: Netlify (Configurado)
-
-El proyecto incluye `netlify.toml` con la configuración correcta:
-
-1. Conecta tu repositorio en [Netlify](https://app.netlify.com/)
-2. Netlify detectará automáticamente la configuración
-3. Build settings (auto-detectados):
-   - **Build command**: `npm run build`
-   - **Publish directory**: `.next`
-   - **Node version**: 20
-
-**Importante**: Netlify requiere el plugin `@netlify/plugin-nextjs` (ya incluido en devDependencies).
-
-### Opción 2: Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alvarolostal/vivenza-redesign)
-
-Vercel detecta automáticamente Next.js, sin configuración adicional.
-
-### Scripts
-
-```bash
-npm run dev        # Desarrollo
-npm run build      # Build de producción
-npm start          # Iniciar producción
-npm run lint       # ESLint
-npm run typecheck  # Verificar TypeScript
-```
-
-## 🎯 Mejoras Implementadas
-
-- ✅ Modernización completa de UI/UX
-- ✅ Performance optimizado (bundle 58% más ligero)
-- ✅ Smooth scroll con JavaScript (sin hash en URL)
-- ✅ Internacionalización completa en 3 idiomas
-- ✅ TypeScript strict mode
-- ✅ Componentes reutilizables con shadcn/ui
-- ✅ Formularios con validación robusta
-- ✅ Responsive design mobile-first
-- ✅ Limpieza de código y dependencias innecesarias
-
-## 🎨 Sistema de Diseño
-
-- **Color Primario**: `#106984` (Teal)
-- **Tema**: Dark mode por defecto
-- **Tipografía**: System font stack
-- **Breakpoints**: 
-  - `sm`: 640px
-  - `md`: 768px  
-  - `lg`: 1024px
-
-## � Licencia
-
-Proyecto educativo. Rediseño no oficial de [Vivenza](https://vivenzaexpo.es/).
-
-## 🔗 Links
-
-- [GrupoSiete](https://gruposiete.es/)
-- [Instagram Vivenza](https://www.instagram.com/gruposiete_vivenza/)
 
 ---
 
-**Nota**: Proyecto de portfolio personal. No afiliado oficialmente con Vivenza o GrupoSiete.
+<div align="center">
+
+**Álvaro Lostal**
+_Ingeniero Informático | Desarrollador Web_
+
+[![Portafolio](https://img.shields.io/badge/Portafolio-lostal.dev-d5bd37?style=for-the-badge&logo=astro&logoColor=white)](https://lostal.dev)
+[![GitHub](https://img.shields.io/badge/GitHub-lostal-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lostal)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Álvaro%20Lostal-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/alvarolostal)
+
+</div>
+
+---
+
+<div align="center">
+
+**Nota**: Este es un proyecto de portfolio personal. No está afiliado oficialmente con GrupoSiete o Vivenza.
+
+</div>
