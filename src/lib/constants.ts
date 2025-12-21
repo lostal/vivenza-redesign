@@ -10,8 +10,8 @@ export const EXTERNAL_URLS = {
   FAVICON: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
   GRUPO_SIETE_LOGO:
     'https://vivenzaexpo.es/wp-content/uploads/2025/03/UNA-MARCA-DE-GRUPOSIETE-VIVENZA.png',
-  GOOGLE_FONTS:
-    'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap',
+  HERO_IMAGE: 'https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg',
+  YOUTUBE_VIDEO: 'https://www.youtube.com/embed/k95tU4XvWDs',
 } as const;
 
 // Configuración del sitio
@@ -19,9 +19,11 @@ export const SITE_CONFIG = {
   NAME: 'Vivenza',
   DEFAULT_LOCALE: 'es',
   SUPPORTED_LOCALES: ['es', 'en', 'fr'] as const,
+  URL: 'https://vivenza-redesign.vercel.app',
 } as const;
 
 // IDs de elementos del DOM para navegación
 export const DOM_IDS = {
   ABOUT_SECTION: 'sobre-nosotros',
+  LOCATIONS_TEASER: 'locations-teaser',
 } as const;

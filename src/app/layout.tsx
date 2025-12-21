@@ -1,12 +1,32 @@
 import type { Metadata } from 'next';
+import { Poppins, Montserrat } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { EXTERNAL_URLS, SITE_CONFIG } from '@/lib/constants';
 
+// Configurar fuentes con next/font para optimización automática
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: SITE_CONFIG.NAME,
+  metadataBase: new URL('https://vivenza-redesign.vercel.app'),
+  title: {
+    default: SITE_CONFIG.NAME,
+    template: `%s | ${SITE_CONFIG.NAME}`,
+  },
   description:
-    'Descubre Vivenza: Productos de alta calidad para baño y hogar con un diseño minimalista inspirado en Apple. Explora nuestras galerías de productos, encuentra ubicaciones de exposición e inspírate con nuestro Buscador de Estilos IA.',
+    'Descubre Vivenza: Productos de alta calidad para baño y hogar con un diseño minimalista. Explora nuestras galerías de productos y encuentra ubicaciones de exposición.',
   keywords: [
     'Vivenza',
     'grifería de baño',
@@ -18,6 +38,18 @@ export const metadata: Metadata = {
   icons: {
     icon: EXTERNAL_URLS.FAVICON,
   },
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    siteName: SITE_CONFIG.NAME,
+    title: SITE_CONFIG.NAME,
+    description: 'Productos de alta calidad para baño y hogar con un diseño minimalista.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_CONFIG.NAME,
+    description: 'Productos de alta calidad para baño y hogar con un diseño minimalista.',
+  },
 };
 
 export default function RootLayout({
@@ -26,12 +58,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SITE_CONFIG.DEFAULT_LOCALE} className="dark scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href={EXTERNAL_URLS.GOOGLE_FONTS} rel="stylesheet" />
-      </head>
+    <html
+      lang={SITE_CONFIG.DEFAULT_LOCALE}
+      className={`${poppins.variable} ${montserrat.variable} dark scroll-smooth`}
+    >
       <body className="font-body antialiased">
         {children}
         <Toaster />

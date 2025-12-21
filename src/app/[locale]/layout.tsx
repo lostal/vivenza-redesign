@@ -5,68 +5,44 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { routing } from '@/i18n/routing';
+import { EXTERNAL_URLS, SITE_CONFIG } from '@/lib/constants';
 
 // Opt into static rendering
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// Metadata fallback para locales inválidos
+const fallbackMetadata = {
+  title: SITE_CONFIG.NAME,
+  description: 'Modern Solutions for Home and Bath',
+  icons: {
+    icon: EXTERNAL_URLS.FAVICON,
+  },
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
-    return {
-      title: 'Vivenza',
-      description: 'Modern Solutions for Home and Bath',
-      keywords: [
-        'Vivenza',
-        'bath fixtures',
-        'home design',
-        'interior design',
-        'modern style',
-        'minimalist design',
-      ],
-      icons: {
-        icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
-      },
-    };
+    return fallbackMetadata;
   }
 
   setRequestLocale(locale);
 
-  let t;
   try {
-    t = await getTranslations({ locale, namespace: 'RootLayout' });
-  } catch (error) {
-    console.error(
-      `Failed to load translations for RootLayout metadata in locale ${locale}:`,
-      error
-    );
+    const t = await getTranslations({ locale, namespace: 'RootLayout' });
     return {
-      title: 'Vivenza',
-      description: 'Modern Solutions for Home and Bath',
-      keywords: [
-        'Vivenza',
-        'bath fixtures',
-        'home design',
-        'interior design',
-        'modern style',
-        'minimalist design',
-      ],
+      title: t('title'),
+      description: t('description'),
+      keywords: t('keywords').split(','),
       icons: {
-        icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
+        icon: EXTERNAL_URLS.FAVICON,
       },
     };
+  } catch {
+    return fallbackMetadata;
   }
-
-  return {
-    title: t('title'),
-    description: t('description'),
-    keywords: t('keywords').split(','),
-    icons: {
-      icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
-    },
-  };
 }
 
 interface LocaleLayoutProps {
@@ -85,12 +61,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   // Enable static rendering
   setRequestLocale(locale);
 
-  let messages;
+  let messages = {};
   try {
     messages = await getMessages();
-  } catch (error) {
-    console.error(`Failed to load messages for locale ${locale}:`, error);
-    messages = {};
+  } catch {
+    console.error(`Failed to load messages for locale ${locale}`);
   }
 
   return (

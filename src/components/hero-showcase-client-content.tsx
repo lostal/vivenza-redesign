@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
+import { EXTERNAL_URLS } from '@/lib/constants';
 
 interface HeroShowcaseClientContentProps {
   titleLine1: string;
@@ -24,22 +26,17 @@ export default function HeroShowcaseClientContent({
   const pathname = usePathname();
   const currentLocale = pathname.split('/')[1] || 'es';
   const contactLink = `/${currentLocale}/contact`;
+  const { scrollToAboutSection } = useSmoothScroll();
 
-  const scrollToAboutUs = (e: React.MouseEvent) => {
+  const handleAboutClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const aboutSection = document.getElementById('sobre-nosotros');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
+    scrollToAboutSection();
   };
 
   return (
     <section className="relative h-[calc(100vh-4rem)] min-h-[500px] sm:min-h-[600px] flex items-center justify-center bg-background overflow-hidden">
       <Image
-        src="https://vivenzaexpo.es/wp-content/uploads/2025/03/Imagen-Principal-VIVENZA.jpg"
+        src={EXTERNAL_URLS.HERO_IMAGE}
         alt="Diseño de baño moderno Vivenza"
         fill
         style={{ objectFit: 'cover' }}
@@ -57,8 +54,8 @@ export default function HeroShowcaseClientContent({
         <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-8 sm:mb-10 max-w-xl">
           {description}
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 sm:space-x-0">
-          <Button size="lg" className="font-body w-full sm:w-auto" onClick={scrollToAboutUs}>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button size="lg" className="font-body w-full sm:w-auto" onClick={handleAboutClick}>
             {aboutUsButtonText} <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <Button asChild variant="outline" size="lg" className="font-body w-full sm:w-auto">

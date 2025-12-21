@@ -1,9 +1,8 @@
-import type {Config} from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: ['class'],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -19,13 +18,14 @@ export default {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1400px', // Match ShadCN default screen for container
+        '2xl': '1400px',
       },
     },
     extend: {
       fontFamily: {
-        headline: ['Poppins', 'sans-serif'], // Updated
-        body: ['Montserrat', 'sans-serif'], // Updated
+        // Usar variables CSS de next/font
+        headline: ['var(--font-poppins)', 'sans-serif'],
+        body: ['var(--font-montserrat)', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -77,29 +77,21 @@ export default {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
         'fade-in': {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
         'slide-in-up': {
-          from: { transform: 'translateY(20px)', opacity: '0'},
-          to: { transform: 'translateY(0)', opacity: '1'},
-        }
+          from: { transform: 'translateY(20px)', opacity: '0' },
+          to: { transform: 'translateY(0)', opacity: '1' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
