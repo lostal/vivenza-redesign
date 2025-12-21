@@ -55,7 +55,6 @@ export default function ContactForm() {
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
     try {
-      console.log('Form data submitted:', values);
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
 

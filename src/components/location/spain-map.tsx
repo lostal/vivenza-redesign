@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { spainCommunityPaths, communitiesWithShowrooms } from '@/lib/spain-map-paths';
+import { useState, useEffect } from 'react';
 import { exhibitionData } from '@/lib/exhibition-data';
+import type { CommunityPath } from '@/lib/spain-map-paths';
+import { Loader2 } from 'lucide-react';
 
 interface SpainMapTranslations {
   mapLabel: string;
@@ -26,6 +27,20 @@ export default function SpainMap({
   translations,
 }: SpainMapProps) {
   const [hoveredCommunity, setHoveredCommunity] = useState<string | null>(null);
+  const [mapData, setMapData] = useState<{
+    paths: CommunityPath[];
+    withShowrooms: string[];
+  } | null>(null);
+
+  // Lazy load the heavy SVG paths
+  useEffect(() => {
+    import('@/lib/spain-map-paths').then((module) => {
+      setMapData({
+        paths: module.spainCommunityPaths,
+        withShowrooms: module.communitiesWithShowrooms,
+      });
+    });
+  }, []);
 
   const getShowroomCount = (communityId: string): number => {
     const community = exhibitionData.find((c) => c.id === communityId);
@@ -33,9 +48,21 @@ export default function SpainMap({
   };
 
   const getCommunityName = (communityId: string): string => {
-    const community = spainCommunityPaths.find((c) => c.id === communityId);
+    const community = mapData?.paths.find((c) => c.id === communityId);
     return community?.name || '';
   };
+
+  // Show loading state while SVG data loads
+  if (!mapData) {
+    return (
+      <div className={`relative ${className} flex items-center justify-center min-h-[300px]`}>
+        <div className="flex flex-col items-center gap-3 text-muted-foreground">
+          <Loader2 className="w-6 h-6 animate-spin" />
+          <span className="text-sm">Cargando mapa...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative ${className}`}>
@@ -62,47 +89,45 @@ export default function SpainMap({
         </defs>
 
         {/* Community paths */}
-        {spainCommunityPaths
+        {mapData.paths.map((community) => {
+          const hasShowrooms = mapData.withShowrooms.includes(community.id);
+          const isHovered = hoveredCommunity === community.id;
+          const isSelected = selectedCommunity === community.id;
 
-          .map((community) => {
-            const hasShowrooms = communitiesWithShowrooms.includes(community.id);
-            const isHovered = hoveredCommunity === community.id;
-            const isSelected = selectedCommunity === community.id;
-
-            return (
-              <motion.path
-                key={community.id}
-                d={community.path}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  scale: isHovered || isSelected ? 1.02 : 1,
-                }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className={`
+          return (
+            <motion.path
+              key={community.id}
+              d={community.path}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                scale: isHovered || isSelected ? 1.02 : 1,
+              }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className={`
                 transition-colors duration-300
                 ${hasShowrooms ? 'cursor-pointer' : 'cursor-default'}
                 ${isSelected
-                    ? 'fill-primary stroke-primary/80'
-                    : isHovered && hasShowrooms
-                      ? 'fill-primary/40 stroke-primary/60'
-                      : hasShowrooms
-                        ? 'fill-muted/80 stroke-border/80 hover:fill-primary/20'
-                        : 'fill-muted/20 stroke-border/30'
-                  }
+                  ? 'fill-primary stroke-primary/80'
+                  : isHovered && hasShowrooms
+                    ? 'fill-primary/40 stroke-primary/60'
+                    : hasShowrooms
+                      ? 'fill-muted/80 stroke-border/80 hover:fill-primary/20'
+                      : 'fill-muted/20 stroke-border/30'
+                }
               `}
-                strokeWidth={isSelected || isHovered ? 2 : 1.5}
-                filter={isSelected ? 'url(#selectedGlow)' : isHovered ? 'url(#glow)' : undefined}
-                onMouseEnter={() => hasShowrooms && setHoveredCommunity(community.id)}
-                onMouseLeave={() => setHoveredCommunity(null)}
-                onClick={() => {
-                  if (hasShowrooms) {
-                    onCommunitySelect(isSelected ? null : community.id);
-                  }
-                }}
-              />
-            );
-          })}
+              strokeWidth={isSelected || isHovered ? 2 : 1.5}
+              filter={isSelected ? 'url(#selectedGlow)' : isHovered ? 'url(#glow)' : undefined}
+              onMouseEnter={() => hasShowrooms && setHoveredCommunity(community.id)}
+              onMouseLeave={() => setHoveredCommunity(null)}
+              onClick={() => {
+                if (hasShowrooms) {
+                  onCommunitySelect(isSelected ? null : community.id);
+                }
+              }}
+            />
+          );
+        })}
       </svg>
 
       {/* Tooltip */}
@@ -133,3 +158,4 @@ export default function SpainMap({
     </div>
   );
 }
+
