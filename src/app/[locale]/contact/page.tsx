@@ -1,13 +1,33 @@
 import SectionTitle from '@/components/section-title';
 import ContactForm from '@/components/contact/contact-form';
 import { Mail, Phone, MapPin, Clock, ArrowRight } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/i18n/routing';
+import { hasLocale } from 'next-intl';
+import { routing } from '@/i18n/routing';
+import type { Metadata } from 'next';
 
 interface ContactPageProps {
   params: Promise<{
     locale: Locale;
   }>;
+}
+
+export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    return { title: 'Vivenza | Contact' };
+  }
+
+  setRequestLocale(locale);
+
+  return {
+    title: locale === 'es' ? 'Vivenza | Contacto' : 'Vivenza | Contact',
+    description: locale === 'es'
+      ? 'Ponte en contacto con Vivenza. Estamos aquí para ayudarte.'
+      : 'Get in touch with Vivenza. We\'re here to help.',
+  };
 }
 
 export default async function ContactPage({ params }: ContactPageProps) {
