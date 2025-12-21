@@ -8,9 +8,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Enable type checking
   },
-  eslint: {
-    ignoreDuringBuilds: false, // Enable linting
-  },
   images: {
     remotePatterns: [
       {
