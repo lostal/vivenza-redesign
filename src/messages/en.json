@@ -9,7 +9,9 @@
     "titleLine2": "VIVENZA",
     "description": "Discover exquisitely crafted bath and home solutions that blend timeless design with modern functionality.",
     "aboutUsButtonText": "About Us",
-    "contactUsButtonText": "Contact Us"
+    "contactUsButtonText": "Contact Us",
+    "badge": "Bath and Ceramic Showrooms",
+    "scrollText": "Scroll"
   },
   "HomePage": {
     "aboutUs": {
@@ -19,10 +21,33 @@
       "paragraph2": "GRUPOSIETE, through VIVENZA, offers comprehensive and innovative solutions to create designer spaces. In our 12 showrooms, you can explore different complete environments that will inspire you.",
       "paragraph3": "Our team of experts will provide you with a unique experience with personalized attention and tailor-made solutions adapted to your style."
     },
+    "features": {
+      "title1": "Premium Design",
+      "title2": "Comprehensive Experience",
+      "title3": "Personalized Attention"
+    },
+    "sections": {
+      "aboutUsEyebrow": "About Us",
+      "locationsEyebrow": "Our Locations",
+      "videoEyebrow": "Discover Vivenza",
+      "videoDescription": "Explore our showrooms through this visual journey."
+    },
     "locationsTeaser": {
       "title": "Visit Our Showrooms",
       "description": "Experience Vivenza quality firsthand at our showroom locations."
     }
+  },
+  "LocationsTeaserMap": {
+    "showroomSingular": "showroom in this region",
+    "showroomPlural": "showrooms in this region",
+    "moreShowrooms": "+{count} more...",
+    "selectRegion": "Select a region on the map to see our showrooms"
+  },
+  "SpainMap": {
+    "mapLabel": "Interactive map of Spain",
+    "showroomsCount": "({count} showrooms)",
+    "legendWithShowrooms": "With showrooms",
+    "legendWithoutShowrooms": "Without showrooms"
   },
   "LocationsTeaserButton": {
     "findStore": "Find your store"
@@ -30,6 +55,7 @@
   "ContactPage": {
     "title": "Get in Touch",
     "description": "We'd love to hear from you. Whether you have a question about our products, need assistance, or just want to share your feedback, please contact us.",
+    "availableBadge": "Available 24/7",
     "contactInfo": "Contact Information",
     "ourHeadquarters": "Our Headquarters",
     "headquarters": "Vivenza Avenue 123, Design City, DC 54321",
@@ -39,14 +65,25 @@
     "supportEmail": "support@vivenzaexpo.es",
     "salesEmail": "sales@vivenzaexpo.es",
     "businessHours": "Business Hours",
-    "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
-    "saturday": "Saturday: 10:00 AM - 4:00 PM",
-    "sunday": "Sunday: Closed",
-    "sendMessage": "Send Us a Message"
+    "weekdays": "Mon - Fri",
+    "weekdaysHours": "9:00 - 18:00",
+    "saturday": "Saturday",
+    "saturdayHours": "10:00 - 16:00",
+    "sunday": "Sunday",
+    "sundayClosed": "Closed",
+    "ctaTitle": "Prefer to visit us?",
+    "ctaDescription": "Find your nearest showroom and experience Vivenza quality firsthand.",
+    "ctaLink": "View locations",
+    "sendMessage": "Send Us a Message",
+    "formDescription": "Fill out the form and we'll respond within 24 hours."
   },
   "LocationsPage": {
     "title": "Our Showrooms",
-    "description": "Visit us to experience Vivenza quality and get expert advice. Find your nearest showroom:"
+    "description": "Visit us to experience Vivenza quality and get expert advice. Find your nearest showroom:",
+    "eyebrow": "Find Us",
+    "selectRegion": "Select a region",
+    "filteringBy": "Filtering by:",
+    "showAll": "Show all"
   },
   "Navbar": {
     "home": "Home",

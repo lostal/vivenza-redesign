@@ -9,7 +9,9 @@
     "titleLine2": "VIVENZA",
     "description": "Découvrez des solutions de bain et de maison exquises qui allient un design intemporel à une fonctionnalité moderne.",
     "aboutUsButtonText": "À Propos de Nous",
-    "contactUsButtonText": "Contactez-Nous"
+    "contactUsButtonText": "Contactez-Nous",
+    "badge": "Showrooms de Salle de Bain et Céramique",
+    "scrollText": "Défiler"
   },
   "HomePage": {
     "aboutUs": {
@@ -19,10 +21,33 @@
       "paragraph2": "GRUPOSIETE, via VIVENZA, offre des solutions intégrales et innovantes pour créer des espaces design. Dans nos 12 showrooms, vous pourrez explorer différents environnements complets qui vous inspireront.",
       "paragraph3": "Notre équipe d'experts vous offrira une expérience unique avec une attention personnalisée et des solutions sur mesure adaptées à votre style."
     },
+    "features": {
+      "title1": "Design Premium",
+      "title2": "Expérience Intégrale",
+      "title3": "Attention Personnalisée"
+    },
+    "sections": {
+      "aboutUsEyebrow": "À Propos de Nous",
+      "locationsEyebrow": "Nos Emplacements",
+      "videoEyebrow": "Découvrez Vivenza",
+      "videoDescription": "Explorez nos showrooms à travers ce parcours visuel."
+    },
     "locationsTeaser": {
       "title": "Visitez Nos Showrooms",
       "description": "Découvrez la qualité Vivenza en personne dans nos showrooms."
     }
+  },
+  "LocationsTeaserMap": {
+    "showroomSingular": "showroom dans cette région",
+    "showroomPlural": "showrooms dans cette région",
+    "moreShowrooms": "+{count} de plus...",
+    "selectRegion": "Sélectionnez une région sur la carte pour voir nos showrooms"
+  },
+  "SpainMap": {
+    "mapLabel": "Carte interactive de l'Espagne",
+    "showroomsCount": "({count} showrooms)",
+    "legendWithShowrooms": "Avec showrooms",
+    "legendWithoutShowrooms": "Sans showrooms"
   },
   "LocationsTeaserButton": {
     "findStore": "Trouvez votre magasin"
@@ -30,6 +55,7 @@
   "ContactPage": {
     "title": "Contactez-Nous",
     "description": "Nous serions ravis d'avoir de vos nouvelles. Que vous ayez une question sur nos produits, besoin d'aide ou que vous souhaitiez simplement partager vos commentaires, n'hésitez pas à nous contacter.",
+    "availableBadge": "Disponible 24/7",
     "contactInfo": "Informations de Contact",
     "ourHeadquarters": "Notre Siège",
     "headquarters": "Avenue Vivenza 123, Design City, DC 54321",
@@ -39,14 +65,25 @@
     "supportEmail": "support@vivenzaexpo.es",
     "salesEmail": "ventes@vivenzaexpo.es",
     "businessHours": "Horaires d'Ouverture",
-    "mondayFriday": "Lundi - Vendredi: 9h00 - 18h00",
-    "saturday": "Samedi: 10h00 - 16h00",
-    "sunday": "Dimanche: Fermé",
-    "sendMessage": "Envoyez-Nous un Message"
+    "weekdays": "Lun - Ven",
+    "weekdaysHours": "9h00 - 18h00",
+    "saturday": "Samedi",
+    "saturdayHours": "10h00 - 16h00",
+    "sunday": "Dimanche",
+    "sundayClosed": "Fermé",
+    "ctaTitle": "Préférez-vous nous rendre visite?",
+    "ctaDescription": "Trouvez votre showroom le plus proche et découvrez la qualité Vivenza en personne.",
+    "ctaLink": "Voir les emplacements",
+    "sendMessage": "Envoyez-Nous un Message",
+    "formDescription": "Remplissez le formulaire et nous vous répondrons dans les 24 heures."
   },
   "LocationsPage": {
     "title": "Nos Showrooms",
-    "description": "Visitez-nous pour découvrir la qualité Vivenza et obtenir des conseils d'experts. Trouvez votre showroom le plus proche:"
+    "description": "Visitez-nous pour découvrir la qualité Vivenza et obtenir des conseils d'experts. Trouvez votre showroom le plus proche:",
+    "eyebrow": "Trouvez-Nous",
+    "selectRegion": "Sélectionnez une région",
+    "filteringBy": "Filtre par:",
+    "showAll": "Afficher tout"
   },
   "Navbar": {
     "home": "Accueil",

@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { Instagram, ArrowUpRight } from 'lucide-react';
 import Logo from '@/components/logo';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { EXTERNAL_URLS, SITE_CONFIG } from '@/lib/constants';
+import { EXTERNAL_URLS, SITE_CONFIG, DOM_IDS } from '@/lib/constants';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -36,7 +36,7 @@ export default function Footer() {
 
   const footerLinks = {
     explore: [
-      { href: '/#sobre-nosotros', label: t('aboutUs') },
+      { href: `/#${DOM_IDS.ABOUT_SECTION}`, label: t('aboutUs') },
       { href: '/locations', label: t('locations') },
     ],
     support: [{ href: '/contact', label: t('contactUs') }],
@@ -65,7 +65,7 @@ export default function Footer() {
             <p className="text-muted-foreground max-w-sm mb-6 leading-relaxed">
               {t('description')}
             </p>
-            <Link
+            <a
               href={EXTERNAL_URLS.GRUPO_SIETE}
               target="_blank"
               rel="noopener noreferrer"
@@ -78,10 +78,10 @@ export default function Footer() {
                 height={15}
                 className="h-auto opacity-70 hover:opacity-100 transition-opacity"
               />
-            </Link>
+            </a>
           </motion.div>
 
-          {/* Explorar */}
+          {/* Explore */}
           <motion.div variants={itemVariants}>
             <h3 className="text-sm font-semibold uppercase tracking-widest text-foreground mb-6">
               {t('explore')}
@@ -90,7 +90,7 @@ export default function Footer() {
               {footerLinks.explore.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={link.href as '/locations' | '/'}
                     className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-flex items-center gap-1 group"
                   >
                     {link.label}
@@ -101,7 +101,7 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Soporte & Social */}
+          {/* Support & Social */}
           <motion.div variants={itemVariants}>
             <h3 className="text-sm font-semibold uppercase tracking-widest text-foreground mb-6">
               {t('support')}
@@ -110,7 +110,7 @@ export default function Footer() {
               {footerLinks.support.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={link.href as '/contact'}
                     className="text-muted-foreground hover:text-foreground transition-colors duration-300 inline-flex items-center gap-1 group"
                   >
                     {link.label}
@@ -124,7 +124,7 @@ export default function Footer() {
             <h3 className="text-sm font-semibold uppercase tracking-widest text-foreground mb-4">
               {t('connect')}
             </h3>
-            <Link
+            <a
               href={EXTERNAL_URLS.INSTAGRAM}
               target="_blank"
               rel="noopener noreferrer"
@@ -132,7 +132,7 @@ export default function Footer() {
               aria-label="Instagram"
             >
               <Instagram className="w-5 h-5" />
-            </Link>
+            </a>
           </motion.div>
         </div>
 

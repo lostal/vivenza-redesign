@@ -13,6 +13,8 @@ interface HeroShowcaseClientContentProps {
   description: string;
   aboutUsButtonText: string;
   contactUsButtonText: string;
+  badge: string;
+  scrollText: string;
 }
 
 export default function HeroShowcaseClientContent({
@@ -21,15 +23,10 @@ export default function HeroShowcaseClientContent({
   description,
   aboutUsButtonText,
   contactUsButtonText,
+  badge,
+  scrollText,
 }: HeroShowcaseClientContentProps) {
-  const handleAboutClick = () => {
-    const element = document.getElementById(DOM_IDS.ABOUT_SECTION);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleScrollIndicator = () => {
+  const scrollToAbout = () => {
     const element = document.getElementById(DOM_IDS.ABOUT_SECTION);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -71,7 +68,7 @@ export default function HeroShowcaseClientContent({
             className="mb-6"
           >
             <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-widest uppercase bg-white/10 text-white border border-white/20 rounded-full backdrop-blur-sm">
-              Exposiciones de Baño y Cerámica
+              {badge}
             </span>
           </motion.div>
 
@@ -105,7 +102,7 @@ export default function HeroShowcaseClientContent({
           >
             <Button
               size="lg"
-              onClick={handleAboutClick}
+              onClick={scrollToAbout}
               className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base font-medium rounded-xl shadow-glow-sm hover:shadow-glow-md transition-all duration-500"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -132,10 +129,10 @@ export default function HeroShowcaseClientContent({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          onClick={handleScrollIndicator}
+          onClick={scrollToAbout}
           className="flex flex-col items-center gap-2 text-foreground/50 hover:text-foreground/80 transition-colors cursor-pointer pointer-events-auto"
         >
-          <span className="text-xs font-medium tracking-widest uppercase pl-[0.1em]">Scroll</span>
+          <span className="text-xs font-medium tracking-widest uppercase pl-[0.1em]">{scrollText}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

@@ -9,7 +9,9 @@
     "titleLine2": "VIVENZA",
     "description": "Descubre soluciones para baño y hogar exquisitamente elaboradas que combinan diseño atemporal con funcionalidad moderna.",
     "aboutUsButtonText": "Sobre Nosotros",
-    "contactUsButtonText": "Contáctanos"
+    "contactUsButtonText": "Contáctanos",
+    "badge": "Exposiciones de Baño y Cerámica",
+    "scrollText": "Scroll"
   },
   "HomePage": {
     "aboutUs": {
@@ -19,10 +21,33 @@
       "paragraph2": "GRUPOSIETE a través de VIVENZA ofrece soluciones integrales e innovadoras para crear espacios de diseño. En nuestras 12 exposiciones podrás explorar diferentes ambientes completos que te inspirarán.",
       "paragraph3": "Nuestro equipo de expertos te brindará una experiencia única con atención personalizada y soluciones a medida adaptadas a tu estilo."
     },
+    "features": {
+      "title1": "Diseño Premium",
+      "title2": "Experiencia Integral",
+      "title3": "Atención Personalizada"
+    },
+    "sections": {
+      "aboutUsEyebrow": "Sobre Nosotros",
+      "locationsEyebrow": "Nuestras Ubicaciones",
+      "videoEyebrow": "Descubre Vivenza",
+      "videoDescription": "Explora nuestras exposiciones a través de este recorrido visual."
+    },
     "locationsTeaser": {
       "title": "Visita Nuestros Showrooms",
       "description": "Experimenta la calidad Vivenza de primera mano en nuestras ubicaciones de exposición."
     }
+  },
+  "LocationsTeaserMap": {
+    "showroomSingular": "showroom en esta región",
+    "showroomPlural": "showrooms en esta región",
+    "moreShowrooms": "+{count} más...",
+    "selectRegion": "Selecciona una región en el mapa para ver nuestros showrooms"
+  },
+  "SpainMap": {
+    "mapLabel": "Mapa interactivo de España",
+    "showroomsCount": "({count} showrooms)",
+    "legendWithShowrooms": "Con exposiciones",
+    "legendWithoutShowrooms": "Sin exposiciones"
   },
   "LocationsTeaserButton": {
     "findStore": "Encuentra tu tienda"
@@ -30,6 +55,7 @@
   "ContactPage": {
     "title": "Ponte en Contacto",
     "description": "Nos encantaría saber de ti. Ya sea que tengas una pregunta sobre nuestros productos, necesites ayuda o simplemente quieras compartir tus comentarios, por favor contáctanos.",
+    "availableBadge": "Disponibles 24/7",
     "contactInfo": "Información de Contacto",
     "ourHeadquarters": "Nuestra Sede",
     "headquarters": "Avenida Vivenza 123, Ciudad Diseño, CD 54321",
@@ -39,14 +65,25 @@
     "supportEmail": "soporte@vivenzaexpo.es",
     "salesEmail": "ventas@vivenzaexpo.es",
     "businessHours": "Horario Comercial",
-    "mondayFriday": "Lunes - Viernes: 9:00 AM - 6:00 PM",
-    "saturday": "Sábado: 10:00 AM - 4:00 PM",
-    "sunday": "Domingo: Cerrado",
-    "sendMessage": "Envíanos un Mensaje"
+    "weekdays": "Lun - Vie",
+    "weekdaysHours": "9:00 - 18:00",
+    "saturday": "Sábado",
+    "saturdayHours": "10:00 - 16:00",
+    "sunday": "Domingo",
+    "sundayClosed": "Cerrado",
+    "ctaTitle": "¿Prefieres visitarnos?",
+    "ctaDescription": "Encuentra tu showroom más cercano y experimenta la calidad Vivenza de primera mano.",
+    "ctaLink": "Ver ubicaciones",
+    "sendMessage": "Envíanos un Mensaje",
+    "formDescription": "Rellena el formulario y te responderemos en menos de 24 horas."
   },
   "LocationsPage": {
     "title": "Nuestros Showrooms",
-    "description": "Visítanos para experimentar la calidad Vivenza y obtener asesoramiento experto. Encuentra tu exposición más cercana:"
+    "description": "Visítanos para experimentar la calidad Vivenza y obtener asesoramiento experto. Encuentra tu exposición más cercana:",
+    "eyebrow": "Encuéntranos",
+    "selectRegion": "Selecciona una región",
+    "filteringBy": "Filtrando:",
+    "showAll": "Mostrar todas"
   },
   "Navbar": {
     "home": "Inicio",

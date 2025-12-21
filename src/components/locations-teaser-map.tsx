@@ -7,13 +7,23 @@ import { exhibitionData } from '@/lib/exhibition-data';
 import { MapPin, Phone, ArrowRight } from 'lucide-react';
 import { Link } from '@/navigation';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
+
+interface LocationsTeaserMapTranslations {
+  showroomSingular: string;
+  showroomPlural: string;
+  moreShowrooms: string;
+  selectRegion: string;
+}
 
 interface LocationsTeaserMapProps {
   buttonText: string;
+  translations: LocationsTeaserMapTranslations;
 }
 
-export default function LocationsTeaserMap({ buttonText }: LocationsTeaserMapProps) {
+export default function LocationsTeaserMap({ buttonText, translations }: LocationsTeaserMapProps) {
   const [selectedCommunity, setSelectedCommunity] = useState<string | null>(null);
+  const tSpainMap = useTranslations('SpainMap');
 
   const selectedData = selectedCommunity
     ? exhibitionData.find((c) => c.id === selectedCommunity)
@@ -33,6 +43,12 @@ export default function LocationsTeaserMap({ buttonText }: LocationsTeaserMapPro
           selectedCommunity={selectedCommunity}
           onCommunitySelect={setSelectedCommunity}
           className="max-w-md mx-auto lg:mx-0"
+          translations={{
+            mapLabel: tSpainMap('mapLabel'),
+            showroomsCount: tSpainMap('showroomsCount'),
+            legendWithShowrooms: tSpainMap('legendWithShowrooms'),
+            legendWithoutShowrooms: tSpainMap('legendWithoutShowrooms'),
+          }}
         />
       </div>
 
@@ -51,7 +67,9 @@ export default function LocationsTeaserMap({ buttonText }: LocationsTeaserMapPro
             </h3>
             <p className="text-muted-foreground">
               {selectedData.showrooms.length}{' '}
-              {selectedData.showrooms.length === 1 ? 'showroom' : 'showrooms'} en esta región
+              {selectedData.showrooms.length === 1
+                ? translations.showroomSingular
+                : translations.showroomPlural}
             </p>
 
             <div className="space-y-3">
@@ -83,7 +101,10 @@ export default function LocationsTeaserMap({ buttonText }: LocationsTeaserMapPro
 
             {selectedData.showrooms.length > 3 && (
               <p className="text-sm text-muted-foreground">
-                +{selectedData.showrooms.length - 3} más...
+                {translations.moreShowrooms.replace(
+                  '{count}',
+                  String(selectedData.showrooms.length - 3)
+                )}
               </p>
             )}
           </motion.div>
@@ -93,9 +114,7 @@ export default function LocationsTeaserMap({ buttonText }: LocationsTeaserMapPro
             animate={{ opacity: 1 }}
             className="text-center lg:text-left py-8"
           >
-            <p className="text-muted-foreground mb-4">
-              Selecciona una región en el mapa para ver nuestros showrooms
-            </p>
+            <p className="text-muted-foreground mb-4">{translations.selectRegion}</p>
             <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
               {exhibitionData.map((community) => (
                 <button

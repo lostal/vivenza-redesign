@@ -17,18 +17,19 @@ export default async function HomePage({ params }: HomePageProps) {
   const t = await getTranslations({ locale, namespace: 'HomePage' });
   const tHero = await getTranslations({ locale, namespace: 'HeroShowcaseClientContent' });
   const tLocationsButton = await getTranslations({ locale, namespace: 'LocationsTeaserButton' });
+  const tMap = await getTranslations({ locale, namespace: 'LocationsTeaserMap' });
 
   const features = [
     {
-      title: 'Diseño Premium',
+      title: t('features.title1'),
       description: t('aboutUs.paragraph1'),
     },
     {
-      title: 'Experiencia Integral',
+      title: t('features.title2'),
       description: t('aboutUs.paragraph2'),
     },
     {
-      title: 'Atención Personalizada',
+      title: t('features.title3'),
       description: t('aboutUs.paragraph3'),
     },
   ];
@@ -42,6 +43,8 @@ export default async function HomePage({ params }: HomePageProps) {
         description={tHero('description')}
         aboutUsButtonText={tHero('aboutUsButtonText')}
         contactUsButtonText={tHero('contactUsButtonText')}
+        badge={tHero('badge')}
+        scrollText={tHero('scrollText')}
       />
 
       {/* About Us Section */}
@@ -55,7 +58,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="container relative">
           <SectionTitle
             icon={<Users className="h-6 w-6 md:h-7 md:w-7" />}
-            eyebrow="Sobre Nosotros"
+            eyebrow={t('sections.aboutUsEyebrow')}
           />
 
           {/* Introduction */}
@@ -97,13 +100,21 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="container relative">
           <SectionTitle
             icon={<MapPin className="h-6 w-6 md:h-7 md:w-7" />}
-            eyebrow="Nuestras Ubicaciones"
+            eyebrow={t('sections.locationsEyebrow')}
             description={t('locationsTeaser.description')}
           />
 
           {/* Interactive Map */}
           <div className="mb-20">
-            <LocationsTeaserMap buttonText={tLocationsButton('findStore')} />
+            <LocationsTeaserMap
+              buttonText={tLocationsButton('findStore')}
+              translations={{
+                showroomSingular: tMap('showroomSingular'),
+                showroomPlural: tMap('showroomPlural'),
+                moreShowrooms: tMap('moreShowrooms'),
+                selectRegion: tMap('selectRegion'),
+              }}
+            />
           </div>
         </div>
       </section>
@@ -113,8 +124,8 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="container">
           <SectionTitle
             icon={<Play className="h-6 w-6 md:h-7 md:w-7" />}
-            eyebrow="Descubre Vivenza"
-            description="Explora nuestras exposiciones a través de este recorrido visual."
+            eyebrow={t('sections.videoEyebrow')}
+            description={t('sections.videoDescription')}
           />
 
           <div className="max-w-5xl mx-auto">

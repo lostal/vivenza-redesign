@@ -7,14 +7,27 @@ import ShowroomCards from '@/components/location/showroom-cards';
 import { exhibitionData } from '@/lib/exhibition-data';
 import { MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 interface LocationsPageClientProps {
   title: string;
   description: string;
+  eyebrow: string;
+  selectRegion: string;
+  filteringBy: string;
+  showAll: string;
 }
 
-export default function LocationsPageClient({ title, description }: LocationsPageClientProps) {
+export default function LocationsPageClient({
+  title,
+  description,
+  eyebrow,
+  selectRegion,
+  filteringBy,
+  showAll,
+}: LocationsPageClientProps) {
   const [selectedCommunity, setSelectedCommunity] = useState<string | null>(null);
+  const tSpainMap = useTranslations('SpainMap');
 
   const handleClearFilter = () => {
     setSelectedCommunity(null);
@@ -31,7 +44,7 @@ export default function LocationsPageClient({ title, description }: LocationsPag
       <div className="container relative">
         <SectionTitle
           icon={<MapPin className="h-6 w-6 md:h-7 md:w-7" />}
-          eyebrow="Encuéntranos"
+          eyebrow={eyebrow}
           title={title}
           description={description}
         />
@@ -48,12 +61,18 @@ export default function LocationsPageClient({ title, description }: LocationsPag
             <div className="sticky top-24">
               <div className="p-6 rounded-2xl bg-card/30 border border-border/30 backdrop-blur-sm">
                 <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-6">
-                  Selecciona una región
+                  {selectRegion}
                 </h3>
 
                 <SpainMap
                   selectedCommunity={selectedCommunity}
                   onCommunitySelect={setSelectedCommunity}
+                  translations={{
+                    mapLabel: tSpainMap('mapLabel'),
+                    showroomsCount: tSpainMap('showroomsCount'),
+                    legendWithShowrooms: tSpainMap('legendWithShowrooms'),
+                    legendWithoutShowrooms: tSpainMap('legendWithoutShowrooms'),
+                  }}
                 />
 
                 {/* Filter status */}
@@ -64,7 +83,7 @@ export default function LocationsPageClient({ title, description }: LocationsPag
                     className="mt-6 flex items-center justify-between p-3 rounded-lg bg-primary/10 border border-primary/20"
                   >
                     <span className="text-sm text-foreground">
-                      Filtrando:{' '}
+                      {filteringBy}{' '}
                       <strong>
                         {exhibitionData.find((c) => c.id === selectedCommunity)?.communityName}
                       </strong>
@@ -73,7 +92,7 @@ export default function LocationsPageClient({ title, description }: LocationsPag
                       onClick={handleClearFilter}
                       className="text-xs text-primary hover:text-primary/80 underline transition-colors"
                     >
-                      Mostrar todas
+                      {showAll}
                     </button>
                   </motion.div>
                 )}

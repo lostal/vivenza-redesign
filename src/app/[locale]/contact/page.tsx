@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n/routing';
 import { hasLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
+import { Link } from '@/navigation';
 
 interface ContactPageProps {
   params: Promise<{
@@ -21,12 +22,11 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   }
 
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'ContactPage' });
 
   return {
-    title: locale === 'es' ? 'Vivenza | Contacto' : 'Vivenza | Contact',
-    description: locale === 'es'
-      ? 'Ponte en contacto con Vivenza. Estamos aquí para ayudarte.'
-      : 'Get in touch with Vivenza. We\'re here to help.',
+    title: `Vivenza | ${t('title')}`,
+    description: t('description'),
   };
 }
 
@@ -63,7 +63,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-sm font-medium text-primary tracking-wide">
-                {locale === 'es' ? 'Disponibles 24/7' : 'Available 24/7'}
+                {t('availableBadge')}
               </span>
             </div>
             <SectionTitle
@@ -133,16 +133,16 @@ export default async function ContactPage({ params }: ContactPageProps) {
                       <h3 className="font-semibold text-foreground mb-2">{t('businessHours')}</h3>
                       <div className="space-y-1 text-sm text-muted-foreground">
                         <p className="flex items-center justify-between">
-                          <span>{locale === 'es' ? 'Lun - Vie' : 'Mon - Fri'}</span>
-                          <span className="text-foreground/80">9:00 - 18:00</span>
+                          <span>{t('weekdays')}</span>
+                          <span className="text-foreground/80">{t('weekdaysHours')}</span>
                         </p>
                         <p className="flex items-center justify-between">
-                          <span>{locale === 'es' ? 'Sábado' : 'Saturday'}</span>
-                          <span className="text-foreground/80">10:00 - 16:00</span>
+                          <span>{t('saturday')}</span>
+                          <span className="text-foreground/80">{t('saturdayHours')}</span>
                         </p>
                         <p className="flex items-center justify-between">
-                          <span>{locale === 'es' ? 'Domingo' : 'Sunday'}</span>
-                          <span className="text-foreground/60">{locale === 'es' ? 'Cerrado' : 'Closed'}</span>
+                          <span>{t('sunday')}</span>
+                          <span className="text-foreground/60">{t('sundayClosed')}</span>
                         </p>
                       </div>
                     </div>
@@ -155,20 +155,18 @@ export default async function ContactPage({ params }: ContactPageProps) {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
                 <div className="relative">
                   <h3 className="font-headline text-lg text-foreground mb-2">
-                    {locale === 'es' ? '¿Prefieres visitarnos?' : 'Prefer to visit us?'}
+                    {t('ctaTitle')}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    {locale === 'es'
-                      ? 'Encuentra tu showroom más cercano y experimenta la calidad Vivenza de primera mano.'
-                      : 'Find your nearest showroom and experience Vivenza quality firsthand.'}
+                    {t('ctaDescription')}
                   </p>
-                  <a
-                    href={`/${locale}`}
+                  <Link
+                    href="/locations"
                     className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
                   >
-                    {locale === 'es' ? 'Ver ubicaciones' : 'View locations'}
+                    {t('ctaLink')}
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -190,9 +188,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
                     {t('sendMessage')}
                   </h2>
                   <p className="text-muted-foreground">
-                    {locale === 'es'
-                      ? 'Rellena el formulario y te responderemos en menos de 24 horas.'
-                      : 'Fill out the form and we\'ll respond within 24 hours.'}
+                    {t('formDescription')}
                   </p>
                 </div>
 

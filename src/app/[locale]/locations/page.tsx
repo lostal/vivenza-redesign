@@ -12,5 +12,14 @@ export default async function LocationsPage({ params }: LocationsPageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'LocationsPage' });
 
-  return <LocationsPageClient title={t('title')} description={t('description')} />;
+  return (
+    <LocationsPageClient
+      title={t('title')}
+      description={t('description')}
+      eyebrow={t('eyebrow')}
+      selectRegion={t('selectRegion')}
+      filteringBy={t('filteringBy')}
+      showAll={t('showAll')}
+    />
+  );
 }

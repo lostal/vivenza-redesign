@@ -5,16 +5,25 @@ import { useState } from 'react';
 import { spainCommunityPaths, communitiesWithShowrooms } from '@/lib/spain-map-paths';
 import { exhibitionData } from '@/lib/exhibition-data';
 
+interface SpainMapTranslations {
+  mapLabel: string;
+  showroomsCount: string;
+  legendWithShowrooms: string;
+  legendWithoutShowrooms: string;
+}
+
 interface SpainMapProps {
   selectedCommunity: string | null;
   onCommunitySelect: (communityId: string | null) => void;
   className?: string;
+  translations: SpainMapTranslations;
 }
 
 export default function SpainMap({
   selectedCommunity,
   onCommunitySelect,
   className = '',
+  translations,
 }: SpainMapProps) {
   const [hoveredCommunity, setHoveredCommunity] = useState<string | null>(null);
 
@@ -30,7 +39,7 @@ export default function SpainMap({
 
   return (
     <div className={`relative ${className}`}>
-      <svg viewBox="0 0 1000 800" className="w-full h-auto" aria-label="Mapa interactivo de España">
+      <svg viewBox="0 0 1000 800" className="w-full h-auto" aria-label={translations.mapLabel}>
         {/* Background */}
         <defs>
           {/* Glow filter */}
@@ -105,7 +114,7 @@ export default function SpainMap({
         >
           <span className="font-medium text-foreground">{getCommunityName(hoveredCommunity)}</span>
           <span className="text-muted-foreground ml-2">
-            ({getShowroomCount(hoveredCommunity)} showrooms)
+            {translations.showroomsCount.replace('{count}', String(getShowroomCount(hoveredCommunity)))}
           </span>
         </motion.div>
       )}
@@ -114,11 +123,11 @@ export default function SpainMap({
       <div className="mt-4 flex items-center justify-center gap-4 text-xs text-muted-foreground">
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-sm bg-muted/80 border border-border/80" />
-          <span>Con exposiciones</span>
+          <span>{translations.legendWithShowrooms}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-sm bg-muted/20 border border-border/30" />
-          <span>Sin exposiciones</span>
+          <span>{translations.legendWithoutShowrooms}</span>
         </div>
       </div>
     </div>
