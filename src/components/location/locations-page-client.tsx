@@ -69,7 +69,7 @@ export default function LocationsPageClient({
                   onCommunitySelect={setSelectedCommunity}
                   translations={{
                     mapLabel: tSpainMap('mapLabel'),
-                    showroomsCount: tSpainMap('showroomsCount'),
+                    showroomsCount: tSpainMap.raw('showroomsCount'),
                     legendWithShowrooms: tSpainMap('legendWithShowrooms'),
                     legendWithoutShowrooms: tSpainMap('legendWithoutShowrooms'),
                   }}

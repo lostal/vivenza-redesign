@@ -111,7 +111,7 @@ export default async function HomePage({ params }: HomePageProps) {
               translations={{
                 showroomSingular: tMap('showroomSingular'),
                 showroomPlural: tMap('showroomPlural'),
-                moreShowrooms: tMap('moreShowrooms'),
+                moreShowrooms: tMap.raw('moreShowrooms'),
                 selectRegion: tMap('selectRegion'),
               }}
             />

@@ -212,7 +212,7 @@ export default function ContactForm() {
           type="submit"
           className={cn(
             "w-full h-12 text-base font-medium rounded-xl",
-            "bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary",
+            "bg-linear-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary",
             "shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30",
             "transition-all duration-300 transform hover:-translate-y-0.5",
             "disabled:opacity-70 disabled:transform-none disabled:shadow-none"

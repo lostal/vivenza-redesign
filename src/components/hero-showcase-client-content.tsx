@@ -53,12 +53,12 @@ export default function HeroShowcaseClientContent({
           className="scale-105"
         />
         {/* Premium gradient overlay - multi-layered */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/40" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/70 via-background/50 to-background" />
+        <div className="absolute inset-0 bg-linear-to-r from-background/60 via-transparent to-background/40" />
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 container px-6 md:px-8 py-32 md:py-40">
+      <div className="relative z-10 container px-6 md:px-8 py-20 md:py-28">
         <div className="max-w-4xl mx-auto md:mx-0 md:ml-[5%]">
           {/* Eyebrow */}
           <motion.div
@@ -77,7 +77,7 @@ export default function HeroShowcaseClientContent({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.8, ease: 'easeOut' }}
-            className="font-headline text-display-xl font-bold mb-6"
+            className="font-headline text-display-xl font-bold leading-none mb-6"
           >
             <span className="block text-foreground">{titleLine1}</span>
             <span className="block text-gradient">{titleLine2}</span>
