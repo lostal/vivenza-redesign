@@ -74,7 +74,7 @@ export const exhibitionData: CommunityExhibitions[] = [
     ],
   },
   {
-    id: 'valencia',
+    id: 'comunidad-valenciana',
     communityName: 'Comunidad Valenciana',
     showrooms: [
       {
@@ -92,7 +92,7 @@ export const exhibitionData: CommunityExhibitions[] = [
     ],
   },
   {
-    id: 'castilla-y-leon',
+    id: 'castilla-leon',
     communityName: 'Castilla y León',
     showrooms: [
       {

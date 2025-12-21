@@ -4,17 +4,17 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { EXTERNAL_URLS, SITE_CONFIG } from '@/lib/constants';
 
-// Configurar fuentes con next/font para optimización automática
+// Premium font configuration with optimized weights
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-poppins',
   display: 'swap',
 });
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-montserrat',
   display: 'swap',
 });
@@ -60,7 +60,8 @@ export default function RootLayout({
   return (
     <html
       lang={SITE_CONFIG.DEFAULT_LOCALE}
-      className={`${poppins.variable} ${montserrat.variable} dark scroll-smooth`}
+      className={`${poppins.variable} ${montserrat.variable} dark`}
+      suppressHydrationWarning
     >
       <body className="font-body antialiased">
         {children}
