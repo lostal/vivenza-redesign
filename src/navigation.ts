@@ -1,24 +1,15 @@
+import { createNavigation } from 'next-intl/navigation';
+import { routing } from './i18n/routing';
 
-import {createLocalizedPathnamesNavigation} from 'next-intl/navigation';
-import {locales, defaultLocale, localePrefix} from './i18n';
+// Lightweight wrappers around Next.js' navigation
+// APIs that consider the routing configuration
+export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
 
-export const pathnames = {
-  '/': '/',
-  '/blog': '/blog',
-  '/blog/[slug]': '/blog/[slug]',
-  '/contact': '/contact',
-  '/locations': '/locations',
-  '/products': '/products',
-  // Add other pathnames here as needed
-} as const;
-
-// Export i18nConfig for middleware
+// Re-export for backward compatibility with existing code
+export { routing };
+export const pathnames = routing.pathnames;
 export const i18nConfig = {
-  locales,
-  defaultLocale,
-  localePrefix,
+  locales: routing.locales,
+  defaultLocale: routing.defaultLocale,
+  localePrefix: routing.localePrefix,
 } as const;
-
-
-export const {Link, redirect, usePathname, useRouter, getPathname} =
-  createLocalizedPathnamesNavigation({locales, localePrefix, pathnames});

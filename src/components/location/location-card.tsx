@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Location } from '@/lib/types';
 import { MapPin, Phone, Clock } from 'lucide-react';
@@ -40,9 +40,9 @@ export default function LocationCard({ location }: LocationCardProps) {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <Button variant="outline" asChild className="w-full">
-          <a 
-            href={`https://maps.google.com/?q=${location.lat},${location.lng}`} 
-            target="_blank" 
+          <a
+            href={`https://maps.google.com/?q=${location.lat},${location.lng}`}
+            target="_blank"
             rel="noopener noreferrer"
           >
             Get Directions

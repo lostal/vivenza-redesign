@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,7 +15,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const t = useTranslations('Navbar');
-  
+
   const navLinks = [
     { href: '/', label: t('home'), isScroll: false },
     { href: 'sobre-nosotros', label: t('aboutUs'), isScroll: true },
@@ -29,9 +29,9 @@ export default function Navbar() {
       setIsSheetOpen(false);
       const aboutSection = document.getElementById('sobre-nosotros');
       if (aboutSection) {
-        aboutSection.scrollIntoView({ 
+        aboutSection.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'start',
         });
       }
     } else {
@@ -41,15 +41,15 @@ export default function Navbar() {
 
   const isActiveLink = (href: string, isScroll: boolean) => {
     const pathWithoutLocale = pathname.replace(/^\/(es|en|fr)/, '') || '/';
-    
+
     if (isScroll) {
       return false; // Never show scroll links as active
     }
-    
+
     if (href === '/') {
       return pathWithoutLocale === '/';
     }
-    
+
     const hrefPath = href.replace(/^\/(es|en|fr)/, '');
     return pathWithoutLocale.startsWith(hrefPath);
   };
@@ -63,7 +63,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 items-center">
-          {navLinks.map((link) => (
+          {navLinks.map((link) =>
             link.isScroll ? (
               <button
                 key={link.label}
@@ -85,13 +85,15 @@ export default function Navbar() {
                   'text-sm font-medium transition-all hover:text-primary relative py-1',
                   'after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300',
                   'hover:after:w-full',
-                  isActiveLink(link.href, link.isScroll) ? 'text-primary after:w-full' : 'text-foreground/80'
+                  isActiveLink(link.href, link.isScroll)
+                    ? 'text-primary after:w-full'
+                    : 'text-foreground/80'
                 )}
               >
                 {link.label}
               </Link>
             )
-          ))}
+          )}
           <LanguageSwitcher />
         </nav>
 
@@ -107,7 +109,7 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[340px]">
               <nav className="flex flex-col space-y-4 mt-8">
-                {navLinks.map((link) => (
+                {navLinks.map((link) =>
                   link.isScroll ? (
                     <button
                       key={link.label}
@@ -126,13 +128,15 @@ export default function Navbar() {
                       onClick={(e) => handleNavClick(e, link.href, link.isScroll)}
                       className={cn(
                         'text-lg font-medium transition-all hover:text-primary p-3 rounded-md hover:bg-muted/50',
-                        isActiveLink(link.href, link.isScroll) ? 'text-primary bg-muted' : 'text-foreground/80'
+                        isActiveLink(link.href, link.isScroll)
+                          ? 'text-primary bg-muted'
+                          : 'text-foreground/80'
                       )}
                     >
                       {link.label}
                     </Link>
                   )
-                ))}
+                )}
               </nav>
             </SheetContent>
           </Sheet>

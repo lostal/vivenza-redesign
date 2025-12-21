@@ -1,9 +1,8 @@
+'use client';
 
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { Link } from "@/navigation"; // Use the locale-aware Link
-import { ArrowRight } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { Link } from '@/navigation'; // Use the locale-aware Link
+import { ArrowRight } from 'lucide-react';
 
 interface LocationsTeaserButtonProps {
   buttonText: string;

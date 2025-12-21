@@ -1,10 +1,9 @@
 import HeroShowcaseClientContent from '@/components/hero-showcase-client-content';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, MapPin, Users } from 'lucide-react';
+import { MapPin, Users } from 'lucide-react';
 import SectionTitle from '@/components/section-title';
 import AboutUsCarousel from '@/components/about-us-carousel';
 import { getTranslations } from 'next-intl/server';
-import type { Locale } from '@/i18n';
+import type { Locale } from '@/i18n/routing';
 import LocationsTeaserButton from '@/components/locations-teaser-button';
 
 interface HomePageProps {
@@ -16,8 +15,8 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'HomePage' });
-  const tHero = await getTranslations({ locale, namespace: 'HeroShowcaseClientContent'});
-  const tLocationsButton = await getTranslations({ locale, namespace: 'LocationsTeaserButton'});
+  const tHero = await getTranslations({ locale, namespace: 'HeroShowcaseClientContent' });
+  const tLocationsButton = await getTranslations({ locale, namespace: 'LocationsTeaserButton' });
 
   return (
     <div>
@@ -37,24 +36,16 @@ export default async function HomePage({ params }: HomePageProps) {
             title={t('aboutUs.title')}
           />
           <div className="max-w-4xl mx-auto text-base sm:text-lg text-foreground/80 text-center">
-            <p className="mb-6 sm:mb-8">
-              {t('aboutUs.intro')}
-            </p>
+            <p className="mb-6 sm:mb-8">{t('aboutUs.intro')}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-12">
               <div className="space-y-3 sm:space-y-4 text-center">
-                <p>
-                  {t('aboutUs.paragraph1')}
-                </p>
+                <p>{t('aboutUs.paragraph1')}</p>
               </div>
               <div className="space-y-3 sm:space-y-4 text-center">
-                <p>
-                  {t('aboutUs.paragraph2')}
-                </p>
+                <p>{t('aboutUs.paragraph2')}</p>
               </div>
               <div className="space-y-3 sm:space-y-4 text-center">
-                <p>
-                  {t('aboutUs.paragraph3')}
-                </p>
+                <p>{t('aboutUs.paragraph3')}</p>
               </div>
             </div>
             <div className="mt-10 sm:mt-12">
@@ -73,9 +64,7 @@ export default async function HomePage({ params }: HomePageProps) {
             description={t('locationsTeaser.description')}
           />
           <div className="mt-8 sm:mt-10">
-            <LocationsTeaserButton
-              buttonText={tLocationsButton('findStore')}
-            />
+            <LocationsTeaserButton buttonText={tLocationsButton('findStore')} />
           </div>
           <div className="mt-10 sm:mt-12 max-w-4xl mx-auto aspect-video rounded-lg shadow-lg overflow-hidden">
             <iframe

@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -25,18 +24,18 @@ export default function HeroShowcaseClientContent({
   const pathname = usePathname();
   const currentLocale = pathname.split('/')[1] || 'es';
   const contactLink = `/${currentLocale}/contact`;
-  
+
   const scrollToAboutUs = (e: React.MouseEvent) => {
     e.preventDefault();
     const aboutSection = document.getElementById('sobre-nosotros');
     if (aboutSection) {
-      aboutSection.scrollIntoView({ 
+      aboutSection.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       });
     }
   };
-  
+
   return (
     <section className="relative h-[calc(100vh-4rem)] min-h-[500px] sm:min-h-[600px] flex items-center justify-center bg-background overflow-hidden">
       <Image
@@ -51,18 +50,15 @@ export default function HeroShowcaseClientContent({
       />
       <div className="relative z-10 px-4 sm:px-8 py-8 max-w-3xl mx-auto text-left sm:translate-x-8">
         <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6">
-          {titleLine1}<br />
+          {titleLine1}
+          <br />
           <span className="text-primary">{titleLine2}</span>
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-8 sm:mb-10 max-w-xl">
           {description}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 sm:space-x-0">
-          <Button 
-            size="lg" 
-            className="font-body w-full sm:w-auto"
-            onClick={scrollToAboutUs}
-          >
+          <Button size="lg" className="font-body w-full sm:w-auto" onClick={scrollToAboutUs}>
             {aboutUsButtonText} <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <Button asChild variant="outline" size="lg" className="font-body w-full sm:w-auto">

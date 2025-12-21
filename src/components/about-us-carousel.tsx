@@ -1,23 +1,22 @@
+'use client';
 
-"use client";
-
-import * as React from "react";
-import Image from "next/image";
+import * as React from 'react';
+import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 const imageUrls = [
-  "https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-1.jpg",
-  "https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-2.jpg",
-  "https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-3.jpg",
-  "https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-4-1.jpg",
-  "https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-5.jpg",
+  'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-1.jpg',
+  'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-2.jpg',
+  'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-3.jpg',
+  'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-4-1.jpg',
+  'https://vivenzaexpo.es/wp-content/uploads/2025/03/VIVENZA-EXPOSICION-5.jpg',
 ];
 
 export default function AboutUsCarousel() {
@@ -42,7 +41,7 @@ export default function AboutUsCarousel() {
                   src={url}
                   alt={`Exposición Vivenza ${index + 1}`}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: 'cover' }}
                   quality={85}
                   priority={index === 0}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1000px"

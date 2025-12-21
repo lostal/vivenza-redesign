@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { Instagram } from 'lucide-react';
@@ -23,9 +23,7 @@ export default function Footer() {
             <div className="mb-4">
               <Logo />
             </div>
-            <p className="text-sm text-muted-foreground mb-6">
-              {t('description')}
-            </p>
+            <p className="text-sm text-muted-foreground mb-6">{t('description')}</p>
             <div>
               <Link href="https://gruposiete.es/" target="_blank" rel="noopener noreferrer">
                 <Image
@@ -39,27 +37,68 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">{t('explore')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
+              {t('explore')}
+            </h3>
             <ul role="list" className="space-y-2">
-              <li><Link href="/#sobre-nosotros" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t('aboutUs')}</Link></li>
-              <li><Link href="/locations" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t('locations')}</Link></li>
+              <li>
+                <Link
+                  href="/#sobre-nosotros"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t('aboutUs')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/locations"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t('locations')}
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">{t('support')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
+              {t('support')}
+            </h3>
             <ul role="list" className="space-y-2">
-              <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t('contactUs')}</Link></li>
-              <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t('faq')}</Link></li>
-              <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">{t('privacy')}</Link></li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t('contactUs')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/faq"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t('faq')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t('privacy')}
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">{t('connect')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
+              {t('connect')}
+            </h3>
             <div className="flex space-x-4">
-              <Link 
-                href="https://www.instagram.com/gruposiete_vivenza/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <Link
+                href="https://www.instagram.com/gruposiete_vivenza/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Instagram"
               >
@@ -69,7 +108,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-border/40 pt-8 text-center">
-          <p className="text-sm text-muted-foreground">&copy; {currentYear} Vivenza. {t('copyright')}</p>
+          <p className="text-sm text-muted-foreground">
+            &copy; {currentYear} Vivenza. {t('copyright')}
+          </p>
         </div>
       </div>
     </footer>

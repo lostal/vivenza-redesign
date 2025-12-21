@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { usePathname, useRouter } from 'next/navigation';
-import { locales } from '@/i18n';
+import { routing } from '@/i18n/routing';
 
 const languageNames: Record<string, string> = {
   es: 'Español',
@@ -20,14 +20,14 @@ const languageNames: Record<string, string> = {
 export default function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
-  
+
   // Extract current locale from pathname
   const currentLocale = pathname.split('/')[1] || 'es';
 
   const handleLanguageChange = (newLocale: string) => {
     // Replace the locale in the current path
     const segments = pathname.split('/');
-    if (locales.includes(segments[1] as any)) {
+    if (routing.locales.includes(segments[1] as (typeof routing.locales)[number])) {
       segments[1] = newLocale;
     } else {
       segments.unshift('', newLocale);
@@ -44,9 +44,9 @@ export default function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {locales.map((locale) => (
-          <DropdownMenuItem 
-            key={locale} 
+        {routing.locales.map((locale) => (
+          <DropdownMenuItem
+            key={locale}
             onClick={() => handleLanguageChange(locale)}
             className={currentLocale === locale ? 'font-semibold bg-muted' : ''}
           >

@@ -1,4 +1,3 @@
-
 import type { Location, Product, BlogPost } from '@/lib/types';
 
 export const placeholderProducts: Product[] = [
@@ -20,7 +19,7 @@ export const productCategories: string[] = [
   'Cocina',
   'Hogar',
   'Cerámica',
-  'Grifería'
+  'Grifería',
 ];
 
 export const placeholderBlogPosts: BlogPost[] = [
@@ -32,10 +31,12 @@ export const placeholderBlogPosts: BlogPost[] = [
     author: 'Vivenza Team',
     imageUrl: 'https://placehold.co/600x338.png',
     dataAiHint: 'sample blog image',
-    excerpt: 'This is a sample blog post excerpt to test static generation for /blog/[slug] routes.',
-    content: '<p>This is the full content of the sample blog post. It helps ensure generateStaticParams has data.</p>',
+    excerpt:
+      'This is a sample blog post excerpt to test static generation for /blog/[slug] routes.',
+    content:
+      '<p>This is the full content of the sample blog post. It helps ensure generateStaticParams has data.</p>',
     tags: ['Sample', 'Test', 'Static Export'],
-  }
+  },
 ];
 
 export const placeholderLocations: Location[] = [
@@ -46,7 +47,7 @@ export const placeholderLocations: Location[] = [
     phone: '+34 900 123 456',
     imageUrl: 'https://placehold.co/600x400.png',
     lat: 40.416775,
-    lng: -3.703790,
+    lng: -3.70379,
     openingHours: 'Lun-Sáb: 10 AM - 7 PM, Dom: 12 PM - 5 PM',
     dataAiHint: 'modern showroom',
   },
@@ -57,7 +58,7 @@ export const placeholderLocations: Location[] = [
     phone: '+34 900 987 654',
     imageUrl: 'https://placehold.co/600x400.png',
     lat: 40.516775,
-    lng: -3.803790,
+    lng: -3.80379,
     openingHours: 'Lun-Vie: 9 AM - 6 PM, Sáb: 10 AM - 4 PM',
     dataAiHint: 'store interior',
   },

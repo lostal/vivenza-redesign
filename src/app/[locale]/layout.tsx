@@ -1,32 +1,58 @@
 import type { ReactNode } from 'react';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
-import { locales, type Locale } from '@/i18n'; // Ensure Locale is imported
+import { routing } from '@/i18n/routing';
 
 // Opt into static rendering
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  unstable_setRequestLocale(locale); // Set locale for metadata
+
+  if (!hasLocale(routing.locales, locale)) {
+    return {
+      title: 'Vivenza',
+      description: 'Modern Solutions for Home and Bath',
+      keywords: [
+        'Vivenza',
+        'bath fixtures',
+        'home design',
+        'interior design',
+        'modern style',
+        'minimalist design',
+      ],
+      icons: {
+        icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
+      },
+    };
+  }
+
+  setRequestLocale(locale);
+
   let t;
   try {
     t = await getTranslations({ locale, namespace: 'RootLayout' });
   } catch (error) {
-    console.error(`Failed to load translations for RootLayout metadata in locale ${locale}:`, error);
-    // Fallback metadata if translations fail
+    console.error(
+      `Failed to load translations for RootLayout metadata in locale ${locale}:`,
+      error
+    );
     return {
       title: 'Vivenza',
       description: 'Modern Solutions for Home and Bath',
-      keywords: ['Vivenza', 'bath fixtures', 'home design', 'interior design', 'modern style', 'minimalist design'],
+      keywords: [
+        'Vivenza',
+        'bath fixtures',
+        'home design',
+        'interior design',
+        'modern style',
+        'minimalist design',
+      ],
       icons: {
         icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
       },
@@ -36,7 +62,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    keywords: t('keywords').split(','), // Assuming keywords are comma-separated in JSON
+    keywords: t('keywords').split(','),
     icons: {
       icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
     },
@@ -45,24 +71,25 @@ export async function generateMetadata({
 
 interface LocaleLayoutProps {
   children: ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LocaleLayoutProps) {
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
+
+  // Validate the incoming locale
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   // Enable static rendering
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   let messages;
   try {
-    // getMessages will use getRequestConfig from i18n.ts which receives the locale
-    messages = await getMessages(); 
+    messages = await getMessages();
   } catch (error) {
     console.error(`Failed to load messages for locale ${locale}:`, error);
-    // Fallback to an empty object or handle error appropriately
     messages = {};
   }
 
