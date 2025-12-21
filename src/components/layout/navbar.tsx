@@ -1,13 +1,12 @@
 'use client';
 
 import { Link, usePathname } from '@/navigation';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { DOM_IDS } from '@/lib/constants';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,13 +29,84 @@ const navItems: NavItem[] = [
 // Type for active section - 'home' means top of page, anchorId for sections
 type ActiveSection = 'home' | string;
 
+// Animation variants for the overlay
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }
+  }
+};
+
+// Animation variants for the menu container
+const menuContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1
+    }
+  }
+};
+
+// Animation variants for each menu item
+const menuItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    filter: 'blur(10px)'
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as const
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    filter: 'blur(5px)',
+    transition: {
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1] as const
+    }
+  }
+};
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<ActiveSection>('home');
   const t = useTranslations('Navbar');
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   // Scroll spy effect - detect which section is currently in view
   useEffect(() => {
@@ -135,7 +205,7 @@ export default function Navbar() {
   }, []);
 
   const handleAnchorClick = (anchorId: string) => {
-    setIsSheetOpen(false);
+    setIsMenuOpen(false);
 
     // If not on home page, navigate to home first then scroll
     if (pathname !== '/') {
@@ -161,6 +231,11 @@ export default function Navbar() {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
+  };
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
   };
 
   const isActive = (item: NavItem) => {
@@ -183,62 +258,86 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        hasScrolled
-          ? 'glass border-b border-border/30 shadow-lg shadow-black/5'
-          : 'bg-transparent border-b border-transparent'
-      )}
-    >
-      <div className="container flex h-18 md:h-20 items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          onClick={handleHomeClick}
-          className="flex items-center transition-all duration-300 hover:opacity-80 hover:scale-[0.98]"
-        >
-          <Logo />
-        </Link>
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={cn(
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          hasScrolled
+            ? 'glass border-b border-border/30 shadow-lg shadow-black/5'
+            : 'bg-transparent border-b border-transparent'
+        )}
+      >
+        <div className="container flex h-18 md:h-20 items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            onClick={handleHomeClick}
+            className="flex items-center transition-all duration-300 hover:opacity-80 hover:scale-[0.98] relative z-[60]"
+          >
+            <Logo />
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-1 items-center">
-          {navItems.map((item) => {
-            const active = isActive(item);
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex gap-1 items-center">
+            {navItems.map((item) => {
+              const active = isActive(item);
 
-            if (item.isAnchor) {
-              return (
-                <button
-                  key={item.labelKey}
-                  onClick={() => handleAnchorClick(item.anchorId!)}
-                  className={cn(
-                    'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
-                    active
-                      ? 'text-primary'
-                      : 'text-foreground/70 hover:text-foreground link-underline'
-                  )}
-                >
-                  {t(item.labelKey)}
-                  {active && (
-                    <motion.span
-                      layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
-                      transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
-                    />
-                  )}
-                </button>
-              );
-            }
+              if (item.isAnchor) {
+                return (
+                  <button
+                    key={item.labelKey}
+                    onClick={() => handleAnchorClick(item.anchorId!)}
+                    className={cn(
+                      'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
+                      active
+                        ? 'text-primary'
+                        : 'text-foreground/70 hover:text-foreground link-underline'
+                    )}
+                  >
+                    {t(item.labelKey)}
+                    {active && (
+                      <motion.span
+                        layoutId="navbar-indicator"
+                        className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
+                        transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
+                      />
+                    )}
+                  </button>
+                );
+              }
 
-            if (item.href === '/') {
+              if (item.href === '/') {
+                return (
+                  <Link
+                    key={item.labelKey}
+                    href={item.href}
+                    onClick={handleHomeClick}
+                    className={cn(
+                      'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
+                      active
+                        ? 'text-primary'
+                        : 'text-foreground/70 hover:text-foreground link-underline'
+                    )}
+                  >
+                    {t(item.labelKey)}
+                    {active && (
+                      <motion.span
+                        layoutId="navbar-indicator"
+                        className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
+                        transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
+                      />
+                    )}
+                  </Link>
+                );
+              }
+
               return (
                 <Link
                   key={item.labelKey}
-                  href={item.href}
-                  onClick={handleHomeClick}
+                  href={item.href!}
                   className={cn(
                     'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
                     active
@@ -256,166 +355,180 @@ export default function Navbar() {
                   )}
                 </Link>
               );
-            }
+            })}
+            <div className="ml-4 pl-4 border-l border-border/30">
+              <LanguageSwitcher />
+            </div>
+          </nav>
 
-            return (
-              <Link
-                key={item.labelKey}
-                href={item.href!}
-                className={cn(
-                  'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
-                  active
-                    ? 'text-primary'
-                    : 'text-foreground/70 hover:text-foreground link-underline'
-                )}
-              >
-                {t(item.labelKey)}
-                {active && (
-                  <motion.span
-                    layoutId="navbar-indicator"
-                    className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
-                    transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
-                  />
-                )}
-              </Link>
-            );
-          })}
-          <div className="ml-4 pl-4 border-l border-border/30">
+          {/* Mobile Navigation Toggle */}
+          <div className="md:hidden flex items-center gap-3">
             <LanguageSwitcher />
-          </div>
-        </nav>
-
-        {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center gap-3">
-          <LanguageSwitcher />
-          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative w-10 h-10 hover:bg-muted/50">
-                <AnimatePresence mode="wait">
-                  {isSheetOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="h-5 w-5" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="h-5 w-5" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <span className="sr-only">{t('openMenu')}</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full max-w-sm glass border-l border-border/30 p-0"
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="relative w-10 h-10 hover:bg-muted/50 z-[60]"
             >
-              <nav className="flex flex-col h-full pt-20 pb-8 px-6">
-                <div className="flex-1 space-y-2">
-                  {navItems.map((item, index) => {
-                    const active = isActive(item);
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="h-5 w-5" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="h-5 w-5" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <span className="sr-only">{t('openMenu')}</span>
+            </Button>
+          </div>
+        </div>
+      </motion.header>
 
-                    if (item.isAnchor) {
-                      return (
-                        <motion.button
-                          key={item.labelKey}
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1, duration: 0.4 }}
-                          onClick={() => handleAnchorClick(item.anchorId!)}
-                          className={cn(
-                            'w-full text-left text-lg font-medium p-4 rounded-xl',
-                            'transition-all duration-300',
-                            active
-                              ? 'text-primary bg-primary/10'
-                              : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
-                          )}
-                        >
-                          {t(item.labelKey)}
-                        </motion.button>
-                      );
-                    }
+      {/* Premium Fullscreen Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-[55] md:hidden"
+          >
+            {/* Backdrop with blur */}
+            <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
 
-                    if (item.href === '/') {
-                      return (
-                        <motion.div
-                          key={item.labelKey}
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1, duration: 0.4 }}
-                        >
-                          <Link
-                            href={item.href}
-                            onClick={(e) => {
-                              handleHomeClick(e);
-                              setIsSheetOpen(false);
-                            }}
-                            className={cn(
-                              'block text-lg font-medium p-4 rounded-xl',
-                              'transition-all duration-300',
-                              active
-                                ? 'text-primary bg-primary/10'
-                                : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
-                            )}
-                          >
-                            {t(item.labelKey)}
-                          </Link>
-                        </motion.div>
-                      );
-                    }
+            {/* Gradient accent */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
-                    return (
-                      <motion.div
-                        key={item.labelKey}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.4 }}
+            {/* Decorative glow */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Menu Content */}
+            <motion.nav
+              variants={menuContainerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="relative h-full flex flex-col items-center justify-center gap-2 px-6"
+            >
+              {navItems.map((item) => {
+                const active = isActive(item);
+
+                if (item.isAnchor) {
+                  return (
+                    <motion.div key={item.labelKey} variants={menuItemVariants}>
+                      <button
+                        onClick={() => handleAnchorClick(item.anchorId!)}
+                        className={cn(
+                          'relative text-3xl font-headline tracking-tight py-4 px-8 block w-full',
+                          'transition-all duration-300',
+                          active
+                            ? 'text-primary'
+                            : 'text-foreground/70 hover:text-foreground'
+                        )}
                       >
-                        <Link
-                          href={item.href!}
-                          onClick={() => setIsSheetOpen(false)}
-                          className={cn(
-                            'block text-lg font-medium p-4 rounded-xl',
-                            'transition-all duration-300',
-                            active
-                              ? 'text-primary bg-primary/10'
-                              : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
-                          )}
-                        >
-                          {t(item.labelKey)}
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                        <span className="relative z-10">{t(item.labelKey)}</span>
+                        {active && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="absolute inset-0 bg-primary/10 rounded-2xl"
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
+                      </button>
+                    </motion.div>
+                  );
+                }
 
-                {/* Bottom branding */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
-                  className="pt-8 border-t border-border/30"
-                >
-                  <p className="text-xs text-muted-foreground text-center">
+                if (item.href === '/') {
+                  return (
+                    <motion.div key={item.labelKey} variants={menuItemVariants}>
+                      <Link
+                        href={item.href}
+                        onClick={handleHomeClick}
+                        className={cn(
+                          'relative text-3xl font-headline tracking-tight py-4 px-8 block',
+                          'transition-all duration-300',
+                          active
+                            ? 'text-primary'
+                            : 'text-foreground/70 hover:text-foreground'
+                        )}
+                      >
+                        <span className="relative z-10">{t(item.labelKey)}</span>
+                        {active && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="absolute inset-0 bg-primary/10 rounded-2xl"
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                }
+
+                return (
+                  <motion.div key={item.labelKey} variants={menuItemVariants}>
+                    <Link
+                      href={item.href!}
+                      onClick={handleLinkClick}
+                      className={cn(
+                        'relative text-3xl font-headline tracking-tight py-4 px-8 block',
+                        'transition-all duration-300',
+                        active
+                          ? 'text-primary'
+                          : 'text-foreground/70 hover:text-foreground'
+                      )}
+                    >
+                      <span className="relative z-10">{t(item.labelKey)}</span>
+                      {active && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="absolute inset-0 bg-primary/10 rounded-2xl"
+                          transition={{ duration: 0.3 }}
+                        />
+                      )}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+
+              {/* Bottom branding */}
+              <motion.div
+                variants={menuItemVariants}
+                className="absolute bottom-8 left-0 right-0 text-center"
+              >
+                <div className="inline-flex flex-col items-center gap-3">
+                  <div className="w-12 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+                  <p className="text-xs text-muted-foreground tracking-widest uppercase">
                     © {new Date().getFullYear()} Vivenza
                   </p>
-                </motion.div>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-    </motion.header>
+                </div>
+              </motion.div>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
+

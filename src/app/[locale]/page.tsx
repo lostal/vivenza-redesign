@@ -55,8 +55,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="container relative">
           <SectionTitle
             icon={<Users className="h-6 w-6 md:h-7 md:w-7" />}
-            eyebrow="Quiénes Somos"
-            title={t('aboutUs.title')}
+            eyebrow="Sobre Nosotros"
           />
 
           {/* Introduction */}
@@ -99,7 +98,6 @@ export default async function HomePage({ params }: HomePageProps) {
           <SectionTitle
             icon={<MapPin className="h-6 w-6 md:h-7 md:w-7" />}
             eyebrow="Nuestras Ubicaciones"
-            title={t('locationsTeaser.title')}
             description={t('locationsTeaser.description')}
           />
 
@@ -116,7 +114,6 @@ export default async function HomePage({ params }: HomePageProps) {
           <SectionTitle
             icon={<Play className="h-6 w-6 md:h-7 md:w-7" />}
             eyebrow="Descubre Vivenza"
-            title="Nuestros Espacios en Acción"
             description="Explora nuestras exposiciones a través de este recorrido visual."
           />
 

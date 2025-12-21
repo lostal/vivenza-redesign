@@ -7,7 +7,7 @@ import { type ReactNode } from 'react';
 interface SectionTitleProps {
   icon?: ReactNode;
   eyebrow?: string;
-  title: string;
+  title?: string;
   description?: string;
   align?: 'left' | 'center';
   className?: string;
@@ -66,16 +66,18 @@ export default function SectionTitle({
         </motion.div>
       )}
 
-      {/* Title */}
-      <motion.h2
-        variants={itemVariants}
-        className={cn(
-          'text-display-md font-headline font-bold text-foreground',
-          description && 'mb-4'
-        )}
-      >
-        {title}
-      </motion.h2>
+      {/* Title - only render if provided */}
+      {title && (
+        <motion.h2
+          variants={itemVariants}
+          className={cn(
+            'text-display-md font-headline font-bold text-foreground',
+            description && 'mb-4'
+          )}
+        >
+          {title}
+        </motion.h2>
+      )}
 
       {/* Description */}
       {description && (
