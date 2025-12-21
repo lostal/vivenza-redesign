@@ -17,6 +17,7 @@ Rediseño completo con enfoque en experiencia de usuario, rendimiento y mejores 
 ### Sobre Vivenza
 
 Vivenza es la marca comercial de GRUPOSIETE, empresa que comercializa materiales de:
+
 - Calefacción, Fontanería y Climatización
 - Sanitario y Obra Civil
 - Materiales de Construcción
@@ -55,17 +56,20 @@ Con **12 exposiciones** en España, Vivenza ofrece soluciones integrales de dise
 ### Desarrollo Local
 
 1. Clonar repositorio:
+
 ```bash
 git clone https://github.com/alvarolostal/vivenza-redesign.git
 cd vivenza-redesign
 ```
 
 2. Instalar dependencias:
+
 ```bash
 npm install
 ```
 
 3. Iniciar servidor de desarrollo:
+
 ```bash
 npm run dev
 ```
@@ -96,6 +100,7 @@ src/
 ## 🌍 Internacionalización
 
 Soporte para tres idiomas:
+
 - 🇪🇸 Español (por defecto)
 - 🇬🇧 Inglés
 - 🇫🇷 Francés
@@ -104,24 +109,18 @@ Las rutas se prefijan automáticamente con el locale (`/es`, `/en`, `/fr`).
 
 ## 🚀 Deployment
 
-### Opción 1: Netlify (Configurado)
-
-El proyecto incluye `netlify.toml` con la configuración correcta:
-
-1. Conecta tu repositorio en [Netlify](https://app.netlify.com/)
-2. Netlify detectará automáticamente la configuración
-3. Build settings (auto-detectados):
-   - **Build command**: `npm run build`
-   - **Publish directory**: `.next`
-   - **Node version**: 20
-
-**Importante**: Netlify requiere el plugin `@netlify/plugin-nextjs` (ya incluido en devDependencies).
-
-### Opción 2: Vercel
+### Vercel (Recomendado)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alvarolostal/vivenza-redesign)
 
-Vercel detecta automáticamente Next.js, sin configuración adicional.
+Vercel es la plataforma nativa para Next.js. Detecta automáticamente la configuración sin necesidad de archivos adicionales.
+
+**Build Settings (auto-detectados):**
+
+- **Framework Preset**: Next.js
+- **Build Command**: `npm run build`
+- **Output Directory**: `.next`
+- **Node.js Version**: 20.x
 
 ### Scripts
 
@@ -150,7 +149,7 @@ npm run typecheck  # Verificar TypeScript
 - **Color Primario**: `#106984` (Teal)
 - **Tema**: Dark mode por defecto
 - **Tipografía**: System font stack
-- **Breakpoints**: 
+- **Breakpoints**:
   - `sm`: 640px
   - `md`: 768px  
   - `lg`: 1024px
