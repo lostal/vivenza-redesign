@@ -7,7 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { DOM_IDS } from '@/lib/constants';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,12 +27,101 @@ const navItems: NavItem[] = [
   { href: '/contact', labelKey: 'contact' },
 ];
 
+// Type for active section - 'home' means top of page, anchorId for sections
+type ActiveSection = 'home' | string;
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<ActiveSection>('home');
   const t = useTranslations('Navbar');
+
+  // Scroll spy effect - detect which section is currently in view
+  useEffect(() => {
+    // Only run scroll spy on home page
+    if (pathname !== '/') {
+      setActiveSection('home');
+      return;
+    }
+
+    const sectionIds = [DOM_IDS.LOCATIONS_TEASER, DOM_IDS.ABOUT_SECTION];
+
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      // Find which sections are currently intersecting
+      const intersecting = entries
+        .filter(entry => entry.isIntersecting)
+        .map(entry => entry.target.id);
+
+      if (intersecting.length === 0) {
+        // No sections in view - check if we're at top or bottom
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+
+        // If near top, set to home
+        if (scrollY < 200) {
+          setActiveSection('home');
+        }
+        // If near bottom, check if locations is the last section
+        else if (scrollY + windowHeight >= docHeight - 100) {
+          const locationsEl = document.getElementById(DOM_IDS.LOCATIONS_TEASER);
+          if (locationsEl) {
+            setActiveSection(DOM_IDS.LOCATIONS_TEASER);
+          }
+        }
+        return;
+      }
+
+      // Priority: if multiple sections visible, pick the one closest to top of viewport
+      let closestSection = intersecting[0];
+      let closestDistance = Infinity;
+
+      for (const id of intersecting) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const distance = Math.abs(rect.top);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = id;
+          }
+        }
+      }
+
+      setActiveSection(closestSection);
+    };
+
+    // Use a threshold that triggers when section is reasonably in view
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: '-20% 0px -60% 0px', // Trigger when section is in upper portion of viewport
+      threshold: [0, 0.1, 0.2],
+    });
+
+    // Observe all sections
+    sectionIds.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    // Also handle initial state and scroll to top detection
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        setActiveSection('home');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check initial position
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,9 +164,22 @@ export default function Navbar() {
   };
 
   const isActive = (item: NavItem) => {
-    if (item.isAnchor) return false;
-    if (item.href === '/') return pathname === '/';
-    return pathname === item.href;
+    // For contact page - check pathname
+    if (item.href === '/contact') {
+      return pathname === '/contact';
+    }
+
+    // For anchor sections - use scroll spy when on home page
+    if (item.isAnchor && item.anchorId) {
+      return pathname === '/' && activeSection === item.anchorId;
+    }
+
+    // For home - active when on home page AND at top (activeSection is 'home')
+    if (item.href === '/') {
+      return pathname === '/' && activeSection === 'home';
+    }
+
+    return false;
   };
 
   return (
@@ -114,11 +216,19 @@ export default function Navbar() {
                   onClick={() => handleAnchorClick(item.anchorId!)}
                   className={cn(
                     'relative px-4 py-2 text-sm font-medium transition-colors duration-300',
-                    'text-foreground/70 hover:text-foreground',
-                    'link-underline'
+                    active
+                      ? 'text-primary'
+                      : 'text-foreground/70 hover:text-foreground link-underline'
                   )}
                 >
                   {t(item.labelKey)}
+                  {active && (
+                    <motion.span
+                      layoutId="navbar-indicator"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
+                      transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
+                    />
+                  )}
                 </button>
               );
             }
@@ -227,7 +337,9 @@ export default function Navbar() {
                           className={cn(
                             'w-full text-left text-lg font-medium p-4 rounded-xl',
                             'transition-all duration-300',
-                            'text-foreground/70 hover:text-foreground hover:bg-muted/50'
+                            active
+                              ? 'text-primary bg-primary/10'
+                              : 'text-foreground/70 hover:text-foreground hover:bg-muted/50'
                           )}
                         >
                           {t(item.labelKey)}
