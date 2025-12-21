@@ -54,6 +54,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     max-width: 100vw;
+    overflow-x: hidden;
   }
 
   h1,
@@ -65,10 +66,10 @@
     @apply font-headline;
   }
 
-  /* Smooth scrolling for anchor links */
+  /* Scroll nativo del navegador - más fluido que JS */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem; /* Account for fixed header */
+    scroll-padding-top: 4.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -77,18 +78,7 @@
     }
   }
 
-  /* Main content wrapper should handle overflow */
   main {
     overflow-x: hidden;
-  }
-
-  /* Smooth transitions for sections */
-  section {
-    @apply transition-all duration-300;
-  }
-
-  /* Optimize images loading */
-  img {
-    @apply transition-opacity duration-300;
   }
 }

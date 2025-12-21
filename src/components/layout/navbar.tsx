@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/navigation';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
@@ -10,83 +9,75 @@ import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
-import type { NavLink } from '@/lib/types';
+import { DOM_IDS } from '@/lib/constants';
+
+type ValidHref = '/' | '/locations' | '/contact';
+
+const navItems = [
+  { href: '/' as ValidHref, labelKey: 'home' as const },
+  { href: null, labelKey: 'aboutUs' as const, isAnchor: true },
+  { href: '/locations' as ValidHref, labelKey: 'locations' as const },
+  { href: '/contact' as ValidHref, labelKey: 'contact' as const },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const t = useTranslations('Navbar');
-  const { scrollToAboutSection } = useSmoothScroll();
 
-  const navLinks: NavLink[] = [
-    { href: '/', label: t('home'), isScroll: false },
-    { href: 'sobre-nosotros', label: t('aboutUs'), isScroll: true },
-    { href: '/locations', label: t('locations'), isScroll: false },
-    { href: '/contact', label: t('contact'), isScroll: false },
-  ];
-
-  const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
-    if (link.isScroll) {
-      e.preventDefault();
-      setIsSheetOpen(false);
-      scrollToAboutSection();
-    } else {
-      setIsSheetOpen(false);
-    }
+  const handleAnchorClick = () => {
+    setIsSheetOpen(false);
+    setTimeout(() => {
+      const element = document.getElementById(DOM_IDS.ABOUT_SECTION);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
-  const isActiveLink = (href: string, isScroll: boolean) => {
-    const pathWithoutLocale = pathname.replace(/^\/(es|en|fr)/, '') || '/';
-
-    if (isScroll) {
-      return false;
-    }
-
-    if (href === '/') {
-      return pathWithoutLocale === '/';
-    }
-
-    const hrefPath = href.replace(/^\/(es|en|fr)/, '');
-    return pathWithoutLocale.startsWith(hrefPath);
+  const isActive = (href: ValidHref | null) => {
+    if (!href) return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href;
   };
 
-  const linkBaseClasses =
-    'text-sm font-medium transition-all hover:text-primary relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full';
+  const linkClasses = (active: boolean) =>
+    cn(
+      'text-sm font-medium py-2 transition-colors',
+      active ? 'text-primary' : 'text-foreground/80 hover:text-primary'
+    );
 
-  const mobileLinkBaseClasses =
-    'text-lg font-medium transition-all hover:text-primary p-3 rounded-md hover:bg-muted/50';
+  const mobileLinkClasses = (active: boolean) =>
+    cn(
+      'text-base font-medium p-3 rounded-md transition-colors',
+      active ? 'text-primary bg-muted' : 'text-foreground/80 hover:text-primary hover:bg-muted/50'
+    );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center space-x-2 transition-opacity hover:opacity-80">
+        <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
           <Logo />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 items-center">
-          {navLinks.map((link) =>
-            link.isScroll ? (
+          {navItems.map((item) =>
+            item.isAnchor ? (
               <button
-                key={link.label}
-                onClick={(e) => handleNavClick(e, link)}
-                className={cn(linkBaseClasses, 'text-foreground/80')}
+                key={item.labelKey}
+                onClick={handleAnchorClick}
+                className={linkClasses(false)}
               >
-                {link.label}
+                {t(item.labelKey)}
               </button>
             ) : (
               <Link
-                key={link.label}
-                href={link.href}
-                className={cn(
-                  linkBaseClasses,
-                  isActiveLink(link.href, link.isScroll)
-                    ? 'text-primary after:w-full'
-                    : 'text-foreground/80'
-                )}
+                key={item.labelKey}
+                href={item.href!}
+                className={linkClasses(isActive(item.href))}
               >
-                {link.label}
+                {t(item.labelKey)}
               </Link>
             )
           )}
@@ -98,35 +89,30 @@ export default function Navbar() {
           <LanguageSwitcher />
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="transition-colors">
+              <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">{t('openMenu')}</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] sm:w-[340px]">
-              <nav className="flex flex-col space-y-4 mt-8">
-                {navLinks.map((link) =>
-                  link.isScroll ? (
+            <SheetContent side="right" className="w-72">
+              <nav className="flex flex-col gap-2 mt-8">
+                {navItems.map((item) =>
+                  item.isAnchor ? (
                     <button
-                      key={link.label}
-                      onClick={(e) => handleNavClick(e, link)}
-                      className={cn(mobileLinkBaseClasses, 'text-foreground/80 text-left')}
+                      key={item.labelKey}
+                      onClick={handleAnchorClick}
+                      className={cn(mobileLinkClasses(false), 'text-left')}
                     >
-                      {link.label}
+                      {t(item.labelKey)}
                     </button>
                   ) : (
                     <Link
-                      key={link.label}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link)}
-                      className={cn(
-                        mobileLinkBaseClasses,
-                        isActiveLink(link.href, link.isScroll)
-                          ? 'text-primary bg-muted'
-                          : 'text-foreground/80'
-                      )}
+                      key={item.labelKey}
+                      href={item.href!}
+                      onClick={() => setIsSheetOpen(false)}
+                      className={mobileLinkClasses(isActive(item.href))}
                     >
-                      {link.label}
+                      {t(item.labelKey)}
                     </Link>
                   )
                 )}

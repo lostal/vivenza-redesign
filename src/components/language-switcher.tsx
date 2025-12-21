@@ -8,7 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, usePathname } from '@/navigation';
+import { useLocale } from 'next-intl';
+import { useTransition } from 'react';
 import { routing } from '@/i18n/routing';
 
 const languageNames: Record<string, string> = {
@@ -18,28 +20,27 @@ const languageNames: Record<string, string> = {
 };
 
 export default function LanguageSwitcher() {
-  const pathname = usePathname();
   const router = useRouter();
-
-  // Extract current locale from pathname
-  const currentLocale = pathname.split('/')[1] || 'es';
+  const pathname = usePathname();
+  const currentLocale = useLocale();
+  const [isPending, startTransition] = useTransition();
 
   const handleLanguageChange = (newLocale: string) => {
-    // Replace the locale in the current path
-    const segments = pathname.split('/');
-    if (routing.locales.includes(segments[1] as (typeof routing.locales)[number])) {
-      segments[1] = newLocale;
-    } else {
-      segments.unshift('', newLocale);
-    }
-    const newPath = segments.join('/');
-    router.push(newPath);
+    startTransition(() => {
+      router.replace(pathname, { locale: newLocale as 'es' | 'en' | 'fr' });
+    });
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Cambiar idioma">
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Cambiar idioma"
+          disabled={isPending}
+          className={isPending ? 'opacity-50' : ''}
+        >
           <Globe className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
