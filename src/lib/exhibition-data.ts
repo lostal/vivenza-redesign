@@ -1,15 +1,4 @@
-export interface Showroom {
-  id: string;
-  name: string;
-  addressLines: string[];
-  phone: string;
-}
-
-export interface CommunityExhibitions {
-  id: string;
-  communityName: string;
-  showrooms: Showroom[];
-}
+import type { CommunityExhibitions } from '@/lib/types';
 
 export const exhibitionData: CommunityExhibitions[] = [
   {

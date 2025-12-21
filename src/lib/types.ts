@@ -1,3 +1,8 @@
+/**
+ * Tipos centralizados del proyecto
+ */
+
+// Tipos de ubicación
 export interface Location {
   id: string;
   name: string;
@@ -10,6 +15,7 @@ export interface Location {
   dataAiHint?: string;
 }
 
+// Tipos de producto
 export interface Product {
   id: string;
   name: string;
@@ -20,15 +26,37 @@ export interface Product {
   dataAiHint?: string;
 }
 
+// Tipos de blog
 export interface BlogPost {
   id: string;
   slug: string;
   title: string;
-  date: string; // Consider using Date type if performing date operations
+  date: string;
   author: string;
   imageUrl: string;
   excerpt: string;
-  content: string; // HTML content
+  content: string;
   tags?: string[];
   dataAiHint?: string;
+}
+
+// Tipos de exposición (showrooms)
+export interface Showroom {
+  id: string;
+  name: string;
+  addressLines: string[];
+  phone: string;
+}
+
+export interface CommunityExhibitions {
+  id: string;
+  communityName: string;
+  showrooms: Showroom[];
+}
+
+// Tipos de navegación
+export interface NavLink {
+  href: string;
+  label: string;
+  isScroll: boolean;
 }

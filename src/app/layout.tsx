@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import { EXTERNAL_URLS, SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Vivenza',
+  title: SITE_CONFIG.NAME,
   description:
     'Descubre Vivenza: Productos de alta calidad para baño y hogar con un diseño minimalista inspirado en Apple. Explora nuestras galerías de productos, encuentra ubicaciones de exposición e inspírate con nuestro Buscador de Estilos IA.',
   keywords: [
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     'diseño minimalista',
   ],
   icons: {
-    icon: 'https://vivenzaexpo.es/wp-content/uploads/2025/02/cropped-Icono-Vivenza-32x32.png',
+    icon: EXTERNAL_URLS.FAVICON,
   },
 };
 
@@ -25,14 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark scroll-smooth">
+    <html lang={SITE_CONFIG.DEFAULT_LOCALE} className="dark scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"
-        />
+        <link href={EXTERNAL_URLS.GOOGLE_FONTS} rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
         {children}

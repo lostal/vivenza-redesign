@@ -1,6 +1,6 @@
 'use client';
 
-import type { CommunityExhibitions } from '@/lib/exhibition-data';
+import type { CommunityExhibitions } from '@/lib/types';
 import {
   Accordion,
   AccordionContent,

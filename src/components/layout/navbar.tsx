@@ -10,30 +10,27 @@ import Logo from '@/components/logo';
 import LanguageSwitcher from '@/components/language-switcher';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
+import type { NavLink } from '@/lib/types';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const t = useTranslations('Navbar');
+  const { scrollToAboutSection } = useSmoothScroll();
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { href: '/', label: t('home'), isScroll: false },
     { href: 'sobre-nosotros', label: t('aboutUs'), isScroll: true },
     { href: '/locations', label: t('locations'), isScroll: false },
     { href: '/contact', label: t('contact'), isScroll: false },
   ];
 
-  const handleNavClick = (e: React.MouseEvent, href: string, isScroll: boolean) => {
-    if (isScroll) {
+  const handleNavClick = (e: React.MouseEvent, link: NavLink) => {
+    if (link.isScroll) {
       e.preventDefault();
       setIsSheetOpen(false);
-      const aboutSection = document.getElementById('sobre-nosotros');
-      if (aboutSection) {
-        aboutSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }
+      scrollToAboutSection();
     } else {
       setIsSheetOpen(false);
     }
@@ -43,7 +40,7 @@ export default function Navbar() {
     const pathWithoutLocale = pathname.replace(/^\/(es|en|fr)/, '') || '/';
 
     if (isScroll) {
-      return false; // Never show scroll links as active
+      return false;
     }
 
     if (href === '/') {
@@ -53,6 +50,12 @@ export default function Navbar() {
     const hrefPath = href.replace(/^\/(es|en|fr)/, '');
     return pathWithoutLocale.startsWith(hrefPath);
   };
+
+  const linkBaseClasses =
+    'text-sm font-medium transition-all hover:text-primary relative py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full';
+
+  const mobileLinkBaseClasses =
+    'text-lg font-medium transition-all hover:text-primary p-3 rounded-md hover:bg-muted/50';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -67,13 +70,8 @@ export default function Navbar() {
             link.isScroll ? (
               <button
                 key={link.label}
-                onClick={(e) => handleNavClick(e, link.href, link.isScroll)}
-                className={cn(
-                  'text-sm font-medium transition-all hover:text-primary relative py-1',
-                  'after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300',
-                  'hover:after:w-full',
-                  'text-foreground/80'
-                )}
+                onClick={(e) => handleNavClick(e, link)}
+                className={cn(linkBaseClasses, 'text-foreground/80')}
               >
                 {link.label}
               </button>
@@ -82,9 +80,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={cn(
-                  'text-sm font-medium transition-all hover:text-primary relative py-1',
-                  'after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300',
-                  'hover:after:w-full',
+                  linkBaseClasses,
                   isActiveLink(link.href, link.isScroll)
                     ? 'text-primary after:w-full'
                     : 'text-foreground/80'
@@ -113,11 +109,8 @@ export default function Navbar() {
                   link.isScroll ? (
                     <button
                       key={link.label}
-                      onClick={(e) => handleNavClick(e, link.href, link.isScroll)}
-                      className={cn(
-                        'text-lg font-medium transition-all hover:text-primary p-3 rounded-md hover:bg-muted/50 text-left',
-                        'text-foreground/80'
-                      )}
+                      onClick={(e) => handleNavClick(e, link)}
+                      className={cn(mobileLinkBaseClasses, 'text-foreground/80 text-left')}
                     >
                       {link.label}
                     </button>
@@ -125,9 +118,9 @@ export default function Navbar() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href, link.isScroll)}
+                      onClick={(e) => handleNavClick(e, link)}
                       className={cn(
-                        'text-lg font-medium transition-all hover:text-primary p-3 rounded-md hover:bg-muted/50',
+                        mobileLinkBaseClasses,
                         isActiveLink(link.href, link.isScroll)
                           ? 'text-primary bg-muted'
                           : 'text-foreground/80'
