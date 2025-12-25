@@ -1,9 +1,9 @@
 # 🚿 Vivenza - Redesign
 
 <div align="center">
-
-![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+  
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_v3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
 **Reinterpretación moderna y optimizada** de la presencia digital de Vivenza, especializada en exposición de baño y cerámica.
