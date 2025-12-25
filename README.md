@@ -5,8 +5,6 @@
 ![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_v3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Shadcn/UI](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
-![i18n](https://img.shields.io/badge/i18n-Multipropósito-26A69A?style=for-the-badge&logo=googletranslate&logoColor=white)
 
 **Reinterpretación moderna y optimizada** de la presencia digital de Vivenza, especializada en exposición de baño y cerámica.
 
